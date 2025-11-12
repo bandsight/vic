@@ -77,7 +77,7 @@ def generate_rss(jobs):
     rss = ET.Element('rss', version='2.0')
     channel = ET.SubElement(rss, 'channel')
     ET.SubElement(channel, 'title').text = 'Victorian Councils Job Feed'
-    ET.SubElement(channel, 'link').text = 'https://yourusername.github.io/repo-name/'  # Update with your Pages URL
+    ET.SubElement(channel, 'link').text = 'https://bandsight.github.io/vic/'  # Updated for your repo
     ET.SubElement(channel, 'description').text = 'Latest jobs from Victorian councils.'
     ET.SubElement(channel, 'pubDate').text = datetime.now().strftime('%a, %d %b %Y %H:%M:%S %z')
     
@@ -109,25 +109,33 @@ with sync_playwright() as p:
     for council in councils:
         try:
             logger.info(f"Scraping {council['name']}...")
-            page.goto(council['job_url'], timeout=60000)  # 60s timeout
-            page.wait_for_load_state('networkidle', timeout=45000)
+            page.goto(council['job_url'], timeout=90000)  # 90s timeout
+            page.wait_for_load_state('networkidle', timeout=90000)
 
             # Load more
-            while True:
-                load_more = page.locator('button:has-text("Load More"), button:has-text("View All"), a:has-text("more jobs")').first
-                if load_more.is_visible(timeout=2000):
-                    load_more.click()
-                    page.wait_for_timeout(DELAY_AFTER_CLICK * 1000)
-                else:
-                    break
+            try:
+                while True:
+                    load_more = page.locator('button:has-text("Load More"), button:has-text("View All"), a:has-text("more jobs")').first
+                    if load_more.is_visible(timeout=2000):
+                        load_more.click()
+                        page.wait_for_timeout(DELAY_AFTER_CLICK * 1000)
+                    else:
+                        break
+            except Exception as load_e:
+                logger.warning(f"Load more error for {council['name']}: {load_e}")
 
             # Scroll fallback
             for _ in range(3):
                 page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
                 time.sleep(DELAY_AFTER_CLICK)
 
-            # Broader job links locator
-            job_links = page.locator('a[href]:has-text("job|position|vacancy|career|role|available")/i').all()[:MAX_JOBS_PER_COUNCIL]
+            # Fixed job links locator: Use or= for multiple texts (case-insensitive)
+            job_links = page.locator('a[href]').filter(has=page.locator('text=job, text=position, text=vacancy, text=career, text=role, text=available').first).all()[:MAX_JOBS_PER_COUNCIL]
+            if len(job_links) == 0:
+                # Fallback: Any a with /job/ or /vacancy/ in href
+                job_links = page.locator('a[href*="/job/" i], a[href*="/vacancy/" i], a[href*="/career/" i]').all()[:MAX_JOBS_PER_COUNCIL]
+
+            logger.info(f"Found {len(job_links)} potential job links for {council['name']}.")
 
             for link_el in job_links:
                 try:
@@ -138,8 +146,8 @@ with sync_playwright() as p:
 
                     detail_page = context.new_page()
                     try:
-                        detail_page.goto(full_url, timeout=60000)
-                        detail_page.wait_for_load_state('networkidle', timeout=45000)
+                        detail_page.goto(full_url, timeout=90000)
+                        detail_page.wait_for_load_state('networkidle', timeout=90000)
 
                         # Fields extraction
                         description = detail_page.locator('text=/description|about|duties|overview/i').first.inner_text()[:500] or "N/A"
@@ -176,6 +184,7 @@ with sync_playwright() as p:
                             'posted_date': posted_date,
                             'scraped_at': datetime.now().isoformat()
                         })
+                        logger.info(f"Added job: {job_title} for {council['name']}")
 
                     except Exception as detail_e:
                         logger.error(f"Detail page timeout/error for {full_url}: {detail_e}")
