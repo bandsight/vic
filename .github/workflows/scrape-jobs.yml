@@ -25,6 +25,8 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+        REMOTE_URL="https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+        echo "Setting remote to: $REMOTE_URL"  # Debug (remove after test)
+        git remote set-url origin "$REMOTE_URL"
         git add jobs_output.json rss.xml scrape.log
         if git diff --staged --quiet; then echo "No changes"; else git commit -m "Update jobs & RSS $(date)" && git push; fi
