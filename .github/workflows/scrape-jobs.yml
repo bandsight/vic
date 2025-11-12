@@ -20,11 +20,11 @@ jobs:
     - name: Run scraper
       run: python scraper.py
     - name: Commit results
-  env:
-    GH_TOKEN: ${{ secrets.GH_TOKEN }}
-  run: |
-    git config --local user.email "action@github.com"
-    git config --local user.name "GitHub Action"
-    git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
-    git add jobs_output.json rss.xml scrape.log
-    if git diff --staged --quiet; then echo "No changes"; else git commit -m "Update jobs & RSS $(date)" && git push; fi
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+        git add jobs_output.json rss.xml scrape.log
+        if git diff --staged --quiet; then echo "No changes"; else git commit -m "Update jobs & RSS $(date)" && git push; fi
