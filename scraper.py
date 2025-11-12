@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
                     handlers=[logging.FileHandler('scrape.log'), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
-# Fallback councils
+# Fallback councils (prioritize Ballarat for test)
 FALLBACK_COUNCILS = [
     {"name": "City of Ballarat", "job_url": "https://www.ballarat.vic.gov.au/careers"},
     {"name": "City of Melbourne", "job_url": "https://www.melbourne.vic.gov.au/jobs-and-careers"},
@@ -44,7 +44,6 @@ def fetch_councils(page):
                 councils.append({"name": name, "job_url": url})
         logger.info(f"Fetched {len(councils)} councils from directory.")
         if QUICK_TEST_COUNCILS:
-            # Filter to quick test
             councils = [c for c in councils if c['name'] in QUICK_TEST_COUNCILS]
             logger.info(f"Quick test mode: Running only {QUICK_TEST_COUNCILS}")
         return councils[:5] if TEST_MODE and not QUICK_TEST_COUNCILS else councils
@@ -56,10 +55,9 @@ def fetch_councils(page):
         return fallback[:5] if TEST_MODE else fallback
 
 def parse_date(text, field_type='closing'):
-    """Robust date parsing: Extract date from phrase, then parse."""
+    """Robust date parsing."""
     if not text or text == "N/A":
         return "N/A"
-    # Extract date-like parts
     date_match = re.search(r'(\d{1,2}[a-z]?\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4})', text, re.I)
     if date_match:
         clean_text = date_match.group(1)
@@ -208,12 +206,12 @@ def explore_page(page, current_url, depth, max_depth, council_name, visited_urls
 
     # Look for navigation buttons/links to deeper levels (enhanced for "Current Vacancies")
     try:
-        # OR chain for nav text (case-insensitive)
-        nav_locator = page.locator('a:has-text("current vacancies")').or_(page.locator('a:has-text("view jobs")')).or_(page.locator('a:has-text("job portal")')).or_(page.locator('a:has-text("vacancy")')).or_(page.locator('a:has-text("position")')).or_(page.locator('a:has-text("job list")')).or_(page.locator('a:has-text("current roles")')).or_(page.locator('a:has-text("opportunities")')).or_(page.locator('button:has-text("view")')).or_(page.locator('button:has-text("show")')).or_(page.locator('button:has-text("see all")'))
+        # Explicit match for "Current Vacancies" and similar
+        nav_locator = page.locator('a:has-text("current vacancies")').or_(page.locator('a:has-text("view current vacancies")')).or_(page.locator('a:has-text("job vacancies")')).or_(page.locator('a:has-text("view jobs")')).or_(page.locator('a:has-text("job portal")')).or_(page.locator('a:has-text("vacancy")')).or_(page.locator('a:has-text("position")')).or_(page.locator('a:has-text("job list")')).or_(page.locator('a:has-text("current roles")')).or_(page.locator('a:has-text("opportunities")')).or_(page.locator('button:has-text("view vacancies")')).or_(page.locator('button:has-text("view")')).or_(page.locator('button:has-text("show")')).or_(page.locator('button:has-text("see all")'))
         nav_links = nav_locator.all()[:3]  # Limit to 3
         for nav_el in nav_links:
             nav_text = nav_el.inner_text().strip().lower()
-            if 'current vacanc' in nav_text or 'view jobs' in nav_text or 'job portal' in nav_text:
+            if 'current vacanc' in nav_text or 'view jobs' in nav_text or 'job portal' in nav_text or 'vacancy' in nav_text:
                 nav_url = urljoin(current_url, nav_el.get_attribute('href')) if nav_el.get_attribute('href') else current_url
                 if nav_url not in visited_urls and nav_text:
                     logger.info(f"Clicked nav '{nav_text}' for deeper exploration.")
