@@ -11,7 +11,6 @@ from xml.dom import minidom
 from playwright.sync_api import sync_playwright
 import pandas as pd
 import os
-# from config import *  # Commented: No config needed for single site
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',
@@ -22,7 +21,7 @@ logger = logging.getLogger(__name__)
 PULSE_URL = "https://ballarat.pulsesoftware.com/Pulse/jobs"
 COUNCIL_NAME = "City of Ballarat"
 MAX_JOBS = 15  # Limit to match known
-DELAY_SCROLL = 2  # Seconds between scrolls
+DELAY_SCROLL = 1  # Seconds between scrolls (shorter for speed)
 
 all_new_jobs = []
 
@@ -48,7 +47,7 @@ def generate_rss(jobs):
     """Generate RSS XML from jobs (recent only)."""
     recent_jobs = [j for j in jobs if j['posted_date'] != "N/A" and 
                    datetime.fromisoformat(j['posted_date'].replace('Z', '+00:00')) > 
-                   datetime.now() - timedelta(days=30)]  # Hardcoded 30 days
+                   datetime.now() - timedelta(days=30)]
     
     rss = ET.Element('rss', version='2.0')
     channel = ET.SubElement(rss, 'channel')
@@ -81,15 +80,16 @@ with sync_playwright() as p:
     logger.info(f"Starting scrape for {COUNCIL_NAME} at {PULSE_URL}")
 
     page.goto(PULSE_URL, timeout=90000)
-    page.wait_for_load_state('networkidle', timeout=90000)
+    page.wait_for_load_state('domcontentloaded', timeout=30000)  # DOM ready, not networkidle
     page_title = page.title()
     logger.info(f"Page title: {page_title}")
 
     # Wait for job elements to load on Pulse
     try:
-        page.wait_for_selector('.job-item, .listing-card, .vacancy-card, [class*="job"]', timeout=30000)
+        page.wait_for_selector('.job-item, .listing-card, .vacancy-card, [class*="job"], [class*="listing"]', timeout=30000)
+        logger.info("Job elements loaded.")
     except:
-        logger.warning("Job elements not found—may be dynamic.")
+        logger.warning("Job elements not found after 30s—may be dynamic; continuing.")
 
     # Extra scrolls to load all 15 jobs
     for i in range(15):
@@ -100,12 +100,12 @@ with sync_playwright() as p:
     # Find job links on Pulse
     job_links = []
     try:
-        # Primary Pulse locators
-        job_locator = page.locator('.job-item a, .job-title a, .listing a, a[href*="/job/"], a:has-text("job")').all()[:MAX_JOBS]
+        # Primary Pulse locators (broad for cards)
+        job_locator = page.locator('.job-item a, .job-title a, .listing a, .vacancy a, a[href*="/job/"], a:has-text("job")').all()[:MAX_JOBS]
         job_links = job_locator
         if len(job_links) == 0:
-            # Fallback: Any a with "position" or "role"
-            job_links = page.locator('a:has-text("position"), a:has-text("role"), a:has-text("officer")').all()[:MAX_JOBS]
+            # Fallback: Any a with "position" or "role" or "officer"
+            job_links = page.locator('a:has-text("position"), a:has-text("role"), a:has-text("officer"), a:has-text("apply")').all()[:MAX_JOBS]
 
         logger.info(f"Found {len(job_links)} job links on Pulse.")
 
@@ -119,11 +119,11 @@ with sync_playwright() as p:
             detail_page = context.new_page()
             try:
                 detail_page.goto(full_url, timeout=60000)
-                detail_page.wait_for_load_state('networkidle', timeout=60000)
+                detail_page.wait_for_load_state('domcontentloaded', timeout=30000)
 
-                # Pulse-specific extraction
-                description = detail_page.locator('text=/description|about|duties|overview/i, .job-description').first.inner_text()[:500] or "N/A"
-                closing_text = detail_page.locator('text=/closing|due|apply by|date/i, .job-deadline, .application-deadline').first.inner_text().strip() or "N/A"
+                # Pulse-specific extraction (broad locators)
+                description = detail_page.locator('text=/description|about|duties|overview/i, .job-description, .role-overview').first.inner_text()[:500] or "N/A"
+                closing_text = detail_page.locator('text=/closing|due|apply by|date/i, .job-deadline, .application-deadline, .closing-date').first.inner_text().strip() or "N/A"
                 closing_date = parse_date(closing_text, 'closing')
                 location = detail_page.locator('text=/location|based in|workplace/i, .job-location').first.inner_text().strip() or "N/A"
                 employment_type = detail_page.locator('text=/full-time|part-time|casual|contract/i').first.inner_text().strip() or "N/A"
