@@ -18,11 +18,13 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
                     handlers=[logging.FileHandler('scrape.log'), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
-# Fallback councils (embedded; update manually if needed)
+# Fallback councils (expanded for testing)
 FALLBACK_COUNCILS = [
     {"name": "City of Melbourne", "job_url": "https://www.melbourne.vic.gov.au/jobs-and-careers"},
     {"name": "City of Yarra", "job_url": "https://www.yarracity.vic.gov.au/about-us/work-with-us"},
-    # Add more if needed; full list from prior
+    {"name": "City of Boroondara", "job_url": "https://www.boroondara.vic.gov.au/your-council/jobs-and-careers-boroondara"},
+    {"name": "Bayside City Council", "job_url": "https://www.bayside.vic.gov.au/council/jobs-and-volunteering-bayside/jobs-and-careers"},
+    {"name": "City of Port Phillip", "job_url": "https://www.portphillip.vic.gov.au/about-the-council/careers-at-the-city-of-port-phillip"}
 ]
 
 DIRECTORY_URL = "https://www.viccouncils.asn.au/work-for-council/council-careers/find-council-jobs"
@@ -46,20 +48,25 @@ def fetch_councils(page):
         logger.warning(f"Directory fetch failed: {e}. Using fallback.")
         return FALLBACK_COUNCILS[:5] if TEST_MODE else FALLBACK_COUNCILS
 
-def parse_posted_date(posted_text):
-    """Advanced date parsing."""
-    posted_date = "N/A"
-    if "ago" in posted_text.lower():
-        days_match = re.search(r'(\d+) days? ago', posted_text, re.I)
-        if days_match:
-            days = int(days_match.group(1))
-            posted_date = (datetime.now() - timedelta(days=days)).isoformat()
+def parse_date(text, field_type='closing'):
+    """Robust date parsing: Extract date from phrase, then parse."""
+    if not text or text == "N/A":
+        return "N/A"
+    # Extract date-like parts (e.g., "Friday, 28 November 2025" → "28 November 2025")
+    # Regex for DD Month YYYY or similar
+    date_match = re.search(r'(\d{1,2}[a-z]?\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4})', text, re.I)
+    if date_match:
+        clean_text = date_match.group(1)
+    elif "ongoing" in text.lower() or "applications welcome" in text.lower():
+        return "N/A"  # Treat ongoing as no date
     else:
-        try:
-            posted_date = date_parser.parse(posted_text).isoformat()
-        except:
-            pass
-    return posted_date
+        clean_text = text
+    try:
+        parsed = date_parser.parse(clean_text)
+        return parsed.isoformat()
+    except:
+        logger.warning(f"Failed to parse {field_type} date: {text}")
+        return "N/A"
 
 def generate_rss(jobs):
     """Generate RSS XML from jobs (recent only)."""
@@ -102,7 +109,8 @@ with sync_playwright() as p:
     for council in councils:
         try:
             logger.info(f"Scraping {council['name']}...")
-            page.goto(council['job_url'], wait_until='networkidle', timeout=45000)  # Increased timeout
+            page.goto(council['job_url'], timeout=60000)  # 60s timeout
+            page.wait_for_load_state('networkidle', timeout=45000)
 
             # Load more
             while True:
@@ -118,8 +126,8 @@ with sync_playwright() as p:
                 page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
                 time.sleep(DELAY_AFTER_CLICK)
 
-            # Job links
-            job_links = page.locator('a[href]:has-text("job"), a[href]:has-text("position"), a[href]:has-text("vacancy")').all()[:MAX_JOBS_PER_COUNCIL]
+            # Broader job links locator
+            job_links = page.locator('a[href]:has-text("job|position|vacancy|career|role|available")/i').all()[:MAX_JOBS_PER_COUNCIL]
 
             for link_el in job_links:
                 try:
@@ -129,45 +137,50 @@ with sync_playwright() as p:
                     if full_url == "N/A": continue
 
                     detail_page = context.new_page()
-                    detail_page.goto(full_url, wait_until='networkidle', timeout=30000)
+                    try:
+                        detail_page.goto(full_url, timeout=60000)
+                        detail_page.wait_for_load_state('networkidle', timeout=45000)
 
-                    # Fields extraction (optimized locators)
-                    description = detail_page.locator('text=/description|about|duties|overview/i').first.inner_text()[:500] or "N/A"
-                    closing_text = detail_page.locator('text=/closing|due|apply by|date/i').first.inner_text().strip() or "N/A"
-                    closing_date = date_parser.parse(closing_text).isoformat() if closing_text != "N/A" else "N/A"
-                    location = detail_page.locator('text=/location|based in|workplace/i').first.inner_text().strip() or "N/A"
-                    employment_type = detail_page.locator('text=/full-time|part-time|casual|contract/i').first.inner_text().strip() or "N/A"
-                    salary = detail_page.locator('text=/salary|pay|remuneration|band/i').first.inner_text().strip() or "N/A"
-                    band_level = detail_page.locator('text=/VPS|band|level|EO|ST|grade/i').first.inner_text().strip() or "N/A"
-                    requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification"), .ksc').all_inner_texts() if req.strip()] or []
-                    application_instructions = detail_page.locator('text=/apply|submit|how to/i').first.inner_text().strip() or "N/A"
-                    contact_info = detail_page.locator('a[href^="mailto"], text=/contact|hr/i').first.inner_text().strip() or "N/A"
-                    ref_text = detail_page.locator('text=/reference|job id|req|advert/i').first.inner_text().strip()
-                    reference_number = ref_text or str(uuid.uuid4())
-                    department = detail_page.locator('text=/department|team|division/i').first.inner_text().strip() or "N/A"
-                    posted_text = detail_page.locator('text=/posted|advertised|published|opens|date advertised/i').first.inner_text().strip() or "N/A"
-                    posted_date = parse_posted_date(posted_text)
+                        # Fields extraction
+                        description = detail_page.locator('text=/description|about|duties|overview/i').first.inner_text()[:500] or "N/A"
+                        closing_text = detail_page.locator('text=/closing|due|apply by|date/i').first.inner_text().strip() or "N/A"
+                        closing_date = parse_date(closing_text, 'closing')
+                        location = detail_page.locator('text=/location|based in|workplace/i').first.inner_text().strip() or "N/A"
+                        employment_type = detail_page.locator('text=/full-time|part-time|casual|contract/i').first.inner_text().strip() or "N/A"
+                        salary = detail_page.locator('text=/salary|pay|remuneration|band/i').first.inner_text().strip() or "N/A"
+                        band_level = detail_page.locator('text=/VPS|band|level|EO|ST|grade/i').first.inner_text().strip() or "N/A"
+                        requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification"), .ksc').all_inner_texts() if req.strip()] or []
+                        application_instructions = detail_page.locator('text=/apply|submit|how to/i').first.inner_text().strip() or "N/A"
+                        contact_info = detail_page.locator('a[href^="mailto"], text=/contact|hr/i').first.inner_text().strip() or "N/A"
+                        ref_text = detail_page.locator('text=/reference|job id|req|advert/i').first.inner_text().strip()
+                        reference_number = ref_text or str(uuid.uuid4())
+                        department = detail_page.locator('text=/department|team|division/i').first.inner_text().strip() or "N/A"
+                        posted_text = detail_page.locator('text=/posted|advertised|published|opens|date advertised/i').first.inner_text().strip() or "N/A"
+                        posted_date = parse_date(posted_text, 'posted')
 
-                    all_new_jobs.append({
-                        'title': job_title,
-                        'council': council['name'],
-                        'detail_url': full_url,
-                        'closing_date': closing_date,
-                        'location': location,
-                        'employment_type': employment_type,
-                        'salary': salary,
-                        'band_level': band_level,
-                        'description': description,
-                        'requirements': requirements,
-                        'application_instructions': application_instructions,
-                        'contact_info': contact_info,
-                        'reference_number': reference_number,
-                        'department': department,
-                        'posted_date': posted_date,
-                        'scraped_at': datetime.now().isoformat()
-                    })
+                        all_new_jobs.append({
+                            'title': job_title,
+                            'council': council['name'],
+                            'detail_url': full_url,
+                            'closing_date': closing_date,
+                            'location': location,
+                            'employment_type': employment_type,
+                            'salary': salary,
+                            'band_level': band_level,
+                            'description': description,
+                            'requirements': requirements,
+                            'application_instructions': application_instructions,
+                            'contact_info': contact_info,
+                            'reference_number': reference_number,
+                            'department': department,
+                            'posted_date': posted_date,
+                            'scraped_at': datetime.now().isoformat()
+                        })
 
-                    detail_page.close()
+                    except Exception as detail_e:
+                        logger.error(f"Detail page timeout/error for {full_url}: {detail_e}")
+                    finally:
+                        detail_page.close()
                     time.sleep(1)
 
                 except Exception as e:
@@ -186,7 +199,7 @@ with sync_playwright() as p:
 output_file = 'jobs_output.json'
 existing_jobs = []
 if os.path.exists(output_file):
-    with open(output_file, 'r') as f:
+    with open(output_file, 'r', encoding='utf-8') as f:
         existing_jobs = json.load(f)
 
 combined_jobs = existing_jobs + all_new_jobs
@@ -199,12 +212,12 @@ if combined_jobs:
     df_dedup = df.sort_values('scraped_at').drop_duplicates(subset=['unique_key'], keep='last')
     combined_jobs = df_dedup.drop('unique_key', axis=1).to_dict('records')
 
-with open(output_file, 'w') as f:
+with open(output_file, 'w', encoding='utf-8') as f:
     json.dump(combined_jobs, f, indent=2, default=str)
 
 # Generate RSS
 rss_xml = generate_rss(combined_jobs)
-with open('rss.xml', 'w') as f:
+with open('rss.xml', 'w', encoding='utf-8') as f:
     f.write(rss_xml)
 
 logger.info(f"Appended {len(all_new_jobs)} new jobs. Total after dedup: {len(combined_jobs)}. RSS generated.")
