@@ -18,13 +18,13 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
                     handlers=[logging.FileHandler('scrape.log'), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
-# Fallback councils (include active one for testing)
+# Fallback councils
 FALLBACK_COUNCILS = [
+    {"name": "City of Ballarat", "job_url": "https://www.ballarat.vic.gov.au/careers"},
     {"name": "City of Melbourne", "job_url": "https://www.melbourne.vic.gov.au/jobs-and-careers"},
     {"name": "City of Yarra", "job_url": "https://www.yarracity.vic.gov.au/about-us/work-with-us"},
     {"name": "City of Boroondara", "job_url": "https://www.boroondara.vic.gov.au/your-council/jobs-and-careers-boroondara"},
-    {"name": "Bayside City Council", "job_url": "https://www.bayside.vic.gov.au/council/jobs-and-volunteering-bayside/jobs-and-careers"},
-    {"name": "City of Port Phillip", "job_url": "https://www.portphillip.vic.gov.au/about-the-council/careers-at-the-city-of-port-phillip"}
+    {"name": "Bayside City Council", "job_url": "https://www.bayside.vic.gov.au/council/jobs-and-volunteering-bayside/jobs-and-careers"}
 ]
 
 DIRECTORY_URL = "https://www.viccouncils.asn.au/work-for-council/council-careers/find-council-jobs"
@@ -43,21 +43,28 @@ def fetch_councils(page):
             if name and url and 'vic.gov.au' in url.lower():
                 councils.append({"name": name, "job_url": url})
         logger.info(f"Fetched {len(councils)} councils from directory.")
-        return councils[:5] if TEST_MODE else councils  # Limit for test
+        if QUICK_TEST_COUNCILS:
+            # Filter to quick test
+            councils = [c for c in councils if c['name'] in QUICK_TEST_COUNCILS]
+            logger.info(f"Quick test mode: Running only {QUICK_TEST_COUNCILS}")
+        return councils[:5] if TEST_MODE and not QUICK_TEST_COUNCILS else councils
     except Exception as e:
         logger.warning(f"Directory fetch failed: {e}. Using fallback.")
-        return FALLBACK_COUNCILS[:5] if TEST_MODE else FALLBACK_COUNCILS
+        fallback = FALLBACK_COUNCILS
+        if QUICK_TEST_COUNCILS:
+            fallback = [c for c in fallback if c['name'] in QUICK_TEST_COUNCILS]
+        return fallback[:5] if TEST_MODE else fallback
 
 def parse_date(text, field_type='closing'):
     """Robust date parsing: Extract date from phrase, then parse."""
     if not text or text == "N/A":
         return "N/A"
-    # Extract date-like parts (e.g., "Friday, 28 November 2025" → "28 November 2025")
+    # Extract date-like parts
     date_match = re.search(r'(\d{1,2}[a-z]?\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4})', text, re.I)
     if date_match:
         clean_text = date_match.group(1)
-    elif "ongoing" in text.lower() or "applications welcome" in text.lower():
-        return "N/A"  # Treat ongoing as no date
+    elif "ongoing" in text.lower():
+        return "N/A"
     else:
         clean_text = text
     try:
@@ -76,7 +83,7 @@ def generate_rss(jobs):
     rss = ET.Element('rss', version='2.0')
     channel = ET.SubElement(rss, 'channel')
     ET.SubElement(channel, 'title').text = 'Victorian Councils Job Feed'
-    ET.SubElement(channel, 'link').text = 'https://bandsight.github.io/vic/'  # Your repo URL
+    ET.SubElement(channel, 'link').text = 'https://bandsight.github.io/vic/'
     ET.SubElement(channel, 'description').text = 'Latest jobs from Victorian councils.'
     ET.SubElement(channel, 'pubDate').text = datetime.now().strftime('%a, %d %b %Y %H:%M:%S %z')
     
@@ -89,7 +96,6 @@ def generate_rss(jobs):
         ET.SubElement(item, 'category').text = job['council']
         ET.SubElement(item, 'guid').text = job['reference_number']
     
-    # Pretty XML
     rough_string = ET.tostring(rss, 'unicode')
     reparsed = minidom.parseString(rough_string)
     return reparsed.toprettyxml(indent='  ')
@@ -97,14 +103,15 @@ def generate_rss(jobs):
 def explore_page(page, current_url, depth, max_depth, council_name, visited_urls):
     """Recursive exploration: Click buttons/links, find jobs."""
     if depth > max_depth or current_url in visited_urls:
-        return []  # Stop recursion
+        return []
 
     visited_urls.add(current_url)
     logger.info(f"Exploring level {depth} for {council_name} at {current_url}")
 
-    # Load page
     page.goto(current_url, timeout=90000)
     page.wait_for_load_state('networkidle', timeout=90000)
+    page_title = page.title()
+    logger.info(f"Page title: {page_title}")
 
     # Load more/scroll
     try:
@@ -125,17 +132,23 @@ def explore_page(page, current_url, depth, max_depth, council_name, visited_urls
     # Look for job links at this level
     jobs_found = []
     try:
-        # Primary: Links with job-related text (case-insensitive regex)
-        job_locator = page.locator('a[href]:has-text(/job|position|vacancy|career|role|available|opening/i)')
+        # Primary: Links with job-related text (OR chain)
+        job_locator = page.locator('a[href]:has-text("job")').or_(page.locator('a[href]:has-text("position")')).or_(page.locator('a[href]:has-text("vacancy")')).or_(page.locator('a[href]:has-text("career")')).or_(page.locator('a[href]:has-text("role")')).or_(page.locator('a[href]:has-text("available")')).or_(page.locator('a[href]:has-text("opening")'))
         job_links = job_locator.all()[:MAX_JOBS_PER_COUNCIL]
         if len(job_links) == 0:
             # Fallback 1: Href paths
-            job_links = page.locator('a[href*="/job/" i], a[href*="/vacancy/" i], a[href*="/career/" i]').all()[:MAX_JOBS_PER_COUNCIL]
+            job_links = page.locator('a[href*="/job/"], a[href*="/vacancy/"], a[href*="/career/"], a[href*="/position/"]').all()[:MAX_JOBS_PER_COUNCIL]
         if len(job_links) == 0:
             # Fallback 2: "Apply" or "Position" text
-            job_links = page.locator('a:has-text("apply" i), a:has-text("position" i)').all()[:MAX_JOBS_PER_COUNCIL]
+            job_links = page.locator('a:has-text("apply"), a:has-text("position")').all()[:MAX_JOBS_PER_COUNCIL]
+        # Portal-specific (e.g., Pulse)
+        if "pulse" in current_url.lower():
+            job_links = page.locator('.job-item a, .job-title a').all()[:MAX_JOBS_PER_COUNCIL]
 
         logger.info(f"Level {depth}: Found {len(job_links)} potential job links.")
+
+        if len(job_links) == 0:
+            logger.info(f"No jobs found at level {depth} for {council_name}—page may be empty.")
 
         for link_el in job_links:
             job_title = link_el.inner_text().strip() or "N/A"
@@ -143,11 +156,10 @@ def explore_page(page, current_url, depth, max_depth, council_name, visited_urls
             if full_url == "N/A":
                 continue
 
-            # Extract details from this page (if it's a job detail)
-            detail_page = page  # Reuse current page for efficiency
+            # Extract details if this is a job detail page
+            detail_page = page
             try:
-                # Assume this is detail if URL has /job/ or similar
-                if '/job/' in full_url.lower() or 'vacancy' in full_url.lower():
+                if '/job/' in full_url.lower() or 'vacancy' in full_url.lower() or 'pulse' in full_url.lower():
                     description = detail_page.locator('text=/description|about|duties|overview/i').first.inner_text()[:500] or "N/A"
                     closing_text = detail_page.locator('text=/closing|due|apply by|date/i').first.inner_text().strip() or "N/A"
                     closing_date = parse_date(closing_text, 'closing')
@@ -184,8 +196,8 @@ def explore_page(page, current_url, depth, max_depth, council_name, visited_urls
                     })
                     logger.info(f"Added job: {job_title} for {council_name}")
                 else:
-                    # If not detail, recurse to sub-page
-                    sub_jobs = explore_page(page, full_url, depth + 1, max_depth, council_name, visited_urls)
+                    # Recurse to sub-page
+                    sub_jobs = explore_page(page, full_url, depth + 1, max_depth, council_name, visited_urls.copy())
                     jobs_found.extend(sub_jobs)
             except Exception as e:
                 logger.error(f"Error extracting job details for {full_url}: {e}")
@@ -194,18 +206,24 @@ def explore_page(page, current_url, depth, max_depth, council_name, visited_urls
     except Exception as e:
         logger.error(f"Error exploring page {current_url}: {e}")
 
-    # Look for navigation buttons/links to deeper levels (e.g., "Vacancies", "Current Jobs")
+    # Look for navigation buttons/links to deeper levels (enhanced for "Current Vacancies")
     try:
-        nav_links = page.locator('a:has-text(/vacancy|position|job list|current roles|opportunities/i), button:has-text(/view|show|see all/i)').all()[:3]  # Limit to 3
+        # OR chain for nav text (case-insensitive)
+        nav_locator = page.locator('a:has-text("current vacancies")').or_(page.locator('a:has-text("view jobs")')).or_(page.locator('a:has-text("job portal")')).or_(page.locator('a:has-text("vacancy")')).or_(page.locator('a:has-text("position")')).or_(page.locator('a:has-text("job list")')).or_(page.locator('a:has-text("current roles")')).or_(page.locator('a:has-text("opportunities")')).or_(page.locator('button:has-text("view")')).or_(page.locator('button:has-text("show")')).or_(page.locator('button:has-text("see all")'))
+        nav_links = nav_locator.all()[:3]  # Limit to 3
         for nav_el in nav_links:
-            nav_text = nav_el.inner_text().strip()
-            nav_url = urljoin(current_url, nav_el.get_attribute('href')) if 'a' in nav_el.tag_name() else current_url
-            if nav_url not in visited_urls:
-                logger.info(f"Clicked nav '{nav_text}' for deeper exploration.")
-                nav_el.click() if 'button' in nav_el.tag_name() else page.goto(nav_url)
-                page.wait_for_timeout(DELAY_AFTER_CLICK * 1000)
-                sub_jobs = explore_page(page, nav_url, depth + 1, max_depth, council_name, visited_urls.copy())
-                jobs_found.extend(sub_jobs)
+            nav_text = nav_el.inner_text().strip().lower()
+            if 'current vacanc' in nav_text or 'view jobs' in nav_text or 'job portal' in nav_text:
+                nav_url = urljoin(current_url, nav_el.get_attribute('href')) if nav_el.get_attribute('href') else current_url
+                if nav_url not in visited_urls and nav_text:
+                    logger.info(f"Clicked nav '{nav_text}' for deeper exploration.")
+                    if nav_el.tag_name() == 'button':
+                        nav_el.click()
+                    else:
+                        page.goto(nav_url)
+                    page.wait_for_timeout(DELAY_AFTER_CLICK * 1000)
+                    sub_jobs = explore_page(page, nav_url, depth + 1, max_depth, council_name, visited_urls.copy())
+                    jobs_found.extend(sub_jobs)
     except Exception as nav_e:
         logger.warning(f"Navigation error for {council_name}: {nav_e}")
 
@@ -231,7 +249,7 @@ with sync_playwright() as p:
 
     browser.close()
 
-# Dedup & Append (enhanced: fallback unique key)
+# Dedup & Append
 output_file = 'jobs_output.json'
 existing_jobs = []
 if os.path.exists(output_file):
@@ -243,7 +261,6 @@ combined_jobs = existing_jobs + all_new_jobs
 if combined_jobs:
     df = pd.DataFrame(combined_jobs)
     df['scraped_at'] = pd.to_datetime(df['scraped_at'])
-    # Fallback key if ref missing
     df['unique_key'] = df['reference_number'].fillna(df['title'] + '|' + df['council'] + '|' + df['detail_url'])
     df_dedup = df.sort_values('scraped_at').drop_duplicates(subset=['unique_key'], keep='last')
     combined_jobs = df_dedup.drop('unique_key', axis=1).to_dict('records')
