@@ -20,8 +20,8 @@ logger = logging.getLogger(__name__)
 # Hardcoded for Ballarat Pulse
 PULSE_URL = "https://ballarat.pulsesoftware.com/Pulse/jobs"
 COUNCIL_NAME = "City of Ballarat"
-MAX_JOBS = 15  # Limit to match known
-DELAY_SCROLL = 1  # Seconds between scrolls (shorter for speed)
+MAX_JOBS = 20  # Buffer for 15+
+DELAY_SCROLL = 1  # Seconds
 
 all_new_jobs = []
 
@@ -80,32 +80,46 @@ with sync_playwright() as p:
     logger.info(f"Starting scrape for {COUNCIL_NAME} at {PULSE_URL}")
 
     page.goto(PULSE_URL, timeout=90000)
-    page.wait_for_load_state('domcontentloaded', timeout=30000)  # DOM ready, not networkidle
+    page.wait_for_load_state('domcontentloaded', timeout=30000)  # DOM ready
     page_title = page.title()
     logger.info(f"Page title: {page_title}")
 
-    # Wait for job elements to load on Pulse
+    # Trigger Vue load if defined (call load() method)
     try:
-        page.wait_for_selector('.job-item, .listing-card, .vacancy-card, [class*="job"], [class*="listing"]', timeout=30000)
-        logger.info("Job elements loaded.")
+        page.evaluate("if (typeof load === 'function') load();")
+        logger.info("Triggered Vue load().")
     except:
-        logger.warning("Job elements not found after 30s—may be dynamic; continuing.")
+        logger.warning("No load() function found.")
 
-    # Extra scrolls to load all 15 jobs
-    for i in range(15):
+    # Wait for Vue to mount and render jobs (check for .row.card-row from template)
+    try:
+        page.wait_for_function("document.querySelectorAll('.row.card-row, .job-item, li.job, div[class*=\"job\"]').length >= 15", timeout=60000)
+        logger.info("15+ job rows loaded via Vue.")
+    except:
+        logger.warning("Less than 15 job rows after 60s—continuing with available.")
+
+    # Screenshot for debug
+    page.screenshot(path='pulse_list.png')
+    logger.info("Screenshot saved: pulse_list.png")
+
+    # Extra scrolls to ensure full load
+    for i in range(20):
         page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         time.sleep(DELAY_SCROLL)
-        logger.info(f"Scroll {i+1}/15 complete.")
+        logger.info(f"Scroll {i+1}/20 complete.")
 
-    # Find job links on Pulse
+    # Find job links on Pulse (from template: .row.card-row .job-title span a)
     job_links = []
     try:
-        # Primary Pulse locators (broad for cards)
-        job_locator = page.locator('.job-item a, .job-title a, .listing a, .vacancy a, a[href*="/job/"], a:has-text("job")').all()[:MAX_JOBS]
+        # Primary: From Vue template structure
+        job_locator = page.locator('.row.card-row .job-title span a, .row.card-row .job-title a').all()[:MAX_JOBS]
         job_links = job_locator
         if len(job_links) == 0:
-            # Fallback: Any a with "position" or "role" or "officer"
-            job_links = page.locator('a:has-text("position"), a:has-text("role"), a:has-text("officer"), a:has-text("apply")').all()[:MAX_JOBS]
+            # Fallback: Broad for any job-like a
+            job_links = page.locator('a[href*="/job/"], h3 a, .title a, .job a, li.job a, div[class*="job"] a, div[class*="card"] a').all()[:MAX_JOBS]
+        if len(job_links) == 0:
+            # Fallback: Text-based
+            job_links = page.locator('a:has-text("Officer"), a:has-text("Engineer"), a:has-text("Manager"), a:has-text("role"), a:has-text("position")').all()[:MAX_JOBS]
 
         logger.info(f"Found {len(job_links)} job links on Pulse.")
 
@@ -121,21 +135,21 @@ with sync_playwright() as p:
                 detail_page.goto(full_url, timeout=60000)
                 detail_page.wait_for_load_state('domcontentloaded', timeout=30000)
 
-                # Pulse-specific extraction (broad locators)
-                description = detail_page.locator('text=/description|about|duties|overview/i, .job-description, .role-overview').first.inner_text()[:500] or "N/A"
-                closing_text = detail_page.locator('text=/closing|due|apply by|date/i, .job-deadline, .application-deadline, .closing-date').first.inner_text().strip() or "N/A"
+                # Extraction from template structure (info-section b for labels)
+                description = detail_page.locator('.job-description, .role-overview, .description, text=/description|duties/i').first.inner_text()[:500] or "N/A"
+                closing_text = detail_page.locator('.info-section b:has-text("Closing date") + span, .job-deadline, .closing-date, text=/closing|due/i').first.inner_text().strip() or "N/A"
                 closing_date = parse_date(closing_text, 'closing')
-                location = detail_page.locator('text=/location|based in|workplace/i, .job-location').first.inner_text().strip() or "N/A"
-                employment_type = detail_page.locator('text=/full-time|part-time|casual|contract/i').first.inner_text().strip() or "N/A"
-                salary = detail_page.locator('text=/salary|pay|remuneration|band/i, .job-salary, .salary-range').first.inner_text().strip() or "N/A"
+                location = detail_page.locator('.info-section b:has-text("Location") + span, .job-location, text=/location/i').first.inner_text().strip() or "N/A"
+                employment_type = detail_page.locator('.info-section b:has-text("Employment type") + span, text=/full-time|part-time/i').first.inner_text().strip() or "N/A"
+                salary = detail_page.locator('.info-section b:has-text("Compensation") + span, .job-salary, text=/salary|pay/i').first.inner_text().strip() or "N/A"
                 band_level = detail_page.locator('text=/VPS|band|level|EO|ST|grade/i').first.inner_text().strip() or "N/A"
-                requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification"), .ksc, .job-requirements').all_inner_texts() if req.strip()] or []
-                application_instructions = detail_page.locator('text=/apply|submit|how to/i, .application-section').first.inner_text().strip() or "N/A"
+                requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification"), .job-requirements').all_inner_texts() if req.strip()] or []
+                application_instructions = detail_page.locator('.application-section, text=/apply|submit/i').first.inner_text().strip() or "N/A"
                 contact_info = detail_page.locator('a[href^="mailto"], text=/contact|hr/i').first.inner_text().strip() or "N/A"
-                ref_text = detail_page.locator('text=/reference|job id|req|advert/i').first.inner_text().strip()
+                ref_text = detail_page.locator('.info-section b:has-text("Reference ID") + span, text=/reference|job id/i').first.inner_text().strip()
                 reference_number = ref_text or str(uuid.uuid4())
-                department = detail_page.locator('text=/department|team|division/i').first.inner_text().strip() or "N/A"
-                posted_text = detail_page.locator('text=/posted|advertised|published|opens|date advertised/i').first.inner_text().strip() or "N/A"
+                department = detail_page.locator('.info-section b:has-text("Department") + span, text=/department/i').first.inner_text().strip() or "N/A"
+                posted_text = detail_page.locator('text=/posted|advertised/i').first.inner_text().strip() or "N/A"
                 posted_date = parse_date(posted_text, 'posted')
 
                 all_new_jobs.append({
