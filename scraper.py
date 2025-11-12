@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
                     handlers=[logging.FileHandler('scrape.log'), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
-# Fallback councils (prioritize Ballarat for test)
+# Fallback councils
 FALLBACK_COUNCILS = [
     {"name": "City of Ballarat", "job_url": "https://www.ballarat.vic.gov.au/careers"},
     {"name": "City of Melbourne", "job_url": "https://www.melbourne.vic.gov.au/jobs-and-careers"},
@@ -111,7 +111,7 @@ def explore_page(page, current_url, depth, max_depth, council_name, visited_urls
     page_title = page.title()
     logger.info(f"Page title: {page_title}")
 
-    # Load more/scroll
+    # Load more/scroll (extra for portals)
     try:
         while True:
             load_more = page.locator('button:has-text("Load More"), button:has-text("View All"), a:has-text("more jobs")').first
@@ -123,9 +123,15 @@ def explore_page(page, current_url, depth, max_depth, council_name, visited_urls
     except Exception as load_e:
         logger.warning(f"Load more error: {load_e}")
 
-    for _ in range(3):
+    for _ in range(10):  # Extra scrolls for lazy-loading portals like Pulse
         page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         time.sleep(DELAY_AFTER_CLICK)
+
+    # Wait for job elements to load (e.g., on Pulse)
+    try:
+        page.wait_for_selector('.job-item, .listing-card, .vacancy-card', timeout=30000)
+    except:
+        pass  # Continue if not found
 
     # Look for job links at this level
     jobs_found = []
@@ -141,7 +147,7 @@ def explore_page(page, current_url, depth, max_depth, council_name, visited_urls
             job_links = page.locator('a:has-text("apply"), a:has-text("position")').all()[:MAX_JOBS_PER_COUNCIL]
         # Portal-specific (e.g., Pulse)
         if "pulse" in current_url.lower():
-            job_links = page.locator('.job-item a, .job-title a').all()[:MAX_JOBS_PER_COUNCIL]
+            job_links = page.locator('.job-item a, .job-title a, .listing a, a[href*="/job/"]').all()[:MAX_JOBS_PER_COUNCIL]
 
         logger.info(f"Level {depth}: Found {len(job_links)} potential job links.")
 
@@ -159,11 +165,11 @@ def explore_page(page, current_url, depth, max_depth, council_name, visited_urls
             try:
                 if '/job/' in full_url.lower() or 'vacancy' in full_url.lower() or 'pulse' in full_url.lower():
                     description = detail_page.locator('text=/description|about|duties|overview/i').first.inner_text()[:500] or "N/A"
-                    closing_text = detail_page.locator('text=/closing|due|apply by|date/i').first.inner_text().strip() or "N/A"
+                    closing_text = detail_page.locator('text=/closing|due|apply by|date/i, .job-deadline, .closing-date').first.inner_text().strip() or "N/A"
                     closing_date = parse_date(closing_text, 'closing')
                     location = detail_page.locator('text=/location|based in|workplace/i').first.inner_text().strip() or "N/A"
                     employment_type = detail_page.locator('text=/full-time|part-time|casual|contract/i').first.inner_text().strip() or "N/A"
-                    salary = detail_page.locator('text=/salary|pay|remuneration|band/i').first.inner_text().strip() or "N/A"
+                    salary = detail_page.locator('text=/salary|pay|remuneration|band/i, .job-salary, .salary-range').first.inner_text().strip() or "N/A"
                     band_level = detail_page.locator('text=/VPS|band|level|EO|ST|grade/i').first.inner_text().strip() or "N/A"
                     requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification"), .ksc').all_inner_texts() if req.strip()] or []
                     application_instructions = detail_page.locator('text=/apply|submit|how to/i').first.inner_text().strip() or "N/A"
@@ -204,18 +210,18 @@ def explore_page(page, current_url, depth, max_depth, council_name, visited_urls
     except Exception as e:
         logger.error(f"Error exploring page {current_url}: {e}")
 
-    # Look for navigation buttons/links to deeper levels (enhanced for "Current Vacancies")
+    # Look for navigation buttons/links to deeper levels (enhanced for Ballarat)
     try:
-        # Explicit match for "Current Vacancies" and similar
-        nav_locator = page.locator('a:has-text("current vacancies")').or_(page.locator('a:has-text("view current vacancies")')).or_(page.locator('a:has-text("job vacancies")')).or_(page.locator('a:has-text("view jobs")')).or_(page.locator('a:has-text("job portal")')).or_(page.locator('a:has-text("vacancy")')).or_(page.locator('a:has-text("position")')).or_(page.locator('a:has-text("job list")')).or_(page.locator('a:has-text("current roles")')).or_(page.locator('a:has-text("opportunities")')).or_(page.locator('button:has-text("view vacancies")')).or_(page.locator('button:has-text("view")')).or_(page.locator('button:has-text("show")')).or_(page.locator('button:has-text("see all")'))
-        nav_links = nav_locator.all()[:3]  # Limit to 3
+        # Explicit for "Current Vacancies" and variations
+        nav_locator = page.locator('a:has-text("current vacancies")').or_(page.locator('a:has-text("view current vacancies")')).or_(page.locator('a:has-text("job vacancies")')).or_(page.locator('a:has-text("view vacancies")')).or_(page.locator('a:has-text("vacancies")')).or_(page.locator('a:has-text("view jobs")')).or_(page.locator('a:has-text("job portal")')).or_(page.locator('button:has-text("current vacancies")')).or_(page.locator('button:has-text("view vacancies")')).or_(page.locator('button:has-text("vacancies")'))
+        nav_links = nav_locator.all()[:3]
         for nav_el in nav_links:
             nav_text = nav_el.inner_text().strip().lower()
-            if 'current vacanc' in nav_text or 'view jobs' in nav_text or 'job portal' in nav_text or 'vacancy' in nav_text:
+            if 'current vacanc' in nav_text or 'view vacancies' in nav_text or 'vacancies' in nav_text or 'job portal' in nav_text:
                 nav_url = urljoin(current_url, nav_el.get_attribute('href')) if nav_el.get_attribute('href') else current_url
                 if nav_url not in visited_urls and nav_text:
                     logger.info(f"Clicked nav '{nav_text}' for deeper exploration.")
-                    if nav_el.tag_name() == 'button':
+                    if 'button' in nav_el.tag_name():
                         nav_el.click()
                     else:
                         page.goto(nav_url)
