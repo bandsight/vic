@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
                     handlers=[logging.FileHandler('scrape.log'), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
-# Fallback councils (expanded for testing)
+# Fallback councils (include active one for testing)
 FALLBACK_COUNCILS = [
     {"name": "City of Melbourne", "job_url": "https://www.melbourne.vic.gov.au/jobs-and-careers"},
     {"name": "City of Yarra", "job_url": "https://www.yarracity.vic.gov.au/about-us/work-with-us"},
@@ -53,7 +53,6 @@ def parse_date(text, field_type='closing'):
     if not text or text == "N/A":
         return "N/A"
     # Extract date-like parts (e.g., "Friday, 28 November 2025" → "28 November 2025")
-    # Regex for DD Month YYYY or similar
     date_match = re.search(r'(\d{1,2}[a-z]?\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4})', text, re.I)
     if date_match:
         clean_text = date_match.group(1)
@@ -77,7 +76,7 @@ def generate_rss(jobs):
     rss = ET.Element('rss', version='2.0')
     channel = ET.SubElement(rss, 'channel')
     ET.SubElement(channel, 'title').text = 'Victorian Councils Job Feed'
-    ET.SubElement(channel, 'link').text = 'https://bandsight.github.io/vic/'  # Updated for your repo
+    ET.SubElement(channel, 'link').text = 'https://bandsight.github.io/vic/'  # Your repo URL
     ET.SubElement(channel, 'description').text = 'Latest jobs from Victorian councils.'
     ET.SubElement(channel, 'pubDate').text = datetime.now().strftime('%a, %d %b %Y %H:%M:%S %z')
     
@@ -95,6 +94,123 @@ def generate_rss(jobs):
     reparsed = minidom.parseString(rough_string)
     return reparsed.toprettyxml(indent='  ')
 
+def explore_page(page, current_url, depth, max_depth, council_name, visited_urls):
+    """Recursive exploration: Click buttons/links, find jobs."""
+    if depth > max_depth or current_url in visited_urls:
+        return []  # Stop recursion
+
+    visited_urls.add(current_url)
+    logger.info(f"Exploring level {depth} for {council_name} at {current_url}")
+
+    # Load page
+    page.goto(current_url, timeout=90000)
+    page.wait_for_load_state('networkidle', timeout=90000)
+
+    # Load more/scroll
+    try:
+        while True:
+            load_more = page.locator('button:has-text("Load More"), button:has-text("View All"), a:has-text("more jobs")').first
+            if load_more.is_visible(timeout=2000):
+                load_more.click()
+                page.wait_for_timeout(DELAY_AFTER_CLICK * 1000)
+            else:
+                break
+    except Exception as load_e:
+        logger.warning(f"Load more error: {load_e}")
+
+    for _ in range(3):
+        page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+        time.sleep(DELAY_AFTER_CLICK)
+
+    # Look for job links at this level
+    jobs_found = []
+    try:
+        # Primary: Links with job-related text (case-insensitive regex)
+        job_locator = page.locator('a[href]:has-text(/job|position|vacancy|career|role|available|opening/i)')
+        job_links = job_locator.all()[:MAX_JOBS_PER_COUNCIL]
+        if len(job_links) == 0:
+            # Fallback 1: Href paths
+            job_links = page.locator('a[href*="/job/" i], a[href*="/vacancy/" i], a[href*="/career/" i]').all()[:MAX_JOBS_PER_COUNCIL]
+        if len(job_links) == 0:
+            # Fallback 2: "Apply" or "Position" text
+            job_links = page.locator('a:has-text("apply" i), a:has-text("position" i)').all()[:MAX_JOBS_PER_COUNCIL]
+
+        logger.info(f"Level {depth}: Found {len(job_links)} potential job links.")
+
+        for link_el in job_links:
+            job_title = link_el.inner_text().strip() or "N/A"
+            full_url = urljoin(current_url, link_el.get_attribute('href')) if link_el.get_attribute('href') else "N/A"
+            if full_url == "N/A":
+                continue
+
+            # Extract details from this page (if it's a job detail)
+            detail_page = page  # Reuse current page for efficiency
+            try:
+                # Assume this is detail if URL has /job/ or similar
+                if '/job/' in full_url.lower() or 'vacancy' in full_url.lower():
+                    description = detail_page.locator('text=/description|about|duties|overview/i').first.inner_text()[:500] or "N/A"
+                    closing_text = detail_page.locator('text=/closing|due|apply by|date/i').first.inner_text().strip() or "N/A"
+                    closing_date = parse_date(closing_text, 'closing')
+                    location = detail_page.locator('text=/location|based in|workplace/i').first.inner_text().strip() or "N/A"
+                    employment_type = detail_page.locator('text=/full-time|part-time|casual|contract/i').first.inner_text().strip() or "N/A"
+                    salary = detail_page.locator('text=/salary|pay|remuneration|band/i').first.inner_text().strip() or "N/A"
+                    band_level = detail_page.locator('text=/VPS|band|level|EO|ST|grade/i').first.inner_text().strip() or "N/A"
+                    requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification"), .ksc').all_inner_texts() if req.strip()] or []
+                    application_instructions = detail_page.locator('text=/apply|submit|how to/i').first.inner_text().strip() or "N/A"
+                    contact_info = detail_page.locator('a[href^="mailto"], text=/contact|hr/i').first.inner_text().strip() or "N/A"
+                    ref_text = detail_page.locator('text=/reference|job id|req|advert/i').first.inner_text().strip()
+                    reference_number = ref_text or str(uuid.uuid4())
+                    department = detail_page.locator('text=/department|team|division/i').first.inner_text().strip() or "N/A"
+                    posted_text = detail_page.locator('text=/posted|advertised|published|opens|date advertised/i').first.inner_text().strip() or "N/A"
+                    posted_date = parse_date(posted_text, 'posted')
+
+                    all_new_jobs.append({
+                        'title': job_title,
+                        'council': council_name,
+                        'detail_url': full_url,
+                        'closing_date': closing_date,
+                        'location': location,
+                        'employment_type': employment_type,
+                        'salary': salary,
+                        'band_level': band_level,
+                        'description': description,
+                        'requirements': requirements,
+                        'application_instructions': application_instructions,
+                        'contact_info': contact_info,
+                        'reference_number': reference_number,
+                        'department': department,
+                        'posted_date': posted_date,
+                        'scraped_at': datetime.now().isoformat()
+                    })
+                    logger.info(f"Added job: {job_title} for {council_name}")
+                else:
+                    # If not detail, recurse to sub-page
+                    sub_jobs = explore_page(page, full_url, depth + 1, max_depth, council_name, visited_urls)
+                    jobs_found.extend(sub_jobs)
+            except Exception as e:
+                logger.error(f"Error extracting job details for {full_url}: {e}")
+                continue
+
+    except Exception as e:
+        logger.error(f"Error exploring page {current_url}: {e}")
+
+    # Look for navigation buttons/links to deeper levels (e.g., "Vacancies", "Current Jobs")
+    try:
+        nav_links = page.locator('a:has-text(/vacancy|position|job list|current roles|opportunities/i), button:has-text(/view|show|see all/i)').all()[:3]  # Limit to 3
+        for nav_el in nav_links:
+            nav_text = nav_el.inner_text().strip()
+            nav_url = urljoin(current_url, nav_el.get_attribute('href')) if 'a' in nav_el.tag_name() else current_url
+            if nav_url not in visited_urls:
+                logger.info(f"Clicked nav '{nav_text}' for deeper exploration.")
+                nav_el.click() if 'button' in nav_el.tag_name() else page.goto(nav_url)
+                page.wait_for_timeout(DELAY_AFTER_CLICK * 1000)
+                sub_jobs = explore_page(page, nav_url, depth + 1, max_depth, council_name, visited_urls.copy())
+                jobs_found.extend(sub_jobs)
+    except Exception as nav_e:
+        logger.warning(f"Navigation error for {council_name}: {nav_e}")
+
+    return jobs_found
+
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True)
     context = browser.new_context(
@@ -105,101 +221,12 @@ with sync_playwright() as p:
     # Fetch councils
     councils = fetch_councils(page)
 
-    # Scrape each
+    # Scrape each with recursion (max_depth=3)
     for council in councils:
-        try:
-            logger.info(f"Scraping {council['name']}...")
-            page.goto(council['job_url'], timeout=90000)  # 90s timeout
-            page.wait_for_load_state('networkidle', timeout=90000)
-
-            # Load more
-            try:
-                while True:
-                    load_more = page.locator('button:has-text("Load More"), button:has-text("View All"), a:has-text("more jobs")').first
-                    if load_more.is_visible(timeout=2000):
-                        load_more.click()
-                        page.wait_for_timeout(DELAY_AFTER_CLICK * 1000)
-                    else:
-                        break
-            except Exception as load_e:
-                logger.warning(f"Load more error for {council['name']}: {load_e}")
-
-            # Scroll fallback
-            for _ in range(3):
-                page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-                time.sleep(DELAY_AFTER_CLICK)
-
-            # Fixed job links locator: Use or= for multiple texts (case-insensitive)
-            job_links = page.locator('a[href]').filter(has=page.locator('text=job, text=position, text=vacancy, text=career, text=role, text=available').first).all()[:MAX_JOBS_PER_COUNCIL]
-            if len(job_links) == 0:
-                # Fallback: Any a with /job/ or /vacancy/ in href
-                job_links = page.locator('a[href*="/job/" i], a[href*="/vacancy/" i], a[href*="/career/" i]').all()[:MAX_JOBS_PER_COUNCIL]
-
-            logger.info(f"Found {len(job_links)} potential job links for {council['name']}.")
-
-            for link_el in job_links:
-                try:
-                    job_title = link_el.inner_text().strip() or "N/A"
-                    full_url = urljoin(council['job_url'], link_el.get_attribute('href')) if link_el.get_attribute('href') else "N/A"
-
-                    if full_url == "N/A": continue
-
-                    detail_page = context.new_page()
-                    try:
-                        detail_page.goto(full_url, timeout=90000)
-                        detail_page.wait_for_load_state('networkidle', timeout=90000)
-
-                        # Fields extraction
-                        description = detail_page.locator('text=/description|about|duties|overview/i').first.inner_text()[:500] or "N/A"
-                        closing_text = detail_page.locator('text=/closing|due|apply by|date/i').first.inner_text().strip() or "N/A"
-                        closing_date = parse_date(closing_text, 'closing')
-                        location = detail_page.locator('text=/location|based in|workplace/i').first.inner_text().strip() or "N/A"
-                        employment_type = detail_page.locator('text=/full-time|part-time|casual|contract/i').first.inner_text().strip() or "N/A"
-                        salary = detail_page.locator('text=/salary|pay|remuneration|band/i').first.inner_text().strip() or "N/A"
-                        band_level = detail_page.locator('text=/VPS|band|level|EO|ST|grade/i').first.inner_text().strip() or "N/A"
-                        requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification"), .ksc').all_inner_texts() if req.strip()] or []
-                        application_instructions = detail_page.locator('text=/apply|submit|how to/i').first.inner_text().strip() or "N/A"
-                        contact_info = detail_page.locator('a[href^="mailto"], text=/contact|hr/i').first.inner_text().strip() or "N/A"
-                        ref_text = detail_page.locator('text=/reference|job id|req|advert/i').first.inner_text().strip()
-                        reference_number = ref_text or str(uuid.uuid4())
-                        department = detail_page.locator('text=/department|team|division/i').first.inner_text().strip() or "N/A"
-                        posted_text = detail_page.locator('text=/posted|advertised|published|opens|date advertised/i').first.inner_text().strip() or "N/A"
-                        posted_date = parse_date(posted_text, 'posted')
-
-                        all_new_jobs.append({
-                            'title': job_title,
-                            'council': council['name'],
-                            'detail_url': full_url,
-                            'closing_date': closing_date,
-                            'location': location,
-                            'employment_type': employment_type,
-                            'salary': salary,
-                            'band_level': band_level,
-                            'description': description,
-                            'requirements': requirements,
-                            'application_instructions': application_instructions,
-                            'contact_info': contact_info,
-                            'reference_number': reference_number,
-                            'department': department,
-                            'posted_date': posted_date,
-                            'scraped_at': datetime.now().isoformat()
-                        })
-                        logger.info(f"Added job: {job_title} for {council['name']}")
-
-                    except Exception as detail_e:
-                        logger.error(f"Detail page timeout/error for {full_url}: {detail_e}")
-                    finally:
-                        detail_page.close()
-                    time.sleep(1)
-
-                except Exception as e:
-                    logger.error(f"Error on job for {council['name']}: {e}")
-                    continue
-
-        except Exception as e:
-            logger.error(f"Failed to scrape {council['name']}: {e}")
-            continue
-
+        visited_urls = set()
+        council_jobs = explore_page(page, council['job_url'], 1, 3, council['name'], visited_urls)
+        logger.info(f"Total jobs for {council['name']}: {len(council_jobs)}")
+        all_new_jobs.extend(council_jobs)
         time.sleep(DELAY_BETWEEN_COUNCILS)
 
     browser.close()
