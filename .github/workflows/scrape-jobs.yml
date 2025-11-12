@@ -1,0 +1,27 @@
+name: Scrape Vic Council Jobs
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # Daily 3 AM UTC
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install deps
+      run: |
+        pip install -r requirements.txt
+        playwright install --with-deps
+    - name: Run scraper
+      run: python scraper.py
+    - name: Commit results
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add jobs_output.json rss.xml scrape.log
+        if git diff --staged --quiet; then echo "No changes"; else git commit -m "Update jobs & RSS $(date)" && git push; fi
