@@ -1,12 +1,226 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Victorian Councils Jobs</title>
-    <link rel="alternate" type="application/rss+xml" title="Jobs RSS" href="rss.xml">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victorian Councils Jobs</title>
+  <link rel="alternate" type="application/rss+xml" title="Jobs RSS" href="rss.xml">
+  <style>
+    :root {
+      color-scheme: light dark;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0 auto;
+      max-width: 960px;
+      padding: 2rem 1rem 4rem;
+      line-height: 1.5;
+    }
+
+    header {
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .links a {
+      margin-right: 1rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .summary-card {
+      border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      background: color-mix(in srgb, currentColor 5%, transparent);
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .search input {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+    }
+
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .job-card {
+      border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      background: color-mix(in srgb, currentColor 5%, transparent);
+    }
+
+    .job-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .job-card ul {
+      padding-left: 1.25rem;
+      margin-bottom: 0;
+    }
+
+    .job-meta {
+      font-size: 0.9rem;
+      color: color-mix(in srgb, currentColor 70%, transparent);
+      margin-bottom: 0.5rem;
+    }
+
+    .status {
+      padding: 1rem;
+      border-radius: 0.75rem;
+      border: 1px dashed color-mix(in srgb, currentColor 35%, transparent);
+      background: color-mix(in srgb, currentColor 5%, transparent);
+    }
+  </style>
 </head>
 <body>
+  <header>
     <h1>Victorian Councils Job Data</h1>
-    <p><a href="jobs_output.json">Download JSON</a> | <a href="rss.xml">RSS Feed</a></p>
-    <p>Last updated: Auto via GitHub Actions.</p>
+    <p class="links">
+      <a href="jobs_output.json">Download JSON</a>
+      <a href="rss.xml">RSS Feed</a>
+      <a href="scrape.log">Latest log</a>
+    </p>
+    <p>The data below refreshes whenever <code>scraper.py</code> runs locally or via the scheduled GitHub Action.</p>
+  </header>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <p>Total jobs</p>
+      <strong id="total-jobs">0</strong>
+    </article>
+    <article class="summary-card">
+      <p>Last scrape</p>
+      <strong id="last-scrape">Waiting for data…</strong>
+    </article>
+    <article class="summary-card">
+      <p>Latest closing date</p>
+      <strong id="latest-close">—</strong>
+    </article>
+  </section>
+
+  <div class="search">
+    <label for="search-input">Filter:</label>
+    <input id="search-input" type="search" placeholder="Search by title, band, council or department">
+  </div>
+
+  <div id="status" class="status">Loading results…</div>
+  <div id="jobs" class="jobs-grid" hidden></div>
+
+  <script>
+    const jobsContainer = document.getElementById('jobs');
+    const statusBox = document.getElementById('status');
+    const totalJobsEl = document.getElementById('total-jobs');
+    const lastScrapeEl = document.getElementById('last-scrape');
+    const latestCloseEl = document.getElementById('latest-close');
+    const searchInput = document.getElementById('search-input');
+
+    let allJobs = [];
+
+    function formatDate(value) {
+      if (!value || value === 'N/A') return 'N/A';
+      const date = new Date(value);
+      return Number.isNaN(date.valueOf()) ? value : date.toLocaleDateString();
+    }
+
+    function renderJobs(list) {
+      jobsContainer.innerHTML = '';
+      if (list.length === 0) {
+        statusBox.textContent = 'No matching roles. Adjust your filter or wait for the scheduled scrape to run.';
+        jobsContainer.hidden = true;
+        return;
+      }
+
+      statusBox.textContent = '';
+      jobsContainer.hidden = false;
+
+      list.forEach(job => {
+        const card = document.createElement('article');
+        card.className = 'job-card';
+        card.innerHTML = `
+          <h3><a href="${job.detail_url}" target="_blank" rel="noopener">${job.title}</a></h3>
+          <div class="job-meta">
+            ${job.council || 'Unknown council'} · ${job.location || 'Location TBC'} · ${job.employment_type || 'Employment type TBC'}
+          </div>
+          <p>${job.description || 'Description pending from scraper.'}</p>
+          <ul>
+            <li><strong>Closing:</strong> ${formatDate(job.closing_date)}</li>
+            <li><strong>Band / Level:</strong> ${job.band_level || 'N/A'}</li>
+            <li><strong>Department:</strong> ${job.department || 'N/A'}</li>
+          </ul>
+        `;
+        jobsContainer.appendChild(card);
+      });
+    }
+
+    function applyFilter() {
+      const term = searchInput.value.trim().toLowerCase();
+      if (!term) {
+        renderJobs(allJobs);
+        return;
+      }
+      const filtered = allJobs.filter(job => {
+        return [job.title, job.council, job.department, job.band_level]
+          .filter(Boolean)
+          .some(value => value.toLowerCase().includes(term));
+      });
+      renderJobs(filtered);
+    }
+
+    async function loadJobs() {
+      try {
+        const response = await fetch('jobs_output.json', { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error('jobs_output.json not found. Run the scraper to generate it.');
+        }
+        const jobs = await response.json();
+        if (!Array.isArray(jobs)) {
+          throw new Error('jobs_output.json must contain a JSON array.');
+        }
+        allJobs = jobs.sort((a, b) => new Date(b.scraped_at || 0) - new Date(a.scraped_at || 0));
+        totalJobsEl.textContent = allJobs.length;
+        const lastJob = allJobs[0];
+        lastScrapeEl.textContent = lastJob?.scraped_at ? new Date(lastJob.scraped_at).toLocaleString() : 'Unknown';
+        const latestClosing = allJobs
+          .map(job => job.closing_date)
+          .filter(date => date && date !== 'N/A')
+          .sort((a, b) => new Date(b) - new Date(a))[0];
+        latestCloseEl.textContent = latestClosing ? formatDate(latestClosing) : 'N/A';
+        renderJobs(allJobs);
+      } catch (error) {
+        statusBox.textContent = `${error.message} The placeholder JSON committed to the repo keeps the page functional.`;
+        jobsContainer.hidden = true;
+        totalJobsEl.textContent = '0';
+        lastScrapeEl.textContent = 'Awaiting first run';
+        latestCloseEl.textContent = 'N/A';
+        console.error(error);
+      }
+    }
+
+    searchInput.addEventListener('input', applyFilter);
+    loadJobs();
+  </script>
 </body>
 </html>
