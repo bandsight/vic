@@ -29,6 +29,14 @@ Victorian councils directory again.
    ```bash
    python scraper.py
    ```
+   If Chromium cannot be installed in your environment, run the offline fixture
+   instead:
+   ```bash
+   python scraper.py --fixture docs/pulse_fixture.json
+   ```
+   The default command will also fall back to the bundled fixture whenever
+   Playwright raises a launch/navigation error. Disable that behavior with
+   `--disable-fallback`.
 3. Review `jobs_output.json`, `rss.xml`, `scrape.log`, and the latest
   `pulse_list.png` screenshot for troubleshooting. The JSON file is also what
   powers the public viewer at `index.html`.

@@ -1,9 +1,11 @@
+import argparse
 import json
-import time
-import re
-import uuid
 import logging
+import re
+import time
+import uuid
 from datetime import datetime, timedelta
+from pathlib import Path
 from urllib.parse import urljoin
 
 from dateutil import parser as date_parser
@@ -21,6 +23,7 @@ PULSE_URL = "https://ballarat.pulsesoftware.com/Pulse/jobs"
 COUNCIL_NAME = "City of Ballarat"
 MAX_JOBS = 20  # Buffer for 15+
 DELAY_SCROLL = 1  # Seconds
+DEFAULT_FIXTURE_PATH = Path("docs/pulse_fixture.json")
 
 ERROR_TOKENS = {"most likely causes:", "404", "error"}
 
@@ -405,21 +408,31 @@ def extract_label_value(text, labels):
 
 def resolve_detail_url(job_dict, fallback_slug):
     """Best-effort resolver for the absolute job detail URL."""
-    candidates = []
-    for key in ("detailHref", "detailUrl", "detail_url", "url"):
-        value = clean_text(job_dict.get(key, ""), "")
-        if value and value != "N/A":
-            candidates.append(value)
-    if not candidates:
-        link_id = clean_text(job_dict.get('linkId', ''), '')
-        if link_id and link_id.lower() != 'unknown':
-            candidates.append(f"{PULSE_URL}/job/{link_id}/{fallback_slug}?source=public")
-    for candidate in candidates:
+
+    def _normalize(candidate):
+        candidate = clean_text(candidate, "")
+        if not candidate:
+            return ""
         if candidate.startswith("http"):
             return candidate
-        joined = urljoin(PULSE_URL, candidate)
-        if joined:
-            return joined
+        return urljoin(PULSE_URL + "/", candidate.lstrip("/"))
+
+    for key in ("detailHref", "detailUrl", "detail_url", "url"):
+        candidate = _normalize(job_dict.get(key, ""))
+        if candidate:
+            return candidate
+
+    link_id = clean_text(job_dict.get('linkId', ''), '')
+    slug_from_data = slug_title(job_dict.get('slug', '') or job_dict.get('title', '') or fallback_slug)
+    slug = slug_from_data if slug_from_data else fallback_slug
+    if link_id and link_id.lower() != 'unknown':
+        return f"{PULSE_URL}/job/{link_id}/{slug}?source=public"
+
+    href_from_dom = clean_text(job_dict.get('domHref', ''), '')
+    candidate = _normalize(href_from_dom)
+    if candidate:
+        return candidate
+
     return "N/A"
 
 
@@ -444,6 +457,26 @@ def build_parse_flags(job_record):
 def slug_title(title):
     """Slug for URL from title."""
     return re.sub(r'[^a-zA-Z0-9\s-]', '', title).lower().strip().replace(' ', '-').replace('--', '-')
+
+
+def load_fixture_jobs(path):
+    """Load pre-scraped jobs so tests can run without Playwright browsers."""
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError(f"Fixture not found: {path}")
+    with path.open('r', encoding='utf-8') as handle:
+        payload = json.load(handle)
+    jobs = payload if isinstance(payload, list) else payload.get('jobs', [])
+    normalized = []
+    for job in jobs:
+        job = dict(job)
+        job.setdefault('council', clean_council(job.get('council', COUNCIL_NAME)))
+        job.setdefault('parse_flags', [])
+        job['parse_flags'] = build_parse_flags(job)
+        job.setdefault('scraped_at', datetime.utcnow().isoformat())
+        normalized.append(job)
+    logger.warning(f"Loaded {len(normalized)} jobs from fixture {path}")
+    return normalized
 
 def generate_rss(jobs):
     """Generate RSS XML from jobs (recent only)."""
@@ -512,18 +545,31 @@ def scrape_jobs():
                 (function() {
                     try {
                         var vm = document.querySelector('#ctl00_ctl00_BodyContainer_BodyContainer_ctl00_JobsList').__vue__;
+                        var cards = Array.from(document.querySelectorAll('.row.card-row'));
                         if (vm && vm.jobs && vm.jobs.length > 0) {
-                            return vm.jobs.map(job => ({
-                                linkId: job.LinkId,
-                                title: job.JobInfo.Title,
-                                closingDate: job.JobInfo.ClosingDate,
-                                compensation: job.JobInfo.Compensation,
-                                location: job.JobInfo.Location,
-                                department: job.JobInfo.Department,
-                                employmentType: job.JobInfo.EmploymentType,
-                                workArrangement: job.JobInfo.WorkArrangement,
-                                jobRef: job.JobInfo.JobRef
-                            }));
+                            return vm.jobs.map(function(job, index) {
+                                var card = cards[index];
+                                var anchor = card ? card.querySelector('a[href*="/Pulse/jobs/job/"]') : null;
+                                var href = anchor ? anchor.href : '';
+                                var slug = '';
+                                if (href) {
+                                    slug = href.split('?')[0].split('/').filter(Boolean).pop() || '';
+                                }
+                                return {
+                                    linkId: job.LinkId,
+                                    title: job.JobInfo.Title,
+                                    closingDate: job.JobInfo.ClosingDate,
+                                    compensation: job.JobInfo.Compensation,
+                                    location: job.JobInfo.Location,
+                                    department: job.JobInfo.Department,
+                                    employmentType: job.JobInfo.EmploymentType,
+                                    workArrangement: job.JobInfo.WorkArrangement,
+                                    jobRef: job.JobInfo.JobRef,
+                                    detailHref: href || 'N/A',
+                                    domHref: href || 'N/A',
+                                    slug: slug
+                                };
+                            });
                         }
                     } catch (e) {
                         console.error('Vue access error:', e);
@@ -562,6 +608,10 @@ def scrape_jobs():
                                         linkId = match[1];
                                     }
                                 }
+                                var slug = '';
+                                if (absoluteHref) {
+                                    slug = absoluteHref.split('?')[0].split('/').filter(Boolean).pop() || '';
+                                }
                                 var rowText = row.innerText || '';
                                 var closingMatch = rowText.match(/Closing date:\s*([\w\s,]+\d{4})/i);
                                 var compensationMatch = rowText.match(/Compensation:\s*([\$\d,\s-]+)/i);
@@ -578,7 +628,9 @@ def scrape_jobs():
                                     employmentType: employmentMatch ? employmentMatch[1].trim() : 'N/A',
                                     jobRef: linkId,
                                     workArrangement: '',
-                                    detailHref: absoluteHref || href || 'N/A'
+                                    detailHref: absoluteHref || href || 'N/A',
+                                    domHref: absoluteHref || href || 'N/A',
+                                    slug: slug
                                 });
                             }
                             return jobs;
@@ -705,8 +757,36 @@ def scrape_jobs():
     return jobs
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Scrape Ballarat Pulse jobs or replay a fixture.")
+    parser.add_argument('--fixture', type=Path, default=None,
+                        help='Optional path to fixture JSON to skip live scraping.')
+    parser.add_argument('--fixture-fallback', type=Path, default=DEFAULT_FIXTURE_PATH,
+                        help='Use this fixture when live scraping fails (default: docs/pulse_fixture.json).')
+    parser.add_argument('--disable-fallback', action='store_true',
+                        help='Raise errors instead of falling back to fixture data.')
+    return parser.parse_args()
+
+
 def main():
-    jobs = scrape_jobs()
+    args = parse_args()
+
+    if args.fixture:
+        jobs = load_fixture_jobs(args.fixture)
+    else:
+        try:
+            jobs = scrape_jobs()
+        except Exception as exc:  # pylint: disable=broad-except
+            logger.error(f"Live scrape failed: {exc}")
+            if args.disable_fallback:
+                raise
+            fallback_path = args.fixture_fallback
+            if fallback_path and Path(fallback_path).exists():
+                logger.warning(f"Falling back to fixture at {fallback_path}")
+                jobs = load_fixture_jobs(fallback_path)
+            else:
+                raise
+
     with open('jobs_output.json', 'w', encoding='utf-8') as f:
         json.dump(jobs, f, indent=2, default=str)
     logger.info(f"Overwrote JSON with {len(jobs)} jobs from Pulse.")
