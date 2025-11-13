@@ -212,4 +212,50 @@ with sync_playwright() as p:
             requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification")').all_inner_texts() if req.strip()] or []
             application_instructions = detail_page.locator('text=/apply|submit/i').first.inner_text().strip() or "N/A"
             contact_info = detail_page.locator('a[href^="mailto"]').first.inner_text().strip() or "N/A"
-            band_level = detail_page.locator('text=/VPS|band
+            band_level = detail_page.locator('text=/VPS|band|level|EO|ST|grade/i').first.inner_text().strip() or "N/A"
+        except Exception as detail_e:
+            logger.error(f"Detail page error for {full_url}: {detail_e}")
+            description = "N/A"
+            requirements = []
+            application_instructions = "N/A"
+            contact_info = "N/A"
+            band_level = "N/A"
+        finally:
+            detail_page.close()
+
+        all_new_jobs.append({
+            'title': job_title,
+            'council': COUNCIL_NAME,
+            'detail_url': full_url,
+            'closing_date': closing_date,
+            'location': location,
+            'employment_type': employment_type,
+            'salary': salary,
+            'band_level': band_level,
+            'description': description,
+            'requirements': requirements,
+            'application_instructions': application_instructions,
+            'contact_info': contact_info,
+            'reference_number': job_ref,
+            'department': department,
+            'posted_date': posted_date,
+            'scraped_at': datetime.now().isoformat()
+        })
+        logger.info(f"Added job: {job_title} for {COUNCIL_NAME} (Ref: {job_ref})")
+        time.sleep(1)
+
+    browser.close()
+
+# Full Overwrite JSON (no append/dedup for testing)
+output_file = 'jobs_output.json'
+with open(output_file, 'w', encoding='utf-8') as f:
+    json.dump(all_new_jobs, f, indent=2, default=str)
+
+logger.info(f"Overwrote JSON with {len(all_new_jobs)} jobs from Pulse.")
+
+# Generate RSS
+rss_xml = generate_rss(all_new_jobs)
+with open('rss.xml', 'w', encoding='utf-8') as f:
+    f.write(rss_xml)
+
+logger.info(f"RSS generated with {len(all_new_jobs)} jobs.")
