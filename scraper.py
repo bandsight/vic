@@ -24,6 +24,14 @@ DELAY_SCROLL = 1  # Seconds
 
 ERROR_TOKENS = {"most likely causes:", "404", "error"}
 
+EXPAND_BUTTON_PATTERNS = [
+    r"view more",
+    r"show more",
+    r"see more",
+    r"read more",
+    r"expand",
+]
+
 EMPLOYMENT_TYPE_MAP = {
     "fixed term": "Full Time",
     "temporary": "Full Time",
@@ -157,6 +165,31 @@ def extract_work_arrangement(*parts):
     return "N/A"
 
 
+def expand_collapsible_sections(page):
+    """Click any collapsible triggers so the DOM contains the full detail text."""
+    for pattern in EXPAND_BUTTON_PATTERNS:
+        try:
+            buttons = page.get_by_role("button", name=re.compile(pattern, re.I))
+            for index in range(buttons.count()):
+                try:
+                    buttons.nth(index).click(timeout=2000)
+                    time.sleep(0.2)
+                except Exception:
+                    continue
+        except Exception:
+            continue
+        try:
+            links = page.get_by_role("link", name=re.compile(pattern, re.I))
+            for index in range(links.count()):
+                try:
+                    links.nth(index).click(timeout=2000)
+                    time.sleep(0.2)
+                except Exception:
+                    continue
+        except Exception:
+            continue
+
+
 def parse_salary_fields(raw):
     text = clean_text(raw)
     if text == "N/A":
@@ -243,7 +276,15 @@ def extract_section_bullets(page, keywords):
 
 
 def extract_description(page):
-    selectors = ['.job-description', '.role-overview', '.jobSummary']
+    selectors = [
+        '.job-description',
+        '.role-overview',
+        '.jobSummary',
+        'article',
+        'main',
+        '.job-detail',
+        '.job-details',
+    ]
     parts = []
     for selector in selectors:
         try:
@@ -256,8 +297,15 @@ def extract_description(page):
         fallback = safe_first_text_regex(page, re.compile(r'(duties|overview|about the role)', re.I))
         if fallback != "N/A":
             parts.append(fallback)
+    if not parts:
+        try:
+            body_text = page.inner_text('body')
+            if body_text:
+                parts.append(body_text)
+        except Exception:
+            pass
     description = " ".join(part.strip() for part in parts if part and part.strip()).strip()
-    return description if description else "N/A"
+    return description[:5000] if description else "N/A"
 
 
 def extract_application_instructions(text):
@@ -341,6 +389,38 @@ def extract_posted_date(text):
         return text
     match = re.search(r"(\d{4}-\d{2}-\d{2})", text)
     return match.group(1) if match else "N/A"
+
+
+def extract_label_value(text, labels):
+    text = clean_text(text, "")
+    if not text:
+        return "N/A"
+    for label in labels:
+        pattern = re.compile(rf"{label}\s*(?:[:\-]\s*|\s+)([^\n\r]+)", re.I)
+        match = pattern.search(text)
+        if match:
+            return clean_text(match.group(1))
+    return "N/A"
+
+
+def resolve_detail_url(job_dict, fallback_slug):
+    """Best-effort resolver for the absolute job detail URL."""
+    candidates = []
+    for key in ("detailHref", "detailUrl", "detail_url", "url"):
+        value = clean_text(job_dict.get(key, ""), "")
+        if value and value != "N/A":
+            candidates.append(value)
+    if not candidates:
+        link_id = clean_text(job_dict.get('linkId', ''), '')
+        if link_id and link_id.lower() != 'unknown':
+            candidates.append(f"{PULSE_URL}/job/{link_id}/{fallback_slug}?source=public")
+    for candidate in candidates:
+        if candidate.startswith("http"):
+            return candidate
+        joined = urljoin(PULSE_URL, candidate)
+        if joined:
+            return joined
+    return "N/A"
 
 
 def build_parse_flags(job_record):
@@ -464,15 +544,30 @@ def scrape_jobs():
                             var jobs = [];
                             for (var i = 0; i < rows.length; i++) {
                                 var row = rows[i];
-                                var title = row.querySelector('.job-title span') ? row.querySelector('.job-title span').textContent.trim() : 'N/A';
+                                var titleNode = row.querySelector('.job-title span, .job-title a, .job-title');
+                                var linkNode = row.querySelector('a[href*="/Pulse/jobs/job/"]');
+                                var title = titleNode ? titleNode.textContent.trim() : 'N/A';
                                 if (title === 'N/A') continue;
+                                var href = linkNode ? linkNode.getAttribute('href') : '';
+                                var absoluteHref = '';
+                                if (href) {
+                                    var a = document.createElement('a');
+                                    a.href = href;
+                                    absoluteHref = a.href;
+                                }
                                 var linkId = 'unknown';
-                                var rowText = row.innerText;
-                                var closingMatch = rowText.match(/Closing date:\\s*([\\w\\s,]+\\d{4})/i);
-                                var compensationMatch = rowText.match(/Compensation:\\s*([\\$\\d,\\s-]+)/i);
-                                var locationMatch = rowText.match(/Location:\\s*([\\w\\s,]+)/i);
-                                var departmentMatch = rowText.match(/Department:\\s*([\\w\\s]+)/i);
-                                var employmentMatch = rowText.match(/Employment type:\\s*([\\w\\s]+)/i);
+                                if (absoluteHref) {
+                                    var match = absoluteHref.match(/job\/([^\/]+)\//i);
+                                    if (match && match[1]) {
+                                        linkId = match[1];
+                                    }
+                                }
+                                var rowText = row.innerText || '';
+                                var closingMatch = rowText.match(/Closing date:\s*([\w\s,]+\d{4})/i);
+                                var compensationMatch = rowText.match(/Compensation:\s*([\$\d,\s-]+)/i);
+                                var locationMatch = rowText.match(/Location:\s*([\w\s,]+)/i);
+                                var departmentMatch = rowText.match(/Department:\s*([\w\s]+)/i);
+                                var employmentMatch = rowText.match(/Employment type:\s*([\w\s]+)/i);
                                 jobs.push({
                                     title: title,
                                     linkId: linkId,
@@ -482,7 +577,8 @@ def scrape_jobs():
                                     department: departmentMatch ? departmentMatch[1].trim() : 'N/A',
                                     employmentType: employmentMatch ? employmentMatch[1].trim() : 'N/A',
                                     jobRef: linkId,
-                                    workArrangement: ''
+                                    workArrangement: '',
+                                    detailHref: absoluteHref || href || 'N/A'
                                 });
                             }
                             return jobs;
@@ -503,7 +599,8 @@ def scrape_jobs():
             raw_ref = clean_text(job.get('jobRef', link_id), 'N/A')
             reference_number = "N/A" if raw_ref.lower() == 'unknown' else raw_ref
             slug = slug_title(job_title if job_title != "N/A" else "role")
-            full_url = f"{PULSE_URL}/job/{link_id}/{slug}?source=public"
+            full_url = resolve_detail_url(job, slug)
+            detail_url, detail_url_valid = validate_url(full_url)
 
             closing_text = job.get('closingDate', "N/A") or "N/A"
             closing_date = parse_date_field(closing_text)
@@ -528,8 +625,11 @@ def scrape_jobs():
             posted_date = "N/A"
             detail_text = ""
             try:
-                detail_page.goto(full_url, timeout=60000)
+                if detail_url == "N/A" or not detail_url_valid:
+                    raise ValueError("Detail URL missing or invalid")
+                detail_page.goto(detail_url, timeout=60000)
                 detail_page.wait_for_load_state('domcontentloaded', timeout=30000)
+                expand_collapsible_sections(detail_page)
                 description = extract_description(detail_page)
                 requirements = extract_section_bullets(detail_page, ["requirements", "skills", "responsibilities", "experience"])
                 key_criteria = extract_section_bullets(detail_page, ["key selection criteria"])
@@ -550,9 +650,22 @@ def scrape_jobs():
             requirements = requirements[:10]
             key_criteria = key_criteria[:5]
             band_level = band_level if re.fullmatch(r"[1-8][A-Z]?", band_level or "") else "N/A"
+            if salary == "N/A" and detail_text:
+                detail_salary_raw = extract_label_value(detail_text, ["salary", "remuneration", "classification", "band", "pay rate"])
+                detail_salary, detail_salary_type = parse_salary_fields(detail_salary_raw)
+                if detail_salary != "N/A":
+                    salary = detail_salary
+                    salary_type = detail_salary_type
+            if closing_date == "N/A" and detail_text:
+                closing_raw = extract_label_value(detail_text, ["closing date", "applications close", "applications closing", "closes"])
+                if closing_raw != "N/A":
+                    closing_date = parse_date_field(closing_raw)
+                    closing_time = parse_closing_time(closing_raw)
+            if description == "N/A" and detail_text:
+                description = " ".join(line.strip() for line in detail_text.splitlines() if line.strip())[:5000] or "N/A"
+
             job_category = infer_job_category(department, band_level)
             salary_type_value = salary_type if salary_type else "N/A"
-            detail_url, _ = validate_url(full_url)
             scraped_at = datetime.utcnow().isoformat()
 
             job_record = {
