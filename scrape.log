@@ -92,3 +92,68 @@
 2025-11-13 06:47:04,203 - INFO - Added job: Gymnastics Assistant Coach for City of Ballarat (Ref: N/A)
 2025-11-13 06:47:05,234 - INFO - Overwrote JSON with 18 jobs from Pulse.
 2025-11-13 06:47:05,254 - INFO - RSS generated with 18 jobs.
+2025-11-13 06:59:39,734 - INFO - Starting scrape for City of Ballarat at https://ballarat.pulsesoftware.com/Pulse/jobs
+2025-11-13 06:59:42,658 - INFO - Page title: 
+2025-11-13 06:59:42,662 - INFO - Triggered Vue load().
+2025-11-13 06:59:42,950 - INFO - 15+ job rows loaded via Vue.
+2025-11-13 06:59:43,082 - INFO - Screenshot saved: pulse_list.png
+2025-11-13 06:59:44,085 - INFO - Scroll 1/20 complete.
+2025-11-13 06:59:45,088 - INFO - Scroll 2/20 complete.
+2025-11-13 06:59:46,091 - INFO - Scroll 3/20 complete.
+2025-11-13 06:59:47,094 - INFO - Scroll 4/20 complete.
+2025-11-13 06:59:48,097 - INFO - Scroll 5/20 complete.
+2025-11-13 06:59:49,100 - INFO - Scroll 6/20 complete.
+2025-11-13 06:59:50,103 - INFO - Scroll 7/20 complete.
+2025-11-13 06:59:51,107 - INFO - Scroll 8/20 complete.
+2025-11-13 06:59:52,110 - INFO - Scroll 9/20 complete.
+2025-11-13 06:59:53,113 - INFO - Scroll 10/20 complete.
+2025-11-13 06:59:54,116 - INFO - Scroll 11/20 complete.
+2025-11-13 06:59:55,119 - INFO - Scroll 12/20 complete.
+2025-11-13 06:59:56,122 - INFO - Scroll 13/20 complete.
+2025-11-13 06:59:57,125 - INFO - Scroll 14/20 complete.
+2025-11-13 06:59:58,128 - INFO - Scroll 15/20 complete.
+2025-11-13 06:59:59,131 - INFO - Scroll 16/20 complete.
+2025-11-13 07:00:00,134 - INFO - Scroll 17/20 complete.
+2025-11-13 07:00:01,137 - INFO - Scroll 18/20 complete.
+2025-11-13 07:00:02,140 - INFO - Scroll 19/20 complete.
+2025-11-13 07:00:03,143 - INFO - Scroll 20/20 complete.
+2025-11-13 07:00:03,147 - INFO - Accessed Vue data: 0 jobs.
+2025-11-13 07:00:03,154 - INFO - Fallback DOM scrape: 18 jobs.
+2025-11-13 07:00:03,181 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:03,186 - INFO - Added job: Operations Scheduler for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:04,213 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:04,217 - INFO - Added job: Operations Rapid Response (Parental Leave Cover) for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:05,245 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:05,249 - INFO - Added job: Supervisor City Entrances for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:06,276 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:06,280 - INFO - Added job: Project Manager Landfills and Transfer Station for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:07,307 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:07,311 - INFO - Added job: Plant Operator Construction for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:08,338 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:08,342 - INFO - Added job: Theatre Technician for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:09,373 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:09,376 - INFO - Added job: Aquatic Education Teacher for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:10,403 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:10,407 - INFO - Added job: Animal Management Officer for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:11,436 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:11,440 - INFO - Added job: Visitor Experience Officer for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:12,468 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:12,471 - INFO - Added job: Visitor Experience Supervisor for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:13,499 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:13,503 - INFO - Added job: Volunteer - Parent Place for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:14,529 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:14,533 - INFO - Added job: Heritage Librarian for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:15,561 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:15,564 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:16,593 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:16,597 - INFO - Added job: Volunteer - Animal Shelter for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:17,624 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:17,628 - INFO - Added job: Youth Services Volunteers for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:18,655 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:18,660 - INFO - Added job: Maternal and Child Health Nurse - Casual for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:19,687 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:19,691 - INFO - Added job: Group Fitness Instructor for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:20,718 - ERROR - Detail page error for N/A: Detail URL missing or invalid
+2025-11-13 07:00:20,721 - INFO - Added job: Gymnastics Assistant Coach for City of Ballarat (Ref: N/A)
+2025-11-13 07:00:21,765 - INFO - Overwrote JSON with 18 jobs from Pulse.
+2025-11-13 07:00:21,784 - INFO - RSS generated with 18 jobs.
