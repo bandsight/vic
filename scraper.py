@@ -180,7 +180,8 @@ with sync_playwright() as p:
                                 compensation: compensationSpan || 'N/A',
                                 location: locationSpan || 'N/A',
                                 department: departmentSpan || 'N/A',
-                                employmentType: employmentSpan || 'N/A'
+                                employmentType: employmentSpan || 'N/A',
+                                jobRef: linkId  # Derive from linkId for fallback
                             });
                         }
                         return jobs;
@@ -199,18 +200,18 @@ with sync_playwright() as p:
     for job in vue_jobs[:MAX_JOBS]:
         job_title = job['title'] or "N/A"
         link_id = job['linkId'] or 'unknown'
-        job_ref = job['jobRef'] or str(uuid.uuid4())
+        job_ref = job.get('jobRef', link_id) or str(uuid.uuid4())  # Safe get
         # Construct detail URL
         slug = slug_title(job_title)
         full_url = f"{PULSE_URL}/job/{link_id}/{slug}?source=public"
         
         # Extract from job dict
-        closing_text = job['closingDate'] or "N/A"
+        closing_text = job.get('closingDate', "N/A") or "N/A"
         closing_date = parse_date(closing_text, 'closing')
-        salary = job['compensation'] or "N/A"
-        location = job['location'] or "N/A"
-        employment_type = job['employmentType'] or "N/A"
-        department = job['department'] or "N/A"
+        salary = job.get('compensation', "N/A") or "N/A"
+        location = job.get('location', "N/A") or "N/A"
+        employment_type = job.get('employmentType', "N/A") or "N/A"
+        department = job.get('department', "N/A") or "N/A"
         posted_date = "N/A"  # Assume scraped_at
 
         # Goto detail for full description/requirements
