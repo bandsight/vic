@@ -13,6 +13,9 @@ Automated scraper using Playwright for intelligent browsing of Victorian council
 1. `pip install -r requirements.txt && playwright install`
 2. Edit `config.py` (e.g., TEST_MODE=False for full run).
 3. `python scraper.py` → Generates `jobs_output.json` + `rss.xml`.
+4. `pytest` → Runs unit tests for helper utilities and RSS generation.
+
+CI runs the same pytest suite automatically via `.github/workflows/tests.yml` for every push/PR, ensuring utility code stays healthy.
 
 ## GitHub Automation
 - Actions: Daily scrape → Commits JSON/RSS.
