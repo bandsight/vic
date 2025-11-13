@@ -73,6 +73,22 @@ def generate_rss(jobs):
     reparsed = minidom.parseString(rough_string)
     return reparsed.toprettyxml(indent='  ')
 
+
+def generate_jobs_xml(jobs):
+    """Generate a full XML document representing all scraped jobs."""
+    jobs_root = ET.Element('jobs', generated_at=datetime.now().isoformat())
+    for job in jobs:
+        job_el = ET.SubElement(jobs_root, 'job')
+        for key, value in job.items():
+            if isinstance(value, list):
+                list_el = ET.SubElement(job_el, key)
+                for item in value:
+                    ET.SubElement(list_el, 'item').text = str(item)
+            else:
+                ET.SubElement(job_el, key).text = '' if value is None else str(value)
+
+    return minidom.parseString(ET.tostring(jobs_root, 'utf-8')).toprettyxml(indent='  ')
+
 # Main scrape for Pulse
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True)
@@ -252,6 +268,20 @@ with open(output_file, 'w', encoding='utf-8') as f:
     json.dump(all_new_jobs, f, indent=2, default=str)
 
 logger.info(f"Overwrote JSON with {len(all_new_jobs)} jobs from Pulse.")
+
+# Export CSV for downstream analysis/storage
+if all_new_jobs:
+    df = pd.DataFrame(all_new_jobs)
+    df.to_csv('jobs_output.csv', index=False)
+    logger.info("CSV export complete: jobs_output.csv")
+else:
+    logger.warning("No jobs scraped—skipping CSV export.")
+
+# Generate full XML dump alongside RSS feed
+jobs_xml = generate_jobs_xml(all_new_jobs)
+with open('jobs.xml', 'w', encoding='utf-8') as f:
+    f.write(jobs_xml)
+logger.info("Full jobs XML generated: jobs.xml")
 
 # Generate RSS
 rss_xml = generate_rss(all_new_jobs)

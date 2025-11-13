@@ -1,6 +1,6 @@
 # Victorian Councils Job Scraper
 
-Automated scraper using Playwright for intelligent browsing of Victorian council jobs. Dynamic fetch from MAV directory. Outputs JSON + RSS for GitHub Pages.
+Automated scraper using Playwright for intelligent browsing of Victorian council jobs. Dynamic fetch from MAV directory. Outputs JSON + CSV + XML (RSS + full dataset) for GitHub Pages.
 
 ## Features
 - **Dynamic Councils:** Fetches 79 from https://www.viccouncils.asn.au/... (fallback included).
@@ -12,7 +12,7 @@ Automated scraper using Playwright for intelligent browsing of Victorian council
 ## Local Setup
 1. `pip install -r requirements.txt && playwright install`
 2. Edit `config.py` (e.g., TEST_MODE=False for full run).
-3. `python scraper.py` → Generates `jobs_output.json` + `rss.xml`.
+3. `python scraper.py` → Generates `jobs_output.json`, `jobs_output.csv`, `jobs.xml` + `rss.xml`.
 
 ## GitHub Automation
 - Actions: Daily scrape → Commits JSON/RSS.
