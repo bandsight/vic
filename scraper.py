@@ -14,7 +14,7 @@ import os
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',
-                    handlers=[logging.FileHandler('scrape.log'), logging.StreamHandler()])
+                    handlers=[logging.FileHandler('scrape.log', mode='a'), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
 # Hardcoded for Ballarat Pulse
@@ -113,6 +113,7 @@ with sync_playwright() as p:
         logger.info(f"Scroll {i+1}/20 complete.")
 
     # Access Vue data directly via evaluate (wrapped in IIFE for scope)
+    vue_jobs = []
     try:
         vue_jobs = page.evaluate("""
             (function() {
@@ -138,92 +139,100 @@ with sync_playwright() as p:
             })();
         """)
         logger.info(f"Accessed Vue data: {len(vue_jobs)} jobs.")
-        
-        for job in vue_jobs[:MAX_JOBS]:
-            job_title = job['title'] or "N/A"
-            link_id = job['linkId']
-            job_ref = job['jobRef'] or str(uuid.uuid4())
-            # Construct detail URL
-            slug = slug_title(job_title)
-            full_url = f"{PULSE_URL}/job/{link_id}/{slug}?source=public"
-            
-            # Extract from list
-            closing_text = job['closingDate'] or "N/A"
-            closing_date = parse_date(closing_text, 'closing')
-            salary = job['compensation'] or "N/A"
-            location = job['location'] or "N/A"
-            employment_type = job['employmentType'] or "N/A"
-            department = job['department'] or "N/A"
-            posted_date = "N/A"  # Assume scraped_at
-
-            # Goto detail for full description/requirements
-            detail_page = context.new_page()
-            try:
-                detail_page.goto(full_url, timeout=60000)
-                detail_page.wait_for_load_state('domcontentloaded', timeout=30000)
-                description = detail_page.locator('.job-description, .role-overview, text=/duties|overview/i').first.inner_text()[:500] or "N/A"
-                requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification")').all_inner_texts() if req.strip()] or []
-                application_instructions = detail_page.locator('text=/apply|submit/i').first.inner_text().strip() or "N/A"
-                contact_info = detail_page.locator('a[href^="mailto"]').first.inner_text().strip() or "N/A"
-                band_level = detail_page.locator('text=/VPS|band|level/i').first.inner_text().strip() or "N/A"
-            except Exception as detail_e:
-                logger.error(f"Detail page error for {full_url}: {detail_e}")
-                description = "N/A"
-                requirements = []
-                application_instructions = "N/A"
-                contact_info = "N/A"
-                band_level = "N/A"
-            finally:
-                detail_page.close()
-
-            all_new_jobs.append({
-                'title': job_title,
-                'council': COUNCIL_NAME,
-                'detail_url': full_url,
-                'closing_date': closing_date,
-                'location': location,
-                'employment_type': employment_type,
-                'salary': salary,
-                'band_level': band_level,
-                'description': description,
-                'requirements': requirements,
-                'application_instructions': application_instructions,
-                'contact_info': contact_info,
-                'reference_number': job_ref,
-                'department': department,
-                'posted_date': posted_date,
-                'scraped_at': datetime.now().isoformat()
-            })
-            logger.info(f"Added job: {job_title} for {COUNCIL_NAME} (Ref: {job_ref})")
-            time.sleep(1)
-
     except Exception as e:
         logger.error(f"Error accessing Vue data: {e}")
 
+    # Fallback: Scrape from rendered DOM if Vue failed
+    if len(vue_jobs) == 0:
+        try:
+            dom_jobs = page.evaluate("""
+                var rows = document.querySelectorAll('.row.card-row');
+                return Array.from(rows).map(row => ({
+                    title: row.querySelector('.job-title span') ? row.querySelector('.job-title span').textContent.trim() : 'N/A',
+                    linkId: row.querySelector('.apply-btn-btn') ? row.querySelector('.apply-btn-btn').getAttribute('data-link-id') || 'unknown' : 'unknown',
+                    closingDate: row.querySelector('.info-section span:has(b:contains("Closing date"))') ? row.querySelector('.info-section span:has(b:contains("Closing date"))').textContent.trim() : 'N/A',
+                    compensation: row.querySelector('.info-section span:has(b:contains("Compensation"))') ? row.querySelector('.info-section span:has(b:contains("Compensation"))').textContent.trim() : 'N/A',
+                    location: row.querySelector('.info-section span:has(b:contains("Location"))') ? row.querySelector('.info-section span:has(b:contains("Location"))').textContent.trim() : 'N/A',
+                    department: row.querySelector('.info-section span:has(b:contains("Department"))') ? row.querySelector('.info-section span:has(b:contains("Department"))').textContent.trim() : 'N/A',
+                    employmentType: row.querySelector('.info-section span:has(b:contains("Employment type"))') ? row.querySelector('.info-section span:has(b:contains("Employment type"))').textContent.trim() : 'N/A'
+                }));
+            """)
+            logger.info(f"Fallback DOM scrape: {len(dom_jobs)} jobs.")
+            vue_jobs = dom_jobs  # Use fallback
+        except Exception as fallback_e:
+            logger.error(f"Fallback DOM error: {fallback_e}")
+
+    # Process jobs (from Vue or fallback)
+    for job in vue_jobs[:MAX_JOBS]:
+        job_title = job['title'] or "N/A"
+        link_id = job['linkId'] or 'unknown'
+        job_ref = job['jobRef'] or str(uuid.uuid4())
+        # Construct detail URL
+        slug = slug_title(job_title)
+        full_url = f"{PULSE_URL}/job/{link_id}/{slug}?source=public"
+        
+        # Extract from job dict
+        closing_text = job['closingDate'] or "N/A"
+        closing_date = parse_date(closing_text, 'closing')
+        salary = job['compensation'] or "N/A"
+        location = job['location'] or "N/A"
+        employment_type = job['employmentType'] or "N/A"
+        department = job['department'] or "N/A"
+        posted_date = "N/A"  # Assume scraped_at
+
+        # Goto detail for full description/requirements
+        detail_page = context.new_page()
+        try:
+            detail_page.goto(full_url, timeout=60000)
+            detail_page.wait_for_load_state('domcontentloaded', timeout=30000)
+            description = detail_page.locator('.job-description, .role-overview, text=/duties|overview/i').first.inner_text()[:500] or "N/A"
+            requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification")').all_inner_texts() if req.strip()] or []
+            application_instructions = detail_page.locator('text=/apply|submit/i').first.inner_text().strip() or "N/A"
+            contact_info = detail_page.locator('a[href^="mailto"]').first.inner_text().strip() or "N/A"
+            band_level = detail_page.locator('text=/VPS|band|level/i').first.inner_text().strip() or "N/A"
+        except Exception as detail_e:
+            logger.error(f"Detail page error for {full_url}: {detail_e}")
+            description = "N/A"
+            requirements = []
+            application_instructions = "N/A"
+            contact_info = "N/A"
+            band_level = "N/A"
+        finally:
+            detail_page.close()
+
+        all_new_jobs.append({
+            'title': job_title,
+            'council': COUNCIL_NAME,
+            'detail_url': full_url,
+            'closing_date': closing_date,
+            'location': location,
+            'employment_type': employment_type,
+            'salary': salary,
+            'band_level': band_level,
+            'description': description,
+            'requirements': requirements,
+            'application_instructions': application_instructions,
+            'contact_info': contact_info,
+            'reference_number': job_ref,
+            'department': department,
+            'posted_date': posted_date,
+            'scraped_at': datetime.now().isoformat()
+        })
+        logger.info(f"Added job: {job_title} for {COUNCIL_NAME} (Ref: {job_ref})")
+        time.sleep(1)
+
     browser.close()
 
-# Dedup & Append
+# Full Overwrite JSON (no append/dedup for testing)
 output_file = 'jobs_output.json'
-existing_jobs = []
-if os.path.exists(output_file):
-    with open(output_file, 'r', encoding='utf-8') as f:
-        existing_jobs = json.load(f)
-
-combined_jobs = existing_jobs + all_new_jobs
-
-if combined_jobs:
-    df = pd.DataFrame(combined_jobs)
-    df['scraped_at'] = pd.to_datetime(df['scraped_at'])
-    df['unique_key'] = df['reference_number'].fillna(df['title'] + '|' + df['council'] + '|' + df['detail_url'])
-    df_dedup = df.sort_values('scraped_at').drop_duplicates(subset=['unique_key'], keep='last')
-    combined_jobs = df_dedup.drop('unique_key', axis=1).to_dict('records')
-
 with open(output_file, 'w', encoding='utf-8') as f:
-    json.dump(combined_jobs, f, indent=2, default=str)
+    json.dump(all_new_jobs, f, indent=2, default=str)
+
+logger.info(f"Overwrote JSON with {len(all_new_jobs)} jobs from Pulse.")
 
 # Generate RSS
-rss_xml = generate_rss(combined_jobs)
+rss_xml = generate_rss(all_new_jobs)
 with open('rss.xml', 'w', encoding='utf-8') as f:
     f.write(rss_xml)
 
-logger.info(f"Appended {len(all_new_jobs)} new jobs from Pulse. Total after dedup: {len(combined_jobs)}. RSS generated.")
+logger.info(f"RSS generated with {len(all_new_jobs)} jobs.")
