@@ -5,12 +5,9 @@ import uuid
 import logging
 from datetime import datetime, timedelta
 from dateutil import parser as date_parser
-from urllib.parse import urljoin
 from xml.etree import ElementTree as ET
 from xml.dom import minidom
 from playwright.sync_api import sync_playwright
-import pandas as pd
-import os
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',
@@ -154,7 +151,7 @@ with sync_playwright() as p:
                             var row = rows[i];
                             var title = row.querySelector('.job-title span') ? row.querySelector('.job-title span').textContent.trim() : 'N/A';
                             if (title === 'N/A') continue;
-                            var linkId = 'unknown';  # Derive from pattern or skip
+                            var linkId = 'unknown';  // Derive from pattern or skip
                             var rowText = row.innerText;
                             // Regex for fields from row text (fixed backslashes)
                             var closingMatch = rowText.match(/Closing date:\\s*([\\w\\s,]+\\d{4})/i);
@@ -170,7 +167,7 @@ with sync_playwright() as p:
                                 location: locationMatch ? locationMatch[1].trim() : 'N/A',
                                 department: departmentMatch ? departmentMatch[1].trim() : 'N/A',
                                 employmentType: employmentMatch ? employmentMatch[1].trim() : 'N/A',
-                                jobRef: linkId  # Derive from linkId for fallback
+                                jobRef: linkId  // Derive from linkId for fallback
                             });
                         }
                         return jobs;
