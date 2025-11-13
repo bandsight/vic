@@ -142,7 +142,7 @@ with sync_playwright() as p:
     except Exception as e:
         logger.error(f"Error accessing Vue data: {e}")
 
-    # Fallback: Scrape from rendered DOM if Vue failed (pure JS, no CSS4)
+    # Fallback: Scrape from rendered DOM if Vue failed (simplified pure JS)
     if len(vue_jobs) == 0:
         try:
             dom_jobs = page.evaluate("""
@@ -154,33 +154,22 @@ with sync_playwright() as p:
                             var row = rows[i];
                             var title = row.querySelector('.job-title span') ? row.querySelector('.job-title span').textContent.trim() : 'N/A';
                             if (title === 'N/A') continue;
-                            var linkId = row.querySelector('.apply-btn-btn') ? row.querySelector('.apply-btn-btn').getAttribute('data-link-id') || 'unknown' : 'unknown';
-                            var closingSpan = null;
-                            var compensationSpan = null;
-                            var locationSpan = null;
-                            var departmentSpan = null;
-                            var employmentSpan = null;
-                            var bTags = row.querySelectorAll('b');
-                            for (var j = 0; j < bTags.length; j++) {
-                                var b = bTags[j];
-                                var bText = b.textContent.trim();
-                                var nextSpan = b.nextElementSibling;
-                                if (nextSpan && nextSpan.tagName === 'SPAN') {
-                                    if (bText.includes('Closing date')) closingSpan = nextSpan.textContent.trim();
-                                    if (bText.includes('Compensation')) compensationSpan = nextSpan.textContent.trim();
-                                    if (bText.includes('Location')) locationSpan = nextSpan.textContent.trim();
-                                    if (bText.includes('Department')) departmentSpan = nextSpan.textContent.trim();
-                                    if (bText.includes('Employment type')) employmentSpan = nextSpan.textContent.trim();
-                                }
-                            }
+                            var linkId = 'unknown';  # Derive from pattern or skip
+                            var rowText = row.innerText;
+                            // Regex for fields from row text
+                            var closingMatch = rowText.match(/Closing date:\\s*([\\w\\s,]+\\d{4})/i);
+                            var compensationMatch = rowText.match(/Compensation:\\s*([\\$\\d,\\s-]+)/i);
+                            var locationMatch = rowText.match(/Location:\\s*([\\w\\s,]+)/i);
+                            var departmentMatch = rowText.match(/Department:\\s*([\\w\\s]+)/i);
+                            var employmentMatch = rowText.match(/Employment type:\\s*([\\w\\s]+)/i);
                             jobs.push({
                                 title: title,
                                 linkId: linkId,
-                                closingDate: closingSpan || 'N/A',
-                                compensation: compensationSpan || 'N/A',
-                                location: locationSpan || 'N/A',
-                                department: departmentSpan || 'N/A',
-                                employmentType: employmentSpan || 'N/A',
+                                closingDate: closingMatch ? closingMatch[1].trim() : 'N/A',
+                                compensation: compensationMatch ? compensationMatch[1].trim() : 'N/A',
+                                location: locationMatch ? locationMatch[1].trim() : 'N/A',
+                                department: departmentMatch ? departmentMatch[1].trim() : 'N/A',
+                                employmentType: employmentMatch ? employmentMatch[1].trim() : 'N/A',
                                 jobRef: linkId  # Derive from linkId for fallback
                             });
                         }
