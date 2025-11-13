@@ -14,7 +14,7 @@ import os
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',
-                    handlers=[logging.FileHandler('scrape.log', mode='a'), logging.StreamHandler()])
+                    handlers=[logging.FileHandler('scrape.log'), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
 # Hardcoded for Ballarat Pulse
@@ -142,20 +142,53 @@ with sync_playwright() as p:
     except Exception as e:
         logger.error(f"Error accessing Vue data: {e}")
 
-    # Fallback: Scrape from rendered DOM if Vue failed
+    # Fallback: Scrape from rendered DOM if Vue failed (pure JS, no CSS4)
     if len(vue_jobs) == 0:
         try:
             dom_jobs = page.evaluate("""
-                var rows = document.querySelectorAll('.row.card-row');
-                return Array.from(rows).map(row => ({
-                    title: row.querySelector('.job-title span') ? row.querySelector('.job-title span').textContent.trim() : 'N/A',
-                    linkId: row.querySelector('.apply-btn-btn') ? row.querySelector('.apply-btn-btn').getAttribute('data-link-id') || 'unknown' : 'unknown',
-                    closingDate: row.querySelector('.info-section span:has(b:contains("Closing date"))') ? row.querySelector('.info-section span:has(b:contains("Closing date"))').textContent.trim() : 'N/A',
-                    compensation: row.querySelector('.info-section span:has(b:contains("Compensation"))') ? row.querySelector('.info-section span:has(b:contains("Compensation"))').textContent.trim() : 'N/A',
-                    location: row.querySelector('.info-section span:has(b:contains("Location"))') ? row.querySelector('.info-section span:has(b:contains("Location"))').textContent.trim() : 'N/A',
-                    department: row.querySelector('.info-section span:has(b:contains("Department"))') ? row.querySelector('.info-section span:has(b:contains("Department"))').textContent.trim() : 'N/A',
-                    employmentType: row.querySelector('.info-section span:has(b:contains("Employment type"))') ? row.querySelector('.info-section span:has(b:contains("Employment type"))').textContent.trim() : 'N/A'
-                }));
+                (function() {
+                    try {
+                        var rows = document.querySelectorAll('.row.card-row');
+                        var jobs = [];
+                        for (var i = 0; i < rows.length; i++) {
+                            var row = rows[i];
+                            var title = row.querySelector('.job-title span') ? row.querySelector('.job-title span').textContent.trim() : 'N/A';
+                            if (title === 'N/A') continue;
+                            var linkId = row.querySelector('.apply-btn-btn') ? row.querySelector('.apply-btn-btn').getAttribute('data-link-id') || 'unknown' : 'unknown';
+                            var closingSpan = null;
+                            var compensationSpan = null;
+                            var locationSpan = null;
+                            var departmentSpan = null;
+                            var employmentSpan = null;
+                            var bTags = row.querySelectorAll('b');
+                            for (var j = 0; j < bTags.length; j++) {
+                                var b = bTags[j];
+                                var bText = b.textContent.trim();
+                                var nextSpan = b.nextElementSibling;
+                                if (nextSpan && nextSpan.tagName === 'SPAN') {
+                                    if (bText.includes('Closing date')) closingSpan = nextSpan.textContent.trim();
+                                    if (bText.includes('Compensation')) compensationSpan = nextSpan.textContent.trim();
+                                    if (bText.includes('Location')) locationSpan = nextSpan.textContent.trim();
+                                    if (bText.includes('Department')) departmentSpan = nextSpan.textContent.trim();
+                                    if (bText.includes('Employment type')) employmentSpan = nextSpan.textContent.trim();
+                                }
+                            }
+                            jobs.push({
+                                title: title,
+                                linkId: linkId,
+                                closingDate: closingSpan || 'N/A',
+                                compensation: compensationSpan || 'N/A',
+                                location: locationSpan || 'N/A',
+                                department: departmentSpan || 'N/A',
+                                employmentType: employmentSpan || 'N/A'
+                            });
+                        }
+                        return jobs;
+                    } catch (e) {
+                        console.error('DOM fallback error:', e);
+                    }
+                    return [];
+                })();
             """)
             logger.info(f"Fallback DOM scrape: {len(dom_jobs)} jobs.")
             vue_jobs = dom_jobs  # Use fallback
