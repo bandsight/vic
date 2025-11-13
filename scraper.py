@@ -112,24 +112,30 @@ with sync_playwright() as p:
         time.sleep(DELAY_SCROLL)
         logger.info(f"Scroll {i+1}/20 complete.")
 
-    # Access Vue data directly via evaluate (from mounted Vue instance)
+    # Access Vue data directly via evaluate (wrapped in IIFE for scope)
     try:
         vue_jobs = page.evaluate("""
-            var vm = document.querySelector('#ctl00_ctl00_BodyContainer_BodyContainer_ctl00_JobsList').__vue__;
-            if (vm && vm.jobs) {
-                return vm.jobs.map(job => ({
-                    linkId: job.LinkId,
-                    title: job.JobInfo.Title,
-                    closingDate: job.JobInfo.ClosingDate,
-                    compensation: job.JobInfo.Compensation,
-                    location: job.JobInfo.Location,
-                    department: job.JobInfo.Department,
-                    employmentType: job.JobInfo.EmploymentType,
-                    workArrangement: job.JobInfo.WorkArrangement,
-                    jobRef: job.JobInfo.JobRef
-                }));
-            }
-            return [];
+            (function() {
+                try {
+                    var vm = document.querySelector('#ctl00_ctl00_BodyContainer_BodyContainer_ctl00_JobsList').__vue__;
+                    if (vm && vm.jobs && vm.jobs.length > 0) {
+                        return vm.jobs.map(job => ({
+                            linkId: job.LinkId,
+                            title: job.JobInfo.Title,
+                            closingDate: job.JobInfo.ClosingDate,
+                            compensation: job.JobInfo.Compensation,
+                            location: job.JobInfo.Location,
+                            department: job.JobInfo.Department,
+                            employmentType: job.JobInfo.EmploymentType,
+                            workArrangement: job.JobInfo.WorkArrangement,
+                            jobRef: job.JobInfo.JobRef
+                        }));
+                    }
+                } catch (e) {
+                    console.error('Vue access error:', e);
+                }
+                return [];
+            })();
         """)
         logger.info(f"Accessed Vue data: {len(vue_jobs)} jobs.")
         
@@ -141,16 +147,16 @@ with sync_playwright() as p:
             slug = slug_title(job_title)
             full_url = f"{PULSE_URL}/job/{link_id}/{slug}?source=public"
             
-            # Extract from list (snippet; full on detail if needed)
+            # Extract from list
             closing_text = job['closingDate'] or "N/A"
             closing_date = parse_date(closing_text, 'closing')
             salary = job['compensation'] or "N/A"
             location = job['location'] or "N/A"
             employment_type = job['employmentType'] or "N/A"
             department = job['department'] or "N/A"
-            posted_date = "N/A"  # Not in list; assume scraped_at as proxy
+            posted_date = "N/A"  # Assume scraped_at
 
-            # Optional: Goto detail for full description/requirements
+            # Goto detail for full description/requirements
             detail_page = context.new_page()
             try:
                 detail_page.goto(full_url, timeout=60000)
@@ -189,7 +195,7 @@ with sync_playwright() as p:
                 'scraped_at': datetime.now().isoformat()
             })
             logger.info(f"Added job: {job_title} for {COUNCIL_NAME} (Ref: {job_ref})")
-            time.sleep(1)  # Polite delay
+            time.sleep(1)
 
     except Exception as e:
         logger.error(f"Error accessing Vue data: {e}")
