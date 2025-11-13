@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Sample job – run scraper.py to refresh",
+    "council": "City of Ballarat",
+    "detail_url": "https://ballarat.pulsesoftware.com/Pulse/jobs",
+    "closing_date": "N/A",
+    "location": "Ballarat, VIC",
+    "employment_type": "N/A",
+    "salary": "N/A",
+    "band_level": "N/A",
+    "description": "Placeholder data committed so the GitHub Pages view has something to render. Replace by running scraper.py.",
+    "requirements": [],
+    "application_instructions": "Run the scraper locally or via GitHub Actions to generate fresh content.",
+    "contact_info": "N/A",
+    "reference_number": "sample",
+    "department": "N/A",
+    "posted_date": "N/A",
+    "scraped_at": "2025-02-14T00:00:00"
+  }
+]

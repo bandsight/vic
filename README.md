@@ -15,6 +15,9 @@ Victorian councils directory again.
 - ✅ **Structured job details** – captures metadata from the listing, opens each
   job detail view for descriptions, requirements, application instructions,
   contact info, and an inferred band level snippet.
+- ✅ **Static viewer** – `index.html` now loads `jobs_output.json` directly so
+  the GitHub Pages site always shows the latest scrape (or the placeholder JSON
+  committed in this repo until the first automated run).
 
 ## Setup
 1. Install the dependencies and browsers:
@@ -27,7 +30,8 @@ Victorian councils directory again.
    python scraper.py
    ```
 3. Review `jobs_output.json`, `rss.xml`, `scrape.log`, and the latest
-   `pulse_list.png` screenshot for troubleshooting.
+  `pulse_list.png` screenshot for troubleshooting. The JSON file is also what
+  powers the public viewer at `index.html`.
 
 ## Why Playwright (research summary)
 Pulse renders its public job listings fully client-side via Vue and only exposes
