@@ -22,6 +22,32 @@ DELAY_SCROLL = 1  # Seconds
 
 all_new_jobs = []
 
+
+def safe_first_text(page, selector, default="N/A"):
+    """Return first matching locator text if it exists, otherwise default."""
+    try:
+        loc = page.locator(selector)
+        if loc.count() == 0:
+            return default
+        text = loc.first.inner_text().strip()
+        return text if text else default
+    except Exception as exc:
+        logger.debug(f"safe_first_text failed for selector '{selector}': {exc}")
+        return default
+
+
+def safe_first_text_regex(page, pattern, default="N/A"):
+    """Return first text node matching regex via get_by_text, else default."""
+    try:
+        loc = page.get_by_text(pattern, exact=False)
+        if loc.count() == 0:
+            return default
+        text = loc.first.inner_text().strip()
+        return text if text else default
+    except Exception as exc:
+        logger.debug(f"safe_first_text_regex failed for pattern '{pattern.pattern}': {exc}")
+        return default
+
 def parse_date(text, field_type='closing'):
     """Robust date parsing."""
     if not text or text == "N/A":
@@ -205,11 +231,19 @@ with sync_playwright() as p:
         try:
             detail_page.goto(full_url, timeout=60000)
             detail_page.wait_for_load_state('domcontentloaded', timeout=30000)
-            description = detail_page.locator('.job-description, .role-overview, text=/duties|overview/i').first.inner_text()[:500] or "N/A"
-            requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification")').all_inner_texts() if req.strip()] or []
-            application_instructions = detail_page.locator('text=/apply|submit/i').first.inner_text().strip() or "N/A"
-            contact_info = detail_page.locator('a[href^="mailto"]').first.inner_text().strip() or "N/A"
-            band_level = detail_page.locator('text=/VPS|band|level|EO|ST|grade/i').first.inner_text().strip() or "N/A"
+            description = safe_first_text(detail_page, '.job-description, .role-overview')
+            if description == "N/A":
+                description = safe_first_text_regex(detail_page, re.compile(r'(duties|overview)', re.I))
+            description = description[:500] if description != "N/A" else description
+
+            requirements = [
+                req.strip()
+                for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification")').all_inner_texts()
+                if req.strip()
+            ] or []
+            application_instructions = safe_first_text_regex(detail_page, re.compile(r'(apply|submit)', re.I))
+            contact_info = safe_first_text(detail_page, 'a[href^="mailto"]')
+            band_level = safe_first_text_regex(detail_page, re.compile(r'(VPS|band|level|EO|ST|grade)', re.I))
         except Exception as detail_e:
             logger.error(f"Detail page error for {full_url}: {detail_e}")
             description = "N/A"
