@@ -1,8 +1,26 @@
-# Configuration for scraper
-TEST_MODE = True  # Set False for full 79 councils
-MAX_JOBS_PER_COUNCIL = 10  # Limit per site
-DELAY_BETWEEN_COUNCILS = 3  # Seconds
-DELAY_AFTER_CLICK = 3  # Seconds for loads
-RSS_DAYS_BACK = 30  # Jobs in RSS (filter by posted_date)
-FALLBACK_COUNCILS_FILE = 'fallback_councils.json'  # Backup if directory fails
-QUICK_TEST_COUNCILS = ['City of Ballarat']  # Run only these for debug (overrides TEST_MODE)
+"""Configuration for the Pulse job scraper."""
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class PulseTenancy:
+    """Represents a single Pulse tenancy we can scrape."""
+    name: str
+    listing_url: str
+    min_card_rows: int = 15
+
+
+BALLARAT_TENANCY = PulseTenancy(
+    name="City of Ballarat",
+    listing_url="https://ballarat.pulsesoftware.com/Pulse/jobs",
+    min_card_rows=15,
+)
+
+# The tenancy we currently target. This keeps the scraper flexible when we
+# re-introduce multiple councils.
+ACTIVE_TENANCY = BALLARAT_TENANCY
+
+# Scraper tuning knobs
+MAX_JOBS = 20
+SCROLL_DELAY_SECONDS = 1
+RSS_LOOKBACK_DAYS = 30

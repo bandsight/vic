@@ -9,16 +9,21 @@ from xml.etree import ElementTree as ET
 from xml.dom import minidom
 from playwright.sync_api import sync_playwright
 
+from config import (
+    ACTIVE_TENANCY,
+    MAX_JOBS,
+    RSS_LOOKBACK_DAYS,
+    SCROLL_DELAY_SECONDS,
+)
+
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',
                     handlers=[logging.FileHandler('scrape.log'), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
-# Hardcoded for Ballarat Pulse
-PULSE_URL = "https://ballarat.pulsesoftware.com/Pulse/jobs"
-COUNCIL_NAME = "City of Ballarat"
-MAX_JOBS = 20  # Buffer for 15+
-DELAY_SCROLL = 1  # Seconds
+# Derived shortcuts for readability
+PULSE_URL = ACTIVE_TENANCY.listing_url
+COUNCIL_NAME = ACTIVE_TENANCY.name
 
 all_new_jobs = []
 
@@ -46,9 +51,13 @@ def slug_title(title):
 
 def generate_rss(jobs):
     """Generate RSS XML from jobs (recent only)."""
-    recent_jobs = [j for j in jobs if j['posted_date'] != "N/A" and 
-                   datetime.fromisoformat(j['posted_date'].replace('Z', '+00:00')) > 
-                   datetime.now() - timedelta(days=30)]
+    recent_jobs = [
+        j
+        for j in jobs
+        if j['posted_date'] != "N/A" and
+        datetime.fromisoformat(j['posted_date'].replace('Z', '+00:00'))
+        > datetime.now() - timedelta(days=RSS_LOOKBACK_DAYS)
+    ]
     
     rss = ET.Element('rss', version='2.0')
     channel = ET.SubElement(rss, 'channel')
@@ -94,10 +103,16 @@ with sync_playwright() as p:
 
     # Wait for Vue to mount and render jobs (check for .row.card-row from template)
     try:
-        page.wait_for_function("document.querySelectorAll('.row.card-row').length >= 15", timeout=60000)
-        logger.info("15+ job rows loaded via Vue.")
+        page.wait_for_function(
+            f"document.querySelectorAll('.row.card-row').length >= {ACTIVE_TENANCY.min_card_rows}",
+            timeout=60000,
+        )
+        logger.info("%s job rows loaded via Vue.", ACTIVE_TENANCY.min_card_rows)
     except:
-        logger.warning("Less than 15 job rows after 60s—continuing with available.")
+        logger.warning(
+            "Less than %s job rows after 60s—continuing with available.",
+            ACTIVE_TENANCY.min_card_rows,
+        )
 
     # Screenshot for debug
     page.screenshot(path='pulse_list.png')
@@ -106,7 +121,7 @@ with sync_playwright() as p:
     # Extra scrolls to ensure full load
     for i in range(20):
         page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-        time.sleep(DELAY_SCROLL)
+        time.sleep(SCROLL_DELAY_SECONDS)
         logger.info(f"Scroll {i+1}/20 complete.")
 
     # Access Vue data directly via evaluate (wrapped in IIFE for scope)

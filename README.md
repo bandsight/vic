@@ -29,6 +29,14 @@ Victorian councils directory again.
 3. Review `jobs_output.json`, `rss.xml`, `scrape.log`, and the latest
    `pulse_list.png` screenshot for troubleshooting.
 
+## Configuration
+The scraper now reads its tenancy metadata from `config.py`. The
+`ACTIVE_TENANCY` constant identifies the single Pulse tenancy (currently the
+City of Ballarat) along with expectations for how many job cards should load.
+Adjusting the dataclass or swapping in a different tenancy makes it clear when
+we intentionally expand beyond Ballarat again, and keeps the Playwright script
+in sync with those choices.
+
 ## Why Playwright (research summary)
 Pulse renders its public job listings fully client-side via Vue and only exposes
 minimal markup until the Vue instance finishes hydrating. Static HTTP requests
