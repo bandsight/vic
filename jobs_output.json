@@ -1,7 +1,40 @@
 [
   {
-    "title": "Operations Scheduler",
+    "title": "Senior Project Engineer",
     "council": "City of Ballarat",
+    "detail_url": "https://ballarat.pulsesoftware.com/Pulse/job/CN12345/senior-project-engineer?source=public",
+    "closing_date": "2025-12-01",
+    "closing_time": "05:00 PM",
+    "location": "Ballarat, VIC",
+    "employment_type": "Full Time",
+    "work_arrangement": "Hybrid",
+    "salary": "$98,000 - $112,000",
+    "salary_type": "per annum",
+    "band_level": "6",
+    "description": "Lead a multidisciplinary team delivering major infrastructure projects for the municipality.",
+    "requirements": [
+      "Degree in Civil Engineering",
+      "Demonstrated project management experience",
+      "Victorian driver's licence"
+    ],
+    "key_criteria": [
+      "Ability to manage contractors",
+      "Budget forecasting and reporting"
+    ],
+    "application_instructions": "Apply online with a cover letter and resume before the closing date.",
+    "contact_info": "people@ballarat.vic.gov.au | 03 5320 5500",
+    "reference_number": "CN12345",
+    "department": "Infrastructure and Growth",
+    "job_category": "Infrastructure & Engineering",
+    "benefits": "11% superannuation; Flexible working arrangements",
+    "attachments": [
+      "https://ballarat.pulsesoftware.com/Pulse/jobs/files/CN12345_PD.pdf"
+    ],
+    "num_positions": 1,
+    "eeo_statement": "We value diversity and are an equal opportunity employer.",
+    "posted_date": "2025-11-10",
+    "scraped_at": "2025-11-12T01:00:00Z",
+    "parse_flags": []
     "detail_url": "https://ballarat.pulsesoftware.com/Pulse/jobs/N/A",
     "closing_date": "N/A",
     "closing_time": "N/A",

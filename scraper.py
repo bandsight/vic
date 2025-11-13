@@ -1,9 +1,11 @@
+import argparse
 import json
-import time
-import re
-import uuid
 import logging
+import re
+import time
+import uuid
 from datetime import datetime, timedelta
+from pathlib import Path
 from urllib.parse import urljoin
 
 from dateutil import parser as date_parser
@@ -21,6 +23,7 @@ PULSE_URL = "https://ballarat.pulsesoftware.com/Pulse/jobs"
 COUNCIL_NAME = "City of Ballarat"
 MAX_JOBS = 20  # Buffer for 15+
 DELAY_SCROLL = 1  # Seconds
+DEFAULT_FIXTURE_PATH = Path("docs/pulse_fixture.json")
 
 ERROR_TOKENS = {"most likely causes:", "404", "error"}
 
@@ -455,6 +458,26 @@ def slug_title(title):
     """Slug for URL from title."""
     return re.sub(r'[^a-zA-Z0-9\s-]', '', title).lower().strip().replace(' ', '-').replace('--', '-')
 
+
+def load_fixture_jobs(path):
+    """Load pre-scraped jobs so tests can run without Playwright browsers."""
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError(f"Fixture not found: {path}")
+    with path.open('r', encoding='utf-8') as handle:
+        payload = json.load(handle)
+    jobs = payload if isinstance(payload, list) else payload.get('jobs', [])
+    normalized = []
+    for job in jobs:
+        job = dict(job)
+        job.setdefault('council', clean_council(job.get('council', COUNCIL_NAME)))
+        job.setdefault('parse_flags', [])
+        job['parse_flags'] = build_parse_flags(job)
+        job.setdefault('scraped_at', datetime.utcnow().isoformat())
+        normalized.append(job)
+    logger.warning(f"Loaded {len(normalized)} jobs from fixture {path}")
+    return normalized
+
 def generate_rss(jobs):
     """Generate RSS XML from jobs (recent only)."""
     recent_jobs = [j for j in jobs if j['posted_date'] != "N/A" and 
@@ -734,8 +757,36 @@ def scrape_jobs():
     return jobs
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Scrape Ballarat Pulse jobs or replay a fixture.")
+    parser.add_argument('--fixture', type=Path, default=None,
+                        help='Optional path to fixture JSON to skip live scraping.')
+    parser.add_argument('--fixture-fallback', type=Path, default=DEFAULT_FIXTURE_PATH,
+                        help='Use this fixture when live scraping fails (default: docs/pulse_fixture.json).')
+    parser.add_argument('--disable-fallback', action='store_true',
+                        help='Raise errors instead of falling back to fixture data.')
+    return parser.parse_args()
+
+
 def main():
-    jobs = scrape_jobs()
+    args = parse_args()
+
+    if args.fixture:
+        jobs = load_fixture_jobs(args.fixture)
+    else:
+        try:
+            jobs = scrape_jobs()
+        except Exception as exc:  # pylint: disable=broad-except
+            logger.error(f"Live scrape failed: {exc}")
+            if args.disable_fallback:
+                raise
+            fallback_path = args.fixture_fallback
+            if fallback_path and Path(fallback_path).exists():
+                logger.warning(f"Falling back to fixture at {fallback_path}")
+                jobs = load_fixture_jobs(fallback_path)
+            else:
+                raise
+
     with open('jobs_output.json', 'w', encoding='utf-8') as f:
         json.dump(jobs, f, indent=2, default=str)
     logger.info(f"Overwrote JSON with {len(jobs)} jobs from Pulse.")
