@@ -1,0 +1,47 @@
+2025-11-13 06:14:19,374 - INFO - Starting scrape for City of Ballarat at https://ballarat.pulsesoftware.com/Pulse/jobs
+2025-11-13 06:14:22,188 - INFO - Page title: 
+2025-11-13 06:14:22,192 - INFO - Triggered Vue load().
+2025-11-13 06:14:24,484 - INFO - 15+ job rows loaded via Vue.
+2025-11-13 06:14:24,606 - INFO - Screenshot saved: pulse_list.png
+2025-11-13 06:14:25,609 - INFO - Scroll 1/20 complete.
+2025-11-13 06:14:26,612 - INFO - Scroll 2/20 complete.
+2025-11-13 06:14:27,615 - INFO - Scroll 3/20 complete.
+2025-11-13 06:14:28,618 - INFO - Scroll 4/20 complete.
+2025-11-13 06:14:29,622 - INFO - Scroll 5/20 complete.
+2025-11-13 06:14:30,625 - INFO - Scroll 6/20 complete.
+2025-11-13 06:14:31,628 - INFO - Scroll 7/20 complete.
+2025-11-13 06:14:32,631 - INFO - Scroll 8/20 complete.
+2025-11-13 06:14:33,634 - INFO - Scroll 9/20 complete.
+2025-11-13 06:14:34,637 - INFO - Scroll 10/20 complete.
+2025-11-13 06:14:35,640 - INFO - Scroll 11/20 complete.
+2025-11-13 06:14:36,643 - INFO - Scroll 12/20 complete.
+2025-11-13 06:14:37,646 - INFO - Scroll 13/20 complete.
+2025-11-13 06:14:38,649 - INFO - Scroll 14/20 complete.
+2025-11-13 06:14:39,652 - INFO - Scroll 15/20 complete.
+2025-11-13 06:14:40,655 - INFO - Scroll 16/20 complete.
+2025-11-13 06:14:41,658 - INFO - Scroll 17/20 complete.
+2025-11-13 06:14:42,661 - INFO - Scroll 18/20 complete.
+2025-11-13 06:14:43,664 - INFO - Scroll 19/20 complete.
+2025-11-13 06:14:44,667 - INFO - Scroll 20/20 complete.
+2025-11-13 06:14:44,671 - INFO - Accessed Vue data: 0 jobs.
+2025-11-13 06:14:44,677 - INFO - Fallback DOM scrape: 18 jobs.
+2025-11-13 06:14:45,019 - INFO - Added job: Operations Scheduler for City of Ballarat (Ref: unknown)
+2025-11-13 06:14:46,432 - INFO - Added job: Operations Rapid Response (Parental Leave Cover) for City of Ballarat (Ref: unknown)
+2025-11-13 06:14:47,845 - INFO - Added job: Supervisor City Entrances for City of Ballarat (Ref: unknown)
+2025-11-13 06:14:49,172 - INFO - Added job: Project Manager Landfills and Transfer Station for City of Ballarat (Ref: unknown)
+2025-11-13 06:14:50,504 - INFO - Added job: Plant Operator Construction for City of Ballarat (Ref: unknown)
+2025-11-13 06:14:51,822 - INFO - Added job: Theatre Technician for City of Ballarat (Ref: unknown)
+2025-11-13 06:14:53,147 - INFO - Added job: Aquatic Education Teacher for City of Ballarat (Ref: unknown)
+2025-11-13 06:14:54,471 - INFO - Added job: Animal Management Officer for City of Ballarat (Ref: unknown)
+2025-11-13 06:14:55,794 - INFO - Added job: Visitor Experience Officer for City of Ballarat (Ref: unknown)
+2025-11-13 06:14:57,123 - INFO - Added job: Visitor Experience Supervisor for City of Ballarat (Ref: unknown)
+2025-11-13 06:14:58,454 - INFO - Added job: Volunteer - Parent Place for City of Ballarat (Ref: unknown)
+2025-11-13 06:14:59,778 - INFO - Added job: Heritage Librarian for City of Ballarat (Ref: unknown)
+2025-11-13 06:15:01,112 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: unknown)
+2025-11-13 06:15:02,766 - INFO - Added job: Volunteer - Animal Shelter for City of Ballarat (Ref: unknown)
+2025-11-13 06:15:04,104 - INFO - Added job: Youth Services Volunteers for City of Ballarat (Ref: unknown)
+2025-11-13 06:15:05,428 - INFO - Added job: Maternal and Child Health Nurse - Casual for City of Ballarat (Ref: unknown)
+2025-11-13 06:15:06,758 - INFO - Added job: Group Fitness Instructor for City of Ballarat (Ref: unknown)
+2025-11-13 06:15:08,089 - INFO - Added job: Gymnastics Assistant Coach for City of Ballarat (Ref: unknown)
+2025-11-13 06:15:09,127 - INFO - Overwrote JSON with 18 jobs from Pulse.
+2025-11-13 06:15:09,163 - INFO - RSS generated with 18 jobs.
