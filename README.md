@@ -1,25 +1,61 @@
-# Victorian Councils Job Scraper
+# City of Ballarat Pulse Job Scraper
 
-Automated scraper using Playwright for intelligent browsing of Victorian council jobs. Dynamic fetch from MAV directory. Outputs JSON + RSS for GitHub Pages.
+This repository now intentionally focuses on a single source: the City of Ballarat
+job board that runs on Pulse. The goal is to prove out one reliable scraping
+approach for a JavaScript-heavy Pulse tenancy before attempting the wider
+Victorian councils directory again.
 
-## Features
-- **Dynamic Councils:** Fetches 79 from https://www.viccouncils.asn.au/... (fallback included).
-- **Fields:** Full schema (title, closing_date, salary, etc.).
-- **Deduplication:** Appends historical data, keeps latest per job.
-- **RSS Feed:** `rss.xml` for recent jobs (30 days); view at GitHub Pages.
-- **Logging:** `scrape.log` for errors.
+## Current capabilities
+- ✅ **Single council scope** – `scraper.py` only targets
+  `https://ballarat.pulsesoftware.com/Pulse/jobs` and exports the jobs to
+  `jobs_output.json` plus a basic RSS feed.
+- ✅ **Playwright-based rendering** – launches Chromium headlessly, waits for the
+  Vue component to populate at least 15 cards, scrolls to trigger lazy loading,
+  and then scrapes either the exposed Vue data or a DOM fallback.
+- ✅ **Structured job details** – captures metadata from the listing, opens each
+  job detail view for descriptions, requirements, application instructions,
+  contact info, and an inferred band level snippet.
 
-## Local Setup
-1. `pip install -r requirements.txt && playwright install`
-2. Edit `config.py` (e.g., TEST_MODE=False for full run).
-3. `python scraper.py` → Generates `jobs_output.json` + `rss.xml`.
+## Setup
+1. Install the dependencies and browsers:
+   ```bash
+   pip install -r requirements.txt
+   playwright install
+   ```
+2. Run the scraper:
+   ```bash
+   python scraper.py
+   ```
+3. Review `jobs_output.json`, `rss.xml`, `scrape.log`, and the latest
+   `pulse_list.png` screenshot for troubleshooting.
 
-## GitHub Automation
-- Actions: Daily scrape → Commits JSON/RSS.
-- Pages: Settings > Pages > Source: main, / (root). Access: `https://yourusername.github.io/vic-councils-job-scraper/rss.xml` (update link in script).
+## Why Playwright (research summary)
+Pulse renders its public job listings fully client-side via Vue and only exposes
+minimal markup until the Vue instance finishes hydrating. Static HTTP requests
+alone cannot reach the job data without reverse engineering the internal API
+endpoints and authentication headers for each tenancy. For now Playwright gives
+us:
 
-## Usage
-- **Data Source:** JSON for analysis; RSS for feeds (e.g., in readers/apps).
-- **Customize:** Tweak locators in script for site changes; monitor logs.
+- A predictable execution context where we can trigger `load()` if it exists and
+  wait for `.row.card-row` nodes to appear.
+- Full DOM access (or direct access to `__vue__`) so we can extract the `jobs`
+  array without guessing undocumented REST endpoints.
+- The ability to drive job detail pages, which Pulse loads on separate routes
+  that lazy-load additional chunks.
 
-Tested November 12, 2025.
+### Alternative paths (to revisit later)
+- **Network interception:** Inspecting the `fetch`/XHR traffic to Pulse can
+  reveal a JSON API for search results. Capturing the request payloads in the
+  Playwright session and replaying them manually would eliminate the need for
+  headless browsers, but each tenancy may use unique IDs and auth tokens.
+- **Server-side rendering or caching:** If latency becomes an issue, we can
+  scrape with Playwright in CI, persist the JSON, and serve it statically (as we
+  already do) while scheduling runs sparingly.
+
+## Next steps
+- Harden the DOM fallback so the scraper still works if the Vue structure
+  changes.
+- Capture the Pulse API calls and confirm whether authenticated requests are
+  required.
+- Once the Ballarat approach is stable, re-introduce multiple councils and the
+  MAV directory with accurate documentation.
