@@ -43,6 +43,10 @@ def parse_date(text, field_type='closing'):
         logger.warning(f"Failed to parse {field_type} date: {text}")
         return "N/A"
 
+def slug_title(title):
+    """Slug for URL from title."""
+    return re.sub(r'[^a-zA-Z0-9\s-]', '', title).lower().strip().replace(' ', '-').replace('--', '-')
+
 def generate_rss(jobs):
     """Generate RSS XML from jobs (recent only)."""
     recent_jobs = [j for j in jobs if j['posted_date'] != "N/A" and 
@@ -80,11 +84,11 @@ with sync_playwright() as p:
     logger.info(f"Starting scrape for {COUNCIL_NAME} at {PULSE_URL}")
 
     page.goto(PULSE_URL, timeout=90000)
-    page.wait_for_load_state('domcontentloaded', timeout=30000)  # DOM ready
+    page.wait_for_load_state('domcontentloaded', timeout=30000)
     page_title = page.title()
     logger.info(f"Page title: {page_title}")
 
-    # Trigger Vue load if defined (call load() method)
+    # Trigger Vue load if defined
     try:
         page.evaluate("if (typeof load === 'function') load();")
         logger.info("Triggered Vue load().")
@@ -93,7 +97,7 @@ with sync_playwright() as p:
 
     # Wait for Vue to mount and render jobs (check for .row.card-row from template)
     try:
-        page.wait_for_function("document.querySelectorAll('.row.card-row, .job-item, li.job, div[class*=\"job\"]').length >= 15", timeout=60000)
+        page.wait_for_function("document.querySelectorAll('.row.card-row').length >= 15", timeout=60000)
         logger.info("15+ job rows loaded via Vue.")
     except:
         logger.warning("Less than 15 job rows after 60s—continuing with available.")
@@ -108,78 +112,87 @@ with sync_playwright() as p:
         time.sleep(DELAY_SCROLL)
         logger.info(f"Scroll {i+1}/20 complete.")
 
-    # Find job links on Pulse (from template: .row.card-row .job-title span a)
-    job_links = []
+    # Access Vue data directly via evaluate (from mounted Vue instance)
     try:
-        # Primary: From Vue template structure
-        job_locator = page.locator('.row.card-row .job-title span a, .row.card-row .job-title a').all()[:MAX_JOBS]
-        job_links = job_locator
-        if len(job_links) == 0:
-            # Fallback: Broad for any job-like a
-            job_links = page.locator('a[href*="/job/"], h3 a, .title a, .job a, li.job a, div[class*="job"] a, div[class*="card"] a').all()[:MAX_JOBS]
-        if len(job_links) == 0:
-            # Fallback: Text-based
-            job_links = page.locator('a:has-text("Officer"), a:has-text("Engineer"), a:has-text("Manager"), a:has-text("role"), a:has-text("position")').all()[:MAX_JOBS]
+        vue_jobs = page.evaluate("""
+            var vm = document.querySelector('#ctl00_ctl00_BodyContainer_BodyContainer_ctl00_JobsList').__vue__;
+            if (vm && vm.jobs) {
+                return vm.jobs.map(job => ({
+                    linkId: job.LinkId,
+                    title: job.JobInfo.Title,
+                    closingDate: job.JobInfo.ClosingDate,
+                    compensation: job.JobInfo.Compensation,
+                    location: job.JobInfo.Location,
+                    department: job.JobInfo.Department,
+                    employmentType: job.JobInfo.EmploymentType,
+                    workArrangement: job.JobInfo.WorkArrangement,
+                    jobRef: job.JobInfo.JobRef
+                }));
+            }
+            return [];
+        """)
+        logger.info(f"Accessed Vue data: {len(vue_jobs)} jobs.")
+        
+        for job in vue_jobs[:MAX_JOBS]:
+            job_title = job['title'] or "N/A"
+            link_id = job['linkId']
+            job_ref = job['jobRef'] or str(uuid.uuid4())
+            # Construct detail URL
+            slug = slug_title(job_title)
+            full_url = f"{PULSE_URL}/job/{link_id}/{slug}?source=public"
+            
+            # Extract from list (snippet; full on detail if needed)
+            closing_text = job['closingDate'] or "N/A"
+            closing_date = parse_date(closing_text, 'closing')
+            salary = job['compensation'] or "N/A"
+            location = job['location'] or "N/A"
+            employment_type = job['employmentType'] or "N/A"
+            department = job['department'] or "N/A"
+            posted_date = "N/A"  # Not in list; assume scraped_at as proxy
 
-        logger.info(f"Found {len(job_links)} job links on Pulse.")
-
-        for link_el in job_links:
-            job_title = link_el.inner_text().strip() or "N/A"
-            full_url = urljoin(PULSE_URL, link_el.get_attribute('href')) if link_el.get_attribute('href') else "N/A"
-            if full_url == "N/A":
-                continue
-
-            # Follow to detail (Pulse job pages)
+            # Optional: Goto detail for full description/requirements
             detail_page = context.new_page()
             try:
                 detail_page.goto(full_url, timeout=60000)
                 detail_page.wait_for_load_state('domcontentloaded', timeout=30000)
-
-                # Extraction from template structure (info-section b for labels)
-                description = detail_page.locator('.job-description, .role-overview, .description, text=/description|duties/i').first.inner_text()[:500] or "N/A"
-                closing_text = detail_page.locator('.info-section b:has-text("Closing date") + span, .job-deadline, .closing-date, text=/closing|due/i').first.inner_text().strip() or "N/A"
-                closing_date = parse_date(closing_text, 'closing')
-                location = detail_page.locator('.info-section b:has-text("Location") + span, .job-location, text=/location/i').first.inner_text().strip() or "N/A"
-                employment_type = detail_page.locator('.info-section b:has-text("Employment type") + span, text=/full-time|part-time/i').first.inner_text().strip() or "N/A"
-                salary = detail_page.locator('.info-section b:has-text("Compensation") + span, .job-salary, text=/salary|pay/i').first.inner_text().strip() or "N/A"
-                band_level = detail_page.locator('text=/VPS|band|level|EO|ST|grade/i').first.inner_text().strip() or "N/A"
-                requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification"), .job-requirements').all_inner_texts() if req.strip()] or []
-                application_instructions = detail_page.locator('.application-section, text=/apply|submit/i').first.inner_text().strip() or "N/A"
-                contact_info = detail_page.locator('a[href^="mailto"], text=/contact|hr/i').first.inner_text().strip() or "N/A"
-                ref_text = detail_page.locator('.info-section b:has-text("Reference ID") + span, text=/reference|job id/i').first.inner_text().strip()
-                reference_number = ref_text or str(uuid.uuid4())
-                department = detail_page.locator('.info-section b:has-text("Department") + span, text=/department/i').first.inner_text().strip() or "N/A"
-                posted_text = detail_page.locator('text=/posted|advertised/i').first.inner_text().strip() or "N/A"
-                posted_date = parse_date(posted_text, 'posted')
-
-                all_new_jobs.append({
-                    'title': job_title,
-                    'council': COUNCIL_NAME,
-                    'detail_url': full_url,
-                    'closing_date': closing_date,
-                    'location': location,
-                    'employment_type': employment_type,
-                    'salary': salary,
-                    'band_level': band_level,
-                    'description': description,
-                    'requirements': requirements,
-                    'application_instructions': application_instructions,
-                    'contact_info': contact_info,
-                    'reference_number': reference_number,
-                    'department': department,
-                    'posted_date': posted_date,
-                    'scraped_at': datetime.now().isoformat()
-                })
-                logger.info(f"Added job: {job_title} for {COUNCIL_NAME}")
-
+                description = detail_page.locator('.job-description, .role-overview, text=/duties|overview/i').first.inner_text()[:500] or "N/A"
+                requirements = [req.strip() for req in detail_page.locator('ul:has-text("requirements"), li:has-text("qualification")').all_inner_texts() if req.strip()] or []
+                application_instructions = detail_page.locator('text=/apply|submit/i').first.inner_text().strip() or "N/A"
+                contact_info = detail_page.locator('a[href^="mailto"]').first.inner_text().strip() or "N/A"
+                band_level = detail_page.locator('text=/VPS|band|level/i').first.inner_text().strip() or "N/A"
             except Exception as detail_e:
                 logger.error(f"Detail page error for {full_url}: {detail_e}")
+                description = "N/A"
+                requirements = []
+                application_instructions = "N/A"
+                contact_info = "N/A"
+                band_level = "N/A"
             finally:
                 detail_page.close()
-            time.sleep(1)
+
+            all_new_jobs.append({
+                'title': job_title,
+                'council': COUNCIL_NAME,
+                'detail_url': full_url,
+                'closing_date': closing_date,
+                'location': location,
+                'employment_type': employment_type,
+                'salary': salary,
+                'band_level': band_level,
+                'description': description,
+                'requirements': requirements,
+                'application_instructions': application_instructions,
+                'contact_info': contact_info,
+                'reference_number': job_ref,
+                'department': department,
+                'posted_date': posted_date,
+                'scraped_at': datetime.now().isoformat()
+            })
+            logger.info(f"Added job: {job_title} for {COUNCIL_NAME} (Ref: {job_ref})")
+            time.sleep(1)  # Polite delay
 
     except Exception as e:
-        logger.error(f"Error exploring Pulse page: {e}")
+        logger.error(f"Error accessing Vue data: {e}")
 
     browser.close()
 
