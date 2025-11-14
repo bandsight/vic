@@ -1,5 +1,39 @@
 [
   {
+    "title": "Learning Services Librarian (Casual)",
+    "council": "City of Ballarat",
+    "detail_url": "https://ballarat.pulsesoftware.com/Pulse/jobs/N/A",
+    "closing_date": "N/A",
+    "closing_time": "N/A",
+    "location": "178 Doveton St N, Ballarat Central VIC 3350",
+    "employment_type": "Casual",
+    "work_arrangement": "N/A",
+    "salary": "N/A",
+    "salary_type": "N/A",
+    "band_level": "N/A",
+    "description": "skip to main content",
+    "requirements": [],
+    "key_criteria": [],
+    "application_instructions": "N/A",
+    "contact_info": "N/A",
+    "reference_number": "N/A",
+    "department": "Community Wellbeing",
+    "job_category": "Community Services",
+    "benefits": "N/A",
+    "attachments": [],
+    "num_positions": 1,
+    "eeo_statement": "N/A",
+    "posted_date": "N/A",
+    "scraped_at": "2025-11-14T04:01:34.574491",
+    "parse_flags": [
+      "missing_salary",
+      "missing_benefits",
+      "no_attachments",
+      "missing_key_criteria",
+      "scraping_error_band"
+    ]
+  },
+  {
     "title": "Operations Scheduler",
     "council": "City of Ballarat",
     "detail_url": "https://ballarat.pulsesoftware.com/Pulse/jobs/N/A",
@@ -11,7 +45,7 @@
     "salary": "N/A",
     "salary_type": "N/A",
     "band_level": "N/A",
-    "description": "skip to main content Microsoft IIS Home Manage Downloads Learn Reference Solutions Blogs Forums HomeError ! Page Not Found Forums go Learn go PHP go Reference go THE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE... If you typed in the URL yourself, please double-check the spelling. If you got here from a link within our site, please Contact Us. This site is managed for Microsoft by Neudesic, LLC. | \u00a9\u00a02025\u00a0Microsoft. All rights reserved. Privacy Statement Terms of Use Contact Us Hosted on Microsoft Azure Advertise with Us Follow us on: Twitter Facebook Microsoft Feedback on IIS",
+    "description": "Microsoft\n\nIIS\nHome\nManage\nDownloads\nLearn\nReference\nSolutions\nBlogs\nForums\n\nHomeError\n\n!\nPage Not Found\nForums\ngo\nLearn\ngo\nPHP\ngo\nReference\ngo\nTHE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE...\n\nIf you typed in the URL yourself, please double-check the spelling.\nIf you got here from a link within our site, please Contact Us.\n\nThis site is managed for Microsoft by Neudesic, LLC. | \u00a9\u00a02025\u00a0Microsoft. All rights reserved.\nPrivacy Statement Terms of Use Contact Us Hosted on Microsoft Azure Advertise with Us\nFollow us on:\nTwitter Facebook\nMicrosoft\nFeedback on IIS",
     "requirements": [],
     "key_criteria": [],
     "application_instructions": "N/A",
@@ -24,7 +58,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:27.459227",
+    "scraped_at": "2025-11-14T04:01:36.630470",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -58,7 +92,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:29.153675",
+    "scraped_at": "2025-11-14T04:01:38.372816",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -92,7 +126,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:30.849456",
+    "scraped_at": "2025-11-14T04:01:40.110923",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -126,7 +160,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:32.534388",
+    "scraped_at": "2025-11-14T04:01:41.870510",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -160,7 +194,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:34.214851",
+    "scraped_at": "2025-11-14T04:01:43.605896",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -194,7 +228,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:35.905092",
+    "scraped_at": "2025-11-14T04:01:45.349434",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -228,7 +262,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:37.605284",
+    "scraped_at": "2025-11-14T04:01:47.092695",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -262,7 +296,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:39.282549",
+    "scraped_at": "2025-11-14T04:01:48.846454",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -296,7 +330,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:40.981683",
+    "scraped_at": "2025-11-14T04:01:50.581135",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -330,7 +364,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:42.674323",
+    "scraped_at": "2025-11-14T04:01:52.310483",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -364,7 +398,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:44.352316",
+    "scraped_at": "2025-11-14T04:01:54.191506",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -398,7 +432,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:46.083208",
+    "scraped_at": "2025-11-14T04:01:55.917621",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -432,7 +466,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:47.767936",
+    "scraped_at": "2025-11-14T04:01:57.657236",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -466,7 +500,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:49.446606",
+    "scraped_at": "2025-11-14T04:01:59.385546",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -500,7 +534,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:51.122736",
+    "scraped_at": "2025-11-14T04:02:01.492692",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -534,7 +568,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:52.807426",
+    "scraped_at": "2025-11-14T04:02:03.209269",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -568,7 +602,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:54.474932",
+    "scraped_at": "2025-11-14T04:02:04.939983",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -602,7 +636,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-13T07:21:56.161720",
+    "scraped_at": "2025-11-14T04:02:06.658912",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
