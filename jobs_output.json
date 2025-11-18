@@ -1,5 +1,39 @@
 [
   {
+    "title": "Executive Assistant to the Mayor and Deputy Mayor",
+    "council": "City of Ballarat",
+    "detail_url": "https://ballarat.pulsesoftware.com/Pulse/jobs/N/A",
+    "closing_date": "N/A",
+    "closing_time": "N/A",
+    "location": "Town Hall",
+    "employment_type": "Full Time",
+    "work_arrangement": "N/A",
+    "salary": "N/A",
+    "salary_type": "N/A",
+    "band_level": "N/A",
+    "description": "skip to main content\nMicrosoft\n\nIIS\nHome\nManage\nDownloads\nLearn\nReference\nSolutions\nBlogs\nForums\n\nHomeError\n\n!\nPage Not Found\nForums\ngo\nLearn\ngo\nPHP\ngo\nReference\ngo\nTHE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE...\n\nIf you typed in the URL yourself, please double-check the spelling.\nIf you got here from a link within our site, please Contact Us.\n\nThis site is managed for Microsoft by Neudesic, LLC. | \u00a9\u00a02025\u00a0Microsoft. All rights reserved.\nPrivacy Statement Terms of Use Contact Us Hosted on Microsoft Azure Advertise with Us\nFollow us on:\nTwitter Facebook\nMicrosoft\nFeedback on IIS",
+    "requirements": [],
+    "key_criteria": [],
+    "application_instructions": "N/A",
+    "contact_info": "N/A",
+    "reference_number": "N/A",
+    "department": "Office of the CEO",
+    "job_category": "N/A",
+    "benefits": "N/A",
+    "attachments": [],
+    "num_positions": 1,
+    "eeo_statement": "N/A",
+    "posted_date": "N/A",
+    "scraped_at": "2025-11-18T04:00:21.602531",
+    "parse_flags": [
+      "missing_salary",
+      "missing_benefits",
+      "no_attachments",
+      "missing_key_criteria",
+      "scraping_error_band"
+    ]
+  },
+  {
     "title": "Learning Services Librarian (Casual)",
     "council": "City of Ballarat",
     "detail_url": "https://ballarat.pulsesoftware.com/Pulse/jobs/N/A",
@@ -24,7 +58,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:02.338288",
+    "scraped_at": "2025-11-18T04:00:23.229733",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -58,7 +92,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:04.007074",
+    "scraped_at": "2025-11-18T04:00:24.851714",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -92,7 +126,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:05.669372",
+    "scraped_at": "2025-11-18T04:00:26.476123",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -126,7 +160,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:07.335047",
+    "scraped_at": "2025-11-18T04:00:28.089769",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -160,7 +194,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:09.006398",
+    "scraped_at": "2025-11-18T04:00:29.696359",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -194,7 +228,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:10.671290",
+    "scraped_at": "2025-11-18T04:00:31.303589",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -228,7 +262,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:12.334106",
+    "scraped_at": "2025-11-18T04:00:32.907295",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -262,7 +296,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:13.985593",
+    "scraped_at": "2025-11-18T04:00:34.518946",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -296,7 +330,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:15.640719",
+    "scraped_at": "2025-11-18T04:00:36.119947",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -330,7 +364,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:17.299834",
+    "scraped_at": "2025-11-18T04:00:37.721410",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -364,7 +398,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:18.967034",
+    "scraped_at": "2025-11-18T04:00:39.336110",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -398,7 +432,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:20.616152",
+    "scraped_at": "2025-11-18T04:00:40.973645",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -432,7 +466,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:22.267757",
+    "scraped_at": "2025-11-18T04:00:42.570580",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -466,7 +500,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:24.150894",
+    "scraped_at": "2025-11-18T04:00:44.193269",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -500,7 +534,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:25.815127",
+    "scraped_at": "2025-11-18T04:00:45.807107",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -534,7 +568,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:27.482206",
+    "scraped_at": "2025-11-18T04:00:47.433105",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -568,7 +602,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:29.149025",
+    "scraped_at": "2025-11-18T04:00:49.046309",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -602,7 +636,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2025-11-17T04:04:30.799560",
+    "scraped_at": "2025-11-18T04:00:50.683915",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
