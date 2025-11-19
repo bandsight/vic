@@ -443,3 +443,52 @@
 2025-11-18 04:00:50,683 - INFO - Added job: Gymnastics Assistant Coach for City of Ballarat (Ref: N/A)
 2025-11-18 04:00:51,722 - INFO - Overwrote JSON with 19 jobs from Pulse.
 2025-11-18 04:00:51,754 - INFO - RSS generated with 19 jobs.
+2025-11-19 03:59:30,093 - INFO - Starting scrape for City of Ballarat at https://ballarat.pulsesoftware.com/Pulse/jobs
+2025-11-19 03:59:32,161 - INFO - Page title: Job Vacancies
+2025-11-19 03:59:32,165 - INFO - Triggered Vue load().
+2025-11-19 03:59:32,728 - INFO - 15+ job rows loaded via Vue.
+2025-11-19 03:59:33,001 - INFO - Screenshot saved: pulse_list.png
+2025-11-19 03:59:34,004 - INFO - Scroll 1/20 complete.
+2025-11-19 03:59:35,007 - INFO - Scroll 2/20 complete.
+2025-11-19 03:59:36,010 - INFO - Scroll 3/20 complete.
+2025-11-19 03:59:37,013 - INFO - Scroll 4/20 complete.
+2025-11-19 03:59:38,016 - INFO - Scroll 5/20 complete.
+2025-11-19 03:59:39,019 - INFO - Scroll 6/20 complete.
+2025-11-19 03:59:40,022 - INFO - Scroll 7/20 complete.
+2025-11-19 03:59:41,025 - INFO - Scroll 8/20 complete.
+2025-11-19 03:59:42,028 - INFO - Scroll 9/20 complete.
+2025-11-19 03:59:43,031 - INFO - Scroll 10/20 complete.
+2025-11-19 03:59:44,034 - INFO - Scroll 11/20 complete.
+2025-11-19 03:59:45,037 - INFO - Scroll 12/20 complete.
+2025-11-19 03:59:46,040 - INFO - Scroll 13/20 complete.
+2025-11-19 03:59:47,043 - INFO - Scroll 14/20 complete.
+2025-11-19 03:59:48,046 - INFO - Scroll 15/20 complete.
+2025-11-19 03:59:49,049 - INFO - Scroll 16/20 complete.
+2025-11-19 03:59:50,052 - INFO - Scroll 17/20 complete.
+2025-11-19 03:59:51,055 - INFO - Scroll 18/20 complete.
+2025-11-19 03:59:52,058 - INFO - Scroll 19/20 complete.
+2025-11-19 03:59:53,061 - INFO - Scroll 20/20 complete.
+2025-11-19 03:59:53,065 - INFO - Accessed Vue data: 0 jobs.
+2025-11-19 03:59:53,072 - INFO - Fallback DOM scrape: 20 jobs.
+2025-11-19 03:59:53,939 - INFO - Added job: Senior Landscape Architect for City of Ballarat (Ref: N/A)
+2025-11-19 03:59:55,554 - INFO - Added job: Executive Assistant to the Mayor and Deputy Mayor for City of Ballarat (Ref: N/A)
+2025-11-19 03:59:57,138 - INFO - Added job: Learning Services Librarian (Casual) for City of Ballarat (Ref: N/A)
+2025-11-19 03:59:58,751 - INFO - Added job: Operations Scheduler for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:00,338 - INFO - Added job: Operations Rapid Response (Parental Leave Cover) for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:01,965 - INFO - Added job: Supervisor City Entrances for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:03,552 - INFO - Added job: Project Manager Landfills and Transfer Station for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:05,155 - INFO - Added job: Plant Operator Construction for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:06,758 - INFO - Added job: Theatre Technician for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:08,378 - INFO - Added job: Aquatic Education Teacher for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:09,999 - INFO - Added job: Animal Management Officer for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:11,635 - INFO - Added job: Visitor Experience Officer for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:13,233 - INFO - Added job: Visitor Experience Supervisor for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:14,866 - INFO - Added job: Volunteer - Parent Place for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:16,451 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:18,034 - INFO - Added job: Volunteer - Animal Shelter for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:19,644 - INFO - Added job: Youth Services Volunteers for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:21,253 - INFO - Added job: Maternal and Child Health Nurse - Casual for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:22,833 - INFO - Added job: Group Fitness Instructor for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:24,414 - INFO - Added job: Gymnastics Assistant Coach for City of Ballarat (Ref: N/A)
+2025-11-19 04:00:25,453 - INFO - Overwrote JSON with 20 jobs from Pulse.
+2025-11-19 04:00:25,520 - INFO - RSS generated with 20 jobs.
