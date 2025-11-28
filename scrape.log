@@ -867,3 +867,46 @@
 2025-11-27 04:01:05,258 - INFO - Added job: Gymnastics Assistant Coach for City of Ballarat (Ref: N/A)
 2025-11-27 04:01:06,290 - INFO - Overwrote JSON with 14 jobs from Pulse.
 2025-11-27 04:01:06,308 - INFO - RSS generated with 14 jobs.
+2025-11-28 03:48:20,145 - INFO - Starting scrape for City of Ballarat at https://ballarat.pulsesoftware.com/Pulse/jobs
+2025-11-28 03:48:22,561 - INFO - Page title: 
+2025-11-28 03:48:22,565 - INFO - Triggered Vue load().
+2025-11-28 03:49:22,568 - WARNING - Less than 15 job rows after 60s—continuing with available.
+2025-11-28 03:49:22,663 - INFO - Screenshot saved: pulse_list.png
+2025-11-28 03:49:23,665 - INFO - Scroll 1/20 complete.
+2025-11-28 03:49:24,669 - INFO - Scroll 2/20 complete.
+2025-11-28 03:49:25,672 - INFO - Scroll 3/20 complete.
+2025-11-28 03:49:26,675 - INFO - Scroll 4/20 complete.
+2025-11-28 03:49:27,678 - INFO - Scroll 5/20 complete.
+2025-11-28 03:49:28,681 - INFO - Scroll 6/20 complete.
+2025-11-28 03:49:29,684 - INFO - Scroll 7/20 complete.
+2025-11-28 03:49:30,687 - INFO - Scroll 8/20 complete.
+2025-11-28 03:49:31,690 - INFO - Scroll 9/20 complete.
+2025-11-28 03:49:32,693 - INFO - Scroll 10/20 complete.
+2025-11-28 03:49:33,696 - INFO - Scroll 11/20 complete.
+2025-11-28 03:49:34,699 - INFO - Scroll 12/20 complete.
+2025-11-28 03:49:35,702 - INFO - Scroll 13/20 complete.
+2025-11-28 03:49:36,705 - INFO - Scroll 14/20 complete.
+2025-11-28 03:49:37,708 - INFO - Scroll 15/20 complete.
+2025-11-28 03:49:38,711 - INFO - Scroll 16/20 complete.
+2025-11-28 03:49:39,714 - INFO - Scroll 17/20 complete.
+2025-11-28 03:49:40,717 - INFO - Scroll 18/20 complete.
+2025-11-28 03:49:41,720 - INFO - Scroll 19/20 complete.
+2025-11-28 03:49:42,723 - INFO - Scroll 20/20 complete.
+2025-11-28 03:49:42,726 - INFO - Accessed Vue data: 0 jobs.
+2025-11-28 03:49:42,733 - INFO - Fallback DOM scrape: 14 jobs.
+2025-11-28 03:49:44,048 - INFO - Added job: Strategic Planner for City of Ballarat (Ref: N/A)
+2025-11-28 03:49:45,672 - INFO - Added job: Leading Hand Sports Reserves for City of Ballarat (Ref: N/A)
+2025-11-28 03:49:47,422 - INFO - Added job: Senior Landscape Architect for City of Ballarat (Ref: N/A)
+2025-11-28 03:49:49,036 - INFO - Added job: Executive Assistant to the Mayor and Deputy Mayor for City of Ballarat (Ref: N/A)
+2025-11-28 03:49:50,665 - INFO - Added job: Learning Services Librarian (Casual) for City of Ballarat (Ref: N/A)
+2025-11-28 03:49:52,284 - INFO - Added job: Project Manager Landfills and Transfer Station for City of Ballarat (Ref: N/A)
+2025-11-28 03:49:53,903 - INFO - Added job: Plant Operator Construction for City of Ballarat (Ref: N/A)
+2025-11-28 03:49:55,535 - INFO - Added job: Aquatic Education Teacher for City of Ballarat (Ref: N/A)
+2025-11-28 03:49:57,457 - INFO - Added job: Volunteer - Parent Place for City of Ballarat (Ref: N/A)
+2025-11-28 03:49:59,090 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
+2025-11-28 03:50:00,709 - INFO - Added job: Volunteer - Animal Shelter for City of Ballarat (Ref: N/A)
+2025-11-28 03:50:02,331 - INFO - Added job: Maternal and Child Health Nurse - Casual for City of Ballarat (Ref: N/A)
+2025-11-28 03:50:03,959 - INFO - Added job: Group Fitness Instructor for City of Ballarat (Ref: N/A)
+2025-11-28 03:50:05,582 - INFO - Added job: Gymnastics Assistant Coach for City of Ballarat (Ref: N/A)
+2025-11-28 03:50:06,621 - INFO - Overwrote JSON with 14 jobs from Pulse.
+2025-11-28 03:50:06,666 - INFO - RSS generated with 14 jobs.
