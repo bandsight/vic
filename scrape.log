@@ -1899,3 +1899,36 @@
 2025-12-27 03:59:52,094 - INFO - Added job: Volunteer - Animal Shelter for City of Ballarat (Ref: N/A)
 2025-12-27 03:59:53,131 - INFO - Overwrote JSON with 4 jobs from Pulse.
 2025-12-27 03:59:53,149 - INFO - RSS generated with 4 jobs.
+2025-12-28 04:12:00,407 - INFO - Starting scrape for City of Ballarat at https://ballarat.pulsesoftware.com/Pulse/jobs
+2025-12-28 04:12:02,936 - INFO - Page title: 
+2025-12-28 04:12:02,940 - INFO - Triggered Vue load().
+2025-12-28 04:13:02,941 - WARNING - Less than 15 job rows after 60s—continuing with available.
+2025-12-28 04:13:03,026 - INFO - Screenshot saved: pulse_list.png
+2025-12-28 04:13:04,028 - INFO - Scroll 1/20 complete.
+2025-12-28 04:13:05,031 - INFO - Scroll 2/20 complete.
+2025-12-28 04:13:06,035 - INFO - Scroll 3/20 complete.
+2025-12-28 04:13:07,038 - INFO - Scroll 4/20 complete.
+2025-12-28 04:13:08,041 - INFO - Scroll 5/20 complete.
+2025-12-28 04:13:09,044 - INFO - Scroll 6/20 complete.
+2025-12-28 04:13:10,047 - INFO - Scroll 7/20 complete.
+2025-12-28 04:13:11,050 - INFO - Scroll 8/20 complete.
+2025-12-28 04:13:12,054 - INFO - Scroll 9/20 complete.
+2025-12-28 04:13:13,057 - INFO - Scroll 10/20 complete.
+2025-12-28 04:13:14,060 - INFO - Scroll 11/20 complete.
+2025-12-28 04:13:15,063 - INFO - Scroll 12/20 complete.
+2025-12-28 04:13:16,066 - INFO - Scroll 13/20 complete.
+2025-12-28 04:13:17,069 - INFO - Scroll 14/20 complete.
+2025-12-28 04:13:18,072 - INFO - Scroll 15/20 complete.
+2025-12-28 04:13:19,075 - INFO - Scroll 16/20 complete.
+2025-12-28 04:13:20,079 - INFO - Scroll 17/20 complete.
+2025-12-28 04:13:21,082 - INFO - Scroll 18/20 complete.
+2025-12-28 04:13:22,085 - INFO - Scroll 19/20 complete.
+2025-12-28 04:13:23,088 - INFO - Scroll 20/20 complete.
+2025-12-28 04:13:23,092 - INFO - Accessed Vue data: 0 jobs.
+2025-12-28 04:13:23,096 - INFO - Fallback DOM scrape: 4 jobs.
+2025-12-28 04:13:23,832 - INFO - Added job: Leading Hand Sports Reserves for City of Ballarat (Ref: N/A)
+2025-12-28 04:13:25,435 - INFO - Added job: Volunteer - Parent Place for City of Ballarat (Ref: N/A)
+2025-12-28 04:13:27,031 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
+2025-12-28 04:13:28,613 - INFO - Added job: Volunteer - Animal Shelter for City of Ballarat (Ref: N/A)
+2025-12-28 04:13:29,651 - INFO - Overwrote JSON with 4 jobs from Pulse.
+2025-12-28 04:13:29,667 - INFO - RSS generated with 4 jobs.
