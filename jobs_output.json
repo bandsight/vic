@@ -11,7 +11,7 @@
     "salary": "N/A",
     "salary_type": "N/A",
     "band_level": "N/A",
-    "description": "skip to main content\nMicrosoft\n\nIIS\nHome\nManage\nDownloads\nLearn\nReference\nSolutions\nBlogs\nForums\n\nHomeError\n\n!\nPage Not Found\nForums\ngo\nLearn\ngo\nPHP\ngo\nReference\ngo\nTHE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE...\n\nIf you typed in the URL yourself, please double-check the spelling.\nIf you got here from a link within our site, please Contact Us.\n\nThis site is managed by Microsoft | \u00a9\u00a02025\u00a0Microsoft. All rights reserved.\nPrivacy Statement Terms of Use Contact Us Hosted on Microsoft Azure Advertise with Us\nFollow us on:\nTwitter Facebook\nMicrosoft\nFeedback on IIS",
+    "description": "Microsoft\n\nIIS\nHome\nManage\nDownloads\nLearn\nReference\nSolutions\nBlogs\nForums\n\nHomeError\n\n!\nPage Not Found\nForums\ngo\nLearn\ngo\nPHP\ngo\nReference\ngo\nTHE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE...\n\nIf you typed in the URL yourself, please double-check the spelling.\nIf you got here from a link within our site, please Contact Us.\n\nThis site is managed by Microsoft | \u00a9\u00a02025\u00a0Microsoft. All rights reserved.\nPrivacy Statement Terms of Use Contact Us Hosted on Microsoft Azure Advertise with Us\nFollow us on:\nTwitter Facebook\nMicrosoft\nFeedback on IIS",
     "requirements": [],
     "key_criteria": [],
     "application_instructions": "N/A",
@@ -24,7 +24,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-01-14T04:14:24.267193",
+    "scraped_at": "2026-01-15T04:09:27.511453",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -58,7 +58,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-01-14T04:14:25.969959",
+    "scraped_at": "2026-01-15T04:09:29.317050",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -92,7 +92,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-01-14T04:14:27.659568",
+    "scraped_at": "2026-01-15T04:09:30.914613",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -126,7 +126,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-01-14T04:14:29.350155",
+    "scraped_at": "2026-01-15T04:09:32.522816",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -160,7 +160,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-01-14T04:14:31.068001",
+    "scraped_at": "2026-01-15T04:09:34.107812",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -170,7 +170,7 @@
     ]
   },
   {
-    "title": "Early Childhood Educator (Cert III)",
+    "title": "Early Childhood Educator (Cert III - Girrabanya Childcare Centre)",
     "council": "City of Ballarat",
     "detail_url": "https://ballarat.pulsesoftware.com/Pulse/jobs/N/A",
     "closing_date": "N/A",
@@ -194,7 +194,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-01-14T04:14:32.815594",
+    "scraped_at": "2026-01-15T04:09:36.043207",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -228,7 +228,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-01-14T04:14:34.491234",
+    "scraped_at": "2026-01-15T04:09:37.636813",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -262,7 +262,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-01-14T04:14:36.185382",
+    "scraped_at": "2026-01-15T04:09:39.221465",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -296,7 +296,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-01-14T04:14:37.868061",
+    "scraped_at": "2026-01-15T04:09:40.809895",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -330,7 +330,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-01-14T04:14:39.547638",
+    "scraped_at": "2026-01-15T04:09:42.389695",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
