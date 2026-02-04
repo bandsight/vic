@@ -3363,3 +3363,46 @@
 2026-02-03 04:53:42,455 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
 2026-02-03 04:53:43,501 - INFO - Overwrote JSON with 15 jobs from Pulse.
 2026-02-03 04:53:43,536 - INFO - RSS generated with 15 jobs.
+2026-02-04 04:46:12,318 - INFO - Starting scrape for City of Ballarat at https://ballarat.pulsesoftware.com/Pulse/jobs
+2026-02-04 04:46:15,044 - INFO - Page title: Job Vacancies
+2026-02-04 04:46:15,048 - INFO - Triggered Vue load().
+2026-02-04 04:47:15,051 - WARNING - Less than 15 job rows after 60s—continuing with available.
+2026-02-04 04:47:15,151 - INFO - Screenshot saved: pulse_list.png
+2026-02-04 04:47:16,154 - INFO - Scroll 1/20 complete.
+2026-02-04 04:47:17,157 - INFO - Scroll 2/20 complete.
+2026-02-04 04:47:18,160 - INFO - Scroll 3/20 complete.
+2026-02-04 04:47:19,164 - INFO - Scroll 4/20 complete.
+2026-02-04 04:47:20,167 - INFO - Scroll 5/20 complete.
+2026-02-04 04:47:21,170 - INFO - Scroll 6/20 complete.
+2026-02-04 04:47:22,173 - INFO - Scroll 7/20 complete.
+2026-02-04 04:47:23,176 - INFO - Scroll 8/20 complete.
+2026-02-04 04:47:24,180 - INFO - Scroll 9/20 complete.
+2026-02-04 04:47:25,183 - INFO - Scroll 10/20 complete.
+2026-02-04 04:47:26,186 - INFO - Scroll 11/20 complete.
+2026-02-04 04:47:27,189 - INFO - Scroll 12/20 complete.
+2026-02-04 04:47:28,192 - INFO - Scroll 13/20 complete.
+2026-02-04 04:47:29,196 - INFO - Scroll 14/20 complete.
+2026-02-04 04:47:30,199 - INFO - Scroll 15/20 complete.
+2026-02-04 04:47:31,202 - INFO - Scroll 16/20 complete.
+2026-02-04 04:47:32,205 - INFO - Scroll 17/20 complete.
+2026-02-04 04:47:33,209 - INFO - Scroll 18/20 complete.
+2026-02-04 04:47:34,212 - INFO - Scroll 19/20 complete.
+2026-02-04 04:47:35,216 - INFO - Scroll 20/20 complete.
+2026-02-04 04:47:35,220 - INFO - Accessed Vue data: 0 jobs.
+2026-02-04 04:47:35,227 - INFO - Fallback DOM scrape: 14 jobs.
+2026-02-04 04:47:36,251 - INFO - Added job: Administration Trainee (Waste&Environment) for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:37,950 - INFO - Added job: Ballarat Airport Stakeholder Reference Group – Call for Expressions of Interest for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:39,662 - INFO - Added job: Early Childhood Teacher (Wendouree Children's Centre) for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:41,384 - INFO - Added job: Business Partner People and Culture for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:43,043 - INFO - Added job: Corporate Services - Traineeship (Administration) for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:44,722 - INFO - Added job: Animal Attendant (Part Time X 2) for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:46,415 - INFO - Added job: Animal Attendant (Full Time) for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:48,098 - INFO - Added job: Community Hubs and Outreach Support Officer for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:49,798 - INFO - Added job: Learning Services Officer for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:51,491 - INFO - Added job: Events and Exhibitions Librarian for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:53,188 - INFO - Added job: Learning Services Librarian for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:54,871 - INFO - Added job: ICT Architect for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:56,559 - INFO - Added job: Volunteer - Parent Place for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:58,234 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
+2026-02-04 04:47:59,270 - INFO - Overwrote JSON with 14 jobs from Pulse.
+2026-02-04 04:47:59,303 - INFO - RSS generated with 14 jobs.
