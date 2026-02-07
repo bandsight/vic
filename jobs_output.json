@@ -24,7 +24,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:29.579031",
+    "scraped_at": "2026-02-07T04:43:52.284959",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -58,7 +58,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:31.282219",
+    "scraped_at": "2026-02-07T04:43:53.969315",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -92,7 +92,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:32.957620",
+    "scraped_at": "2026-02-07T04:43:55.653685",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -126,7 +126,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:34.650717",
+    "scraped_at": "2026-02-07T04:43:57.340691",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -160,7 +160,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:36.341958",
+    "scraped_at": "2026-02-07T04:43:59.003798",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -194,7 +194,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:38.051206",
+    "scraped_at": "2026-02-07T04:44:00.671854",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -228,7 +228,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:39.734230",
+    "scraped_at": "2026-02-07T04:44:02.340214",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -262,7 +262,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:41.421266",
+    "scraped_at": "2026-02-07T04:44:03.999581",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -296,7 +296,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:43.108639",
+    "scraped_at": "2026-02-07T04:44:05.682013",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -330,7 +330,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:44.787140",
+    "scraped_at": "2026-02-07T04:44:07.352496",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -364,7 +364,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:46.466125",
+    "scraped_at": "2026-02-07T04:44:09.016877",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -398,7 +398,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:48.161685",
+    "scraped_at": "2026-02-07T04:44:10.681629",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -432,7 +432,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:49.866015",
+    "scraped_at": "2026-02-07T04:44:12.348537",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -466,41 +466,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:51.554722",
-    "parse_flags": [
-      "missing_salary",
-      "missing_benefits",
-      "no_attachments",
-      "missing_key_criteria",
-      "scraping_error_band"
-    ]
-  },
-  {
-    "title": "ICT Architect",
-    "council": "City of Ballarat",
-    "detail_url": "https://ballarat.pulsesoftware.com/Pulse/jobs/N/A",
-    "closing_date": "N/A",
-    "closing_time": "N/A",
-    "location": "25 Armstrong Street Ballarat",
-    "employment_type": "Full Time",
-    "work_arrangement": "N/A",
-    "salary": "N/A",
-    "salary_type": "N/A",
-    "band_level": "N/A",
-    "description": "Microsoft\n\nIIS\nHome\nManage\nDownloads\nLearn\nReference\nSolutions\nBlogs\nForums\n\nHomeError\n\n!\nPage Not Found\nForums\ngo\nLearn\ngo\nPHP\ngo\nReference\ngo\nTHE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE...\n\nIf you typed in the URL yourself, please double-check the spelling.\nIf you got here from a link within our site, please Contact Us.\n\nThis site is managed by Microsoft | \u00a9\u00a02025\u00a0Microsoft. All rights reserved.\nPrivacy Statement Terms of Use Contact Us Hosted on Microsoft Azure Advertise with Us\nFollow us on:\nTwitter Facebook\nMicrosoft\nFeedback on IIS",
-    "requirements": [],
-    "key_criteria": [],
-    "application_instructions": "N/A",
-    "contact_info": "N/A",
-    "reference_number": "N/A",
-    "department": "Corporate Services",
-    "job_category": "N/A",
-    "benefits": "N/A",
-    "attachments": [],
-    "num_positions": 1,
-    "eeo_statement": "N/A",
-    "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:53.263897",
+    "scraped_at": "2026-02-07T04:44:14.016888",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -534,7 +500,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:54.961107",
+    "scraped_at": "2026-02-07T04:44:15.682927",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -568,7 +534,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-06T04:53:56.636090",
+    "scraped_at": "2026-02-07T04:44:17.347870",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
