@@ -3635,3 +3635,50 @@
 2026-02-09 05:07:55,197 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
 2026-02-09 05:07:56,237 - INFO - Overwrote JSON with 16 jobs from Pulse.
 2026-02-09 05:07:56,275 - INFO - RSS generated with 16 jobs.
+2026-02-10 05:10:30,149 - INFO - Starting scrape for City of Ballarat at https://ballarat.pulsesoftware.com/Pulse/jobs
+2026-02-10 05:10:32,284 - INFO - Page title: Job Vacancies
+2026-02-10 05:10:32,288 - INFO - Triggered Vue load().
+2026-02-10 05:10:32,731 - INFO - 15+ job rows loaded via Vue.
+2026-02-10 05:10:33,109 - INFO - Screenshot saved: pulse_list.png
+2026-02-10 05:10:34,111 - INFO - Scroll 1/20 complete.
+2026-02-10 05:10:35,114 - INFO - Scroll 2/20 complete.
+2026-02-10 05:10:36,118 - INFO - Scroll 3/20 complete.
+2026-02-10 05:10:37,121 - INFO - Scroll 4/20 complete.
+2026-02-10 05:10:38,124 - INFO - Scroll 5/20 complete.
+2026-02-10 05:10:39,127 - INFO - Scroll 6/20 complete.
+2026-02-10 05:10:40,130 - INFO - Scroll 7/20 complete.
+2026-02-10 05:10:41,133 - INFO - Scroll 8/20 complete.
+2026-02-10 05:10:42,136 - INFO - Scroll 9/20 complete.
+2026-02-10 05:10:43,139 - INFO - Scroll 10/20 complete.
+2026-02-10 05:10:44,142 - INFO - Scroll 11/20 complete.
+2026-02-10 05:10:45,145 - INFO - Scroll 12/20 complete.
+2026-02-10 05:10:46,148 - INFO - Scroll 13/20 complete.
+2026-02-10 05:10:47,151 - INFO - Scroll 14/20 complete.
+2026-02-10 05:10:48,154 - INFO - Scroll 15/20 complete.
+2026-02-10 05:10:49,157 - INFO - Scroll 16/20 complete.
+2026-02-10 05:10:50,160 - INFO - Scroll 17/20 complete.
+2026-02-10 05:10:51,163 - INFO - Scroll 18/20 complete.
+2026-02-10 05:10:52,166 - INFO - Scroll 19/20 complete.
+2026-02-10 05:10:53,169 - INFO - Scroll 20/20 complete.
+2026-02-10 05:10:53,173 - INFO - Accessed Vue data: 0 jobs.
+2026-02-10 05:10:53,180 - INFO - Fallback DOM scrape: 18 jobs.
+2026-02-10 05:10:55,043 - INFO - Added job: Administration Oficer for City of Ballarat (Ref: N/A)
+2026-02-10 05:10:56,794 - INFO - Added job: Coordinator Enhanced Maternal and Child Health Nurse and Outreach for City of Ballarat (Ref: N/A)
+2026-02-10 05:10:58,515 - INFO - Added job: Community Connections Officer - Casual for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:00,230 - INFO - Added job: Aquatic Education Teacher (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:01,955 - INFO - Added job: Customer Experience Officer (Casual) for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:03,704 - INFO - Added job: Gymnastics Coach (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:05,417 - INFO - Added job: Gymnastics Assistant Coach (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:07,136 - INFO - Added job: Administration Trainee (Waste&Environment) for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:08,874 - INFO - Added job: Ballarat Airport Stakeholder Reference Group – Call for Expressions of Interest for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:10,788 - INFO - Added job: Early Childhood Teacher (Wendouree Children's Centre) for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:12,500 - INFO - Added job: Business Partner People and Culture for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:14,213 - INFO - Added job: Corporate Services - Traineeship (Administration) for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:15,917 - INFO - Added job: Animal Attendant (Part Time X 2) for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:17,633 - INFO - Added job: Animal Attendant (Full Time) for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:19,337 - INFO - Added job: Community Hubs and Outreach Support Officer for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:21,046 - INFO - Added job: Project Manager for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:22,748 - INFO - Added job: Volunteer - Parent Place for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:24,468 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
+2026-02-10 05:11:25,509 - INFO - Overwrote JSON with 18 jobs from Pulse.
+2026-02-10 05:11:25,532 - INFO - RSS generated with 18 jobs.
