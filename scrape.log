@@ -3822,3 +3822,49 @@
 2026-02-13 05:00:23,846 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
 2026-02-13 05:00:24,885 - INFO - Overwrote JSON with 17 jobs from Pulse.
 2026-02-13 05:00:24,923 - INFO - RSS generated with 17 jobs.
+2026-02-14 04:47:10,566 - INFO - Starting scrape for City of Ballarat at https://ballarat.pulsesoftware.com/Pulse/jobs
+2026-02-14 04:47:12,907 - INFO - Page title: Job Vacancies
+2026-02-14 04:47:12,910 - INFO - Triggered Vue load().
+2026-02-14 04:47:13,194 - INFO - 15+ job rows loaded via Vue.
+2026-02-14 04:47:13,515 - INFO - Screenshot saved: pulse_list.png
+2026-02-14 04:47:14,518 - INFO - Scroll 1/20 complete.
+2026-02-14 04:47:15,521 - INFO - Scroll 2/20 complete.
+2026-02-14 04:47:16,524 - INFO - Scroll 3/20 complete.
+2026-02-14 04:47:17,527 - INFO - Scroll 4/20 complete.
+2026-02-14 04:47:18,530 - INFO - Scroll 5/20 complete.
+2026-02-14 04:47:19,533 - INFO - Scroll 6/20 complete.
+2026-02-14 04:47:20,536 - INFO - Scroll 7/20 complete.
+2026-02-14 04:47:21,539 - INFO - Scroll 8/20 complete.
+2026-02-14 04:47:22,542 - INFO - Scroll 9/20 complete.
+2026-02-14 04:47:23,545 - INFO - Scroll 10/20 complete.
+2026-02-14 04:47:24,548 - INFO - Scroll 11/20 complete.
+2026-02-14 04:47:25,551 - INFO - Scroll 12/20 complete.
+2026-02-14 04:47:26,554 - INFO - Scroll 13/20 complete.
+2026-02-14 04:47:27,557 - INFO - Scroll 14/20 complete.
+2026-02-14 04:47:28,560 - INFO - Scroll 15/20 complete.
+2026-02-14 04:47:29,563 - INFO - Scroll 16/20 complete.
+2026-02-14 04:47:30,566 - INFO - Scroll 17/20 complete.
+2026-02-14 04:47:31,569 - INFO - Scroll 18/20 complete.
+2026-02-14 04:47:32,572 - INFO - Scroll 19/20 complete.
+2026-02-14 04:47:33,576 - INFO - Scroll 20/20 complete.
+2026-02-14 04:47:33,580 - INFO - Accessed Vue data: 0 jobs.
+2026-02-14 04:47:33,586 - INFO - Fallback DOM scrape: 17 jobs.
+2026-02-14 04:47:34,880 - INFO - Added job: Early Childhood Educator (Diploma - Girrabanya Child Care Centre) for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:36,543 - INFO - Added job: Early Childhood Educator Casual - Cert III and Diploma for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:38,230 - INFO - Added job: Administration Officer for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:39,891 - INFO - Added job: Coordinator Enhanced Maternal and Child Health Nurse and Outreach for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:41,567 - INFO - Added job: Community Connections Officer - Casual for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:43,227 - INFO - Added job: Aquatic Education Teacher (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:44,926 - INFO - Added job: Customer Experience Officer (Casual) for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:46,595 - INFO - Added job: Gymnastics Coach (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:48,263 - INFO - Added job: Gymnastics Assistant Coach (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:49,924 - INFO - Added job: Administration Trainee (Waste&Environment) for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:51,589 - INFO - Added job: Ballarat Airport Stakeholder Reference Group – Call for Expressions of Interest for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:53,257 - INFO - Added job: Early Childhood Teacher (Wendouree Children's Centre) for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:54,921 - INFO - Added job: Business Partner People and Culture for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:56,594 - INFO - Added job: Corporate Services - Traineeship (Administration) for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:58,269 - INFO - Added job: Supervisor City Entrances for City of Ballarat (Ref: N/A)
+2026-02-14 04:47:59,928 - INFO - Added job: Volunteer - Parent Place for City of Ballarat (Ref: N/A)
+2026-02-14 04:48:01,589 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
+2026-02-14 04:48:02,628 - INFO - Overwrote JSON with 17 jobs from Pulse.
+2026-02-14 04:48:02,660 - INFO - RSS generated with 17 jobs.
