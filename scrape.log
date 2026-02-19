@@ -4049,3 +4049,49 @@
 2026-02-18 05:01:11,183 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
 2026-02-18 05:01:12,220 - INFO - Overwrote JSON with 16 jobs from Pulse.
 2026-02-18 05:01:12,255 - INFO - RSS generated with 16 jobs.
+2026-02-19 04:59:28,703 - INFO - Starting scrape for City of Ballarat at https://ballarat.pulsesoftware.com/Pulse/jobs
+2026-02-19 04:59:31,362 - INFO - Page title: Job Vacancies
+2026-02-19 04:59:31,365 - INFO - Triggered Vue load().
+2026-02-19 04:59:31,939 - INFO - 15+ job rows loaded via Vue.
+2026-02-19 04:59:32,217 - INFO - Screenshot saved: pulse_list.png
+2026-02-19 04:59:33,220 - INFO - Scroll 1/20 complete.
+2026-02-19 04:59:34,224 - INFO - Scroll 2/20 complete.
+2026-02-19 04:59:35,227 - INFO - Scroll 3/20 complete.
+2026-02-19 04:59:36,230 - INFO - Scroll 4/20 complete.
+2026-02-19 04:59:37,233 - INFO - Scroll 5/20 complete.
+2026-02-19 04:59:38,237 - INFO - Scroll 6/20 complete.
+2026-02-19 04:59:39,240 - INFO - Scroll 7/20 complete.
+2026-02-19 04:59:40,244 - INFO - Scroll 8/20 complete.
+2026-02-19 04:59:41,247 - INFO - Scroll 9/20 complete.
+2026-02-19 04:59:42,250 - INFO - Scroll 10/20 complete.
+2026-02-19 04:59:43,254 - INFO - Scroll 11/20 complete.
+2026-02-19 04:59:44,257 - INFO - Scroll 12/20 complete.
+2026-02-19 04:59:45,260 - INFO - Scroll 13/20 complete.
+2026-02-19 04:59:46,263 - INFO - Scroll 14/20 complete.
+2026-02-19 04:59:47,266 - INFO - Scroll 15/20 complete.
+2026-02-19 04:59:48,269 - INFO - Scroll 16/20 complete.
+2026-02-19 04:59:49,272 - INFO - Scroll 17/20 complete.
+2026-02-19 04:59:50,275 - INFO - Scroll 18/20 complete.
+2026-02-19 04:59:51,279 - INFO - Scroll 19/20 complete.
+2026-02-19 04:59:52,282 - INFO - Scroll 20/20 complete.
+2026-02-19 04:59:52,286 - INFO - Accessed Vue data: 0 jobs.
+2026-02-19 04:59:52,292 - INFO - Fallback DOM scrape: 17 jobs.
+2026-02-19 04:59:53,389 - INFO - Added job: Street Cleaner Operator for City of Ballarat (Ref: N/A)
+2026-02-19 04:59:55,029 - INFO - Added job: Parking Compliance Officer for City of Ballarat (Ref: N/A)
+2026-02-19 04:59:56,679 - INFO - Added job: Sustainable Destination Development Officer for City of Ballarat (Ref: N/A)
+2026-02-19 04:59:58,309 - INFO - Added job: Early Childhood Educator (Diploma - Girrabanya Child Care Centre) for City of Ballarat (Ref: N/A)
+2026-02-19 04:59:59,985 - INFO - Added job: Early Childhood Educator Casual - Cert III and Diploma for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:01,637 - INFO - Added job: Administration Officer for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:03,558 - INFO - Added job: Coordinator Enhanced Maternal and Child Health Nurse and Outreach for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:05,202 - INFO - Added job: Community Connections Officer - Casual for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:06,828 - INFO - Added job: Aquatic Education Teacher (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:08,490 - INFO - Added job: Customer Experience Officer (Casual) for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:10,128 - INFO - Added job: Gymnastics Coach (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:11,790 - INFO - Added job: Gymnastics Assistant Coach (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:13,441 - INFO - Added job: Ballarat Airport Stakeholder Reference Group – Call for Expressions of Interest for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:15,091 - INFO - Added job: Corporate Services - Traineeship (Administration) for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:16,734 - INFO - Added job: Supervisor City Entrances for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:18,398 - INFO - Added job: Volunteer - Parent Place for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:20,042 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
+2026-02-19 05:00:21,075 - INFO - Overwrote JSON with 17 jobs from Pulse.
+2026-02-19 05:00:21,096 - INFO - RSS generated with 17 jobs.
