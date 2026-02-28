@@ -24,7 +24,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:13.126514",
+    "scraped_at": "2026-02-28T04:21:26.145660",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -58,7 +58,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:14.877632",
+    "scraped_at": "2026-02-28T04:21:27.882837",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -92,7 +92,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:16.614157",
+    "scraped_at": "2026-02-28T04:21:29.570453",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -126,7 +126,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:18.364558",
+    "scraped_at": "2026-02-28T04:21:31.246914",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -160,7 +160,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:20.094862",
+    "scraped_at": "2026-02-28T04:21:32.930091",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -194,7 +194,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:21.830344",
+    "scraped_at": "2026-02-28T04:21:34.619012",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -228,7 +228,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:23.593095",
+    "scraped_at": "2026-02-28T04:21:36.313663",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -262,7 +262,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:25.332081",
+    "scraped_at": "2026-02-28T04:21:38.001056",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -296,41 +296,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:27.077217",
-    "parse_flags": [
-      "missing_salary",
-      "missing_benefits",
-      "no_attachments",
-      "missing_key_criteria",
-      "scraping_error_band"
-    ]
-  },
-  {
-    "title": "Community Connections Officer - Casual",
-    "council": "City of Ballarat",
-    "detail_url": "https://ballarat.pulsesoftware.com/Pulse/jobs/N/A",
-    "closing_date": "N/A",
-    "closing_time": "N/A",
-    "location": "The Phoenix",
-    "employment_type": "Casual",
-    "work_arrangement": "N/A",
-    "salary": "N/A",
-    "salary_type": "N/A",
-    "band_level": "N/A",
-    "description": "Microsoft\n\nIIS\nHome\nManage\nDownloads\nLearn\nReference\nSolutions\nBlogs\nForums\n\nHomeError\n\n!\nPage Not Found\nForums\ngo\nLearn\ngo\nPHP\ngo\nReference\ngo\nTHE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE...\n\nIf you typed in the URL yourself, please double-check the spelling.\nIf you got here from a link within our site, please Contact Us.\n\nThis site is managed by Microsoft | \u00a9\u00a02025\u00a0Microsoft. All rights reserved.\nPrivacy Statement Terms of Use Contact Us Hosted on Microsoft Azure Advertise with Us\nFollow us on:\nTwitter Facebook\nMicrosoft\nFeedback on IIS",
-    "requirements": [],
-    "key_criteria": [],
-    "application_instructions": "N/A",
-    "contact_info": "N/A",
-    "reference_number": "N/A",
-    "department": "Community Wellbeing",
-    "job_category": "Community Services",
-    "benefits": "N/A",
-    "attachments": [],
-    "num_positions": 1,
-    "eeo_statement": "N/A",
-    "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:28.805137",
+    "scraped_at": "2026-02-28T04:21:39.687702",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -364,7 +330,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:30.538190",
+    "scraped_at": "2026-02-28T04:21:41.381311",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -398,7 +364,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:32.270556",
+    "scraped_at": "2026-02-28T04:21:43.061301",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -432,7 +398,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:33.996569",
+    "scraped_at": "2026-02-28T04:21:44.746739",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -466,7 +432,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:35.725204",
+    "scraped_at": "2026-02-28T04:21:46.431791",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -500,7 +466,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-02-27T04:51:37.453257",
+    "scraped_at": "2026-02-28T04:21:48.113442",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
