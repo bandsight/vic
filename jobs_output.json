@@ -11,7 +11,7 @@
     "salary": "N/A",
     "salary_type": "N/A",
     "band_level": "N/A",
-    "description": "Microsoft\n\nIIS\nHome\nManage\nDownloads\nLearn\nReference\nSolutions\nBlogs\nForums\n\nHomeError\n\n!\nPage Not Found\nForums\ngo\nLearn\ngo\nPHP\ngo\nReference\ngo\nTHE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE...\n\nIf you typed in the URL yourself, please double-check the spelling.\nIf you got here from a link within our site, please Contact Us.\n\nThis site is managed by Microsoft | \u00a9\u00a02025\u00a0Microsoft. All rights reserved.\nPrivacy Statement Terms of Use Contact Us Hosted on Microsoft Azure Advertise with Us\nFollow us on:\nTwitter Facebook\nMicrosoft\nFeedback on IIS",
+    "description": "skip to main content\nMicrosoft\n\nIIS\nHome\nManage\nDownloads\nLearn\nReference\nSolutions\nBlogs\nForums\n\nHomeError\n\n!\nPage Not Found\nForums\ngo\nLearn\ngo\nPHP\ngo\nReference\ngo\nTHE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE...\n\nIf you typed in the URL yourself, please double-check the spelling.\nIf you got here from a link within our site, please Contact Us.\n\nThis site is managed by Microsoft | \u00a9\u00a02025\u00a0Microsoft. All rights reserved.\nPrivacy Statement Terms of Use Contact Us Hosted on Microsoft Azure Advertise with Us\nFollow us on:\nTwitter Facebook\nMicrosoft\nFeedback on IIS",
     "requirements": [],
     "key_criteria": [],
     "application_instructions": "N/A",
@@ -24,7 +24,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-03-14T04:50:07.593194",
+    "scraped_at": "2026-03-15T05:12:38.607532",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -58,7 +58,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-03-14T04:50:09.181617",
+    "scraped_at": "2026-03-15T05:12:40.331858",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -92,7 +92,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-03-14T04:50:10.795611",
+    "scraped_at": "2026-03-15T05:12:42.098118",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -126,7 +126,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-03-14T04:50:12.392132",
+    "scraped_at": "2026-03-15T05:12:43.811103",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -160,7 +160,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-03-14T04:50:14.004250",
+    "scraped_at": "2026-03-15T05:12:45.545420",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -194,7 +194,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-03-14T04:50:15.634552",
+    "scraped_at": "2026-03-15T05:12:47.400684",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -228,7 +228,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-03-14T04:50:17.229830",
+    "scraped_at": "2026-03-15T05:12:49.129855",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -262,7 +262,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-03-14T04:50:18.834933",
+    "scraped_at": "2026-03-15T05:12:50.843660",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
