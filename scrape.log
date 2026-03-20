@@ -5239,3 +5239,40 @@
 2026-03-19 05:02:16,217 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
 2026-03-19 05:02:17,256 - INFO - Overwrote JSON with 7 jobs from Pulse.
 2026-03-19 05:02:17,272 - INFO - RSS generated with 7 jobs.
+2026-03-20 04:53:22,344 - INFO - Starting scrape for City of Ballarat at https://ballarat.pulsesoftware.com/Pulse/jobs
+2026-03-20 04:53:25,081 - INFO - Page title: Job Vacancies
+2026-03-20 04:53:25,084 - INFO - Triggered Vue load().
+2026-03-20 04:54:25,088 - WARNING - Less than 15 job rows after 60s—continuing with available.
+2026-03-20 04:54:25,182 - INFO - Screenshot saved: pulse_list.png
+2026-03-20 04:54:26,184 - INFO - Scroll 1/20 complete.
+2026-03-20 04:54:27,187 - INFO - Scroll 2/20 complete.
+2026-03-20 04:54:28,191 - INFO - Scroll 3/20 complete.
+2026-03-20 04:54:29,194 - INFO - Scroll 4/20 complete.
+2026-03-20 04:54:30,197 - INFO - Scroll 5/20 complete.
+2026-03-20 04:54:31,200 - INFO - Scroll 6/20 complete.
+2026-03-20 04:54:32,203 - INFO - Scroll 7/20 complete.
+2026-03-20 04:54:33,206 - INFO - Scroll 8/20 complete.
+2026-03-20 04:54:34,209 - INFO - Scroll 9/20 complete.
+2026-03-20 04:54:35,212 - INFO - Scroll 10/20 complete.
+2026-03-20 04:54:36,215 - INFO - Scroll 11/20 complete.
+2026-03-20 04:54:37,218 - INFO - Scroll 12/20 complete.
+2026-03-20 04:54:38,221 - INFO - Scroll 13/20 complete.
+2026-03-20 04:54:39,224 - INFO - Scroll 14/20 complete.
+2026-03-20 04:54:40,227 - INFO - Scroll 15/20 complete.
+2026-03-20 04:54:41,230 - INFO - Scroll 16/20 complete.
+2026-03-20 04:54:42,233 - INFO - Scroll 17/20 complete.
+2026-03-20 04:54:43,236 - INFO - Scroll 18/20 complete.
+2026-03-20 04:54:44,239 - INFO - Scroll 19/20 complete.
+2026-03-20 04:54:45,242 - INFO - Scroll 20/20 complete.
+2026-03-20 04:54:45,246 - INFO - Accessed Vue data: 0 jobs.
+2026-03-20 04:54:45,251 - INFO - Fallback DOM scrape: 8 jobs.
+2026-03-20 04:54:46,378 - INFO - Added job: After Hours Animal Management Officer for City of Ballarat (Ref: N/A)
+2026-03-20 04:54:48,025 - INFO - Added job: Early Childhood Teacher (Girrabanya Children's Centre) for City of Ballarat (Ref: N/A)
+2026-03-20 04:54:49,694 - INFO - Added job: Principal Business Statutory Planner for City of Ballarat (Ref: N/A)
+2026-03-20 04:54:51,330 - INFO - Added job: Aquatic Education Teacher (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-03-20 04:54:52,986 - INFO - Added job: Gymnastics Coach (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-03-20 04:54:54,637 - INFO - Added job: Gymnastics Assistant Coach (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-03-20 04:54:56,280 - INFO - Added job: Volunteer - Parent Place for City of Ballarat (Ref: N/A)
+2026-03-20 04:54:57,957 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
+2026-03-20 04:54:58,990 - INFO - Overwrote JSON with 8 jobs from Pulse.
+2026-03-20 04:54:59,004 - INFO - RSS generated with 8 jobs.
