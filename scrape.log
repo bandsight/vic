@@ -6631,3 +6631,40 @@
 2026-04-28 06:12:52,219 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
 2026-04-28 06:12:53,254 - INFO - Overwrote JSON with 7 jobs from Pulse.
 2026-04-28 06:12:53,269 - INFO - RSS generated with 7 jobs.
+2026-04-29 06:05:31,396 - INFO - Starting scrape for City of Ballarat at https://ballarat.pulsesoftware.com/Pulse/jobs
+2026-04-29 06:05:33,845 - INFO - Page title: Job Vacancies
+2026-04-29 06:05:33,848 - INFO - Triggered Vue load().
+2026-04-29 06:06:33,850 - WARNING - Less than 15 job rows after 60s—continuing with available.
+2026-04-29 06:06:33,936 - INFO - Screenshot saved: pulse_list.png
+2026-04-29 06:06:34,939 - INFO - Scroll 1/20 complete.
+2026-04-29 06:06:35,942 - INFO - Scroll 2/20 complete.
+2026-04-29 06:06:36,945 - INFO - Scroll 3/20 complete.
+2026-04-29 06:06:37,948 - INFO - Scroll 4/20 complete.
+2026-04-29 06:06:38,950 - INFO - Scroll 5/20 complete.
+2026-04-29 06:06:39,953 - INFO - Scroll 6/20 complete.
+2026-04-29 06:06:40,956 - INFO - Scroll 7/20 complete.
+2026-04-29 06:06:41,959 - INFO - Scroll 8/20 complete.
+2026-04-29 06:06:42,962 - INFO - Scroll 9/20 complete.
+2026-04-29 06:06:43,964 - INFO - Scroll 10/20 complete.
+2026-04-29 06:06:44,967 - INFO - Scroll 11/20 complete.
+2026-04-29 06:06:45,970 - INFO - Scroll 12/20 complete.
+2026-04-29 06:06:46,973 - INFO - Scroll 13/20 complete.
+2026-04-29 06:06:47,976 - INFO - Scroll 14/20 complete.
+2026-04-29 06:06:48,979 - INFO - Scroll 15/20 complete.
+2026-04-29 06:06:49,981 - INFO - Scroll 16/20 complete.
+2026-04-29 06:06:50,984 - INFO - Scroll 17/20 complete.
+2026-04-29 06:06:51,987 - INFO - Scroll 18/20 complete.
+2026-04-29 06:06:52,990 - INFO - Scroll 19/20 complete.
+2026-04-29 06:06:53,993 - INFO - Scroll 20/20 complete.
+2026-04-29 06:06:53,996 - INFO - Accessed Vue data: 0 jobs.
+2026-04-29 06:06:54,001 - INFO - Fallback DOM scrape: 8 jobs.
+2026-04-29 06:06:54,978 - INFO - Added job: Coordinator Civil Operations for City of Ballarat (Ref: N/A)
+2026-04-29 06:06:56,605 - INFO - Added job: Counter Planner for City of Ballarat (Ref: N/A)
+2026-04-29 06:06:58,231 - INFO - Added job: Senior Planning Officer for City of Ballarat (Ref: N/A)
+2026-04-29 06:06:59,858 - INFO - Added job: Aquatic Education Teacher (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-04-29 06:07:01,469 - INFO - Added job: Gymnastics Coach (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-04-29 06:07:03,102 - INFO - Added job: Gymnastics Assistant Coach (Ballarat Aquatic & Lifestyle Centre) for City of Ballarat (Ref: N/A)
+2026-04-29 06:07:04,714 - INFO - Added job: Volunteer - Parent Place for City of Ballarat (Ref: N/A)
+2026-04-29 06:07:06,325 - INFO - Added job: Social Activities Volunteer for City of Ballarat (Ref: N/A)
+2026-04-29 06:07:07,356 - INFO - Overwrote JSON with 8 jobs from Pulse.
+2026-04-29 06:07:07,363 - INFO - RSS generated with 8 jobs.

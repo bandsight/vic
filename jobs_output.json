@@ -1,5 +1,39 @@
 [
   {
+    "title": "Coordinator Civil Operations",
+    "council": "City of Ballarat",
+    "detail_url": "https://ballarat.pulsesoftware.com/Pulse/jobs/N/A",
+    "closing_date": "N/A",
+    "closing_time": "N/A",
+    "location": "City Wide Services Depot",
+    "employment_type": "Full Time",
+    "work_arrangement": "N/A",
+    "salary": "N/A",
+    "salary_type": "N/A",
+    "band_level": "N/A",
+    "description": "Microsoft\n\nIIS\nHome\nManage\nDownloads\nLearn\nReference\nSolutions\nBlogs\nForums\n\nHomeError\n\n!\nPage Not Found\nForums\ngo\nLearn\ngo\nPHP\ngo\nReference\ngo\nTHE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE...\n\nIf you typed in the URL yourself, please double-check the spelling.\nIf you got here from a link within our site, please Contact Us.",
+    "requirements": [],
+    "key_criteria": [],
+    "application_instructions": "N/A",
+    "contact_info": "N/A",
+    "reference_number": "N/A",
+    "department": "Infrastructure and Environment",
+    "job_category": "Infrastructure & Engineering",
+    "benefits": "N/A",
+    "attachments": [],
+    "num_positions": 1,
+    "eeo_statement": "N/A",
+    "posted_date": "N/A",
+    "scraped_at": "2026-04-29T06:06:54.978258",
+    "parse_flags": [
+      "missing_salary",
+      "missing_benefits",
+      "no_attachments",
+      "missing_key_criteria",
+      "scraping_error_band"
+    ]
+  },
+  {
     "title": "Counter Planner",
     "council": "City of Ballarat",
     "detail_url": "https://ballarat.pulsesoftware.com/Pulse/jobs/N/A",
@@ -11,7 +45,7 @@
     "salary": "N/A",
     "salary_type": "N/A",
     "band_level": "N/A",
-    "description": "skip to main content\nMicrosoft\n\nIIS\nHome\nManage\nDownloads\nLearn\nReference\nSolutions\nBlogs\nForums\n\nHomeError\n\n!\nPage Not Found\nForums\ngo\nLearn\ngo\nPHP\ngo\nReference\ngo\nTHE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE...\n\nIf you typed in the URL yourself, please double-check the spelling.\nIf you got here from a link within our site, please Contact Us.\n\nThis site is managed by Microsoft | \u00a9\u00a02025\u00a0Microsoft. All rights reserved.\nPrivacy Statement  Consumer Health Privacy Terms of Use Contact Us  Hosted on Microsoft Azure  Advertise with Us\nFollow us on:\nTwitter Facebook\nMicrosoft\nFeedback on IIS",
+    "description": "Microsoft\n\nIIS\nHome\nManage\nDownloads\nLearn\nReference\nSolutions\nBlogs\nForums\n\nHomeError\n\n!\nPage Not Found\nForums\ngo\nLearn\ngo\nPHP\ngo\nReference\ngo\nTHE PAGE YOU ARE LOOKING FOR IS NOT AVAILABLE...\n\nIf you typed in the URL yourself, please double-check the spelling.\nIf you got here from a link within our site, please Contact Us.",
     "requirements": [],
     "key_criteria": [],
     "application_instructions": "N/A",
@@ -24,7 +58,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-04-28T06:12:42.094514",
+    "scraped_at": "2026-04-29T06:06:56.605491",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -58,7 +92,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-04-28T06:12:43.773921",
+    "scraped_at": "2026-04-29T06:06:58.231740",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -92,7 +126,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-04-28T06:12:45.458185",
+    "scraped_at": "2026-04-29T06:06:59.858369",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -126,7 +160,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-04-28T06:12:47.139328",
+    "scraped_at": "2026-04-29T06:07:01.469356",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -160,7 +194,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-04-28T06:12:48.842975",
+    "scraped_at": "2026-04-29T06:07:03.102656",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -194,7 +228,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-04-28T06:12:50.528644",
+    "scraped_at": "2026-04-29T06:07:04.714538",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
@@ -228,7 +262,7 @@
     "num_positions": 1,
     "eeo_statement": "N/A",
     "posted_date": "N/A",
-    "scraped_at": "2026-04-28T06:12:52.219002",
+    "scraped_at": "2026-04-29T06:07:06.325595",
     "parse_flags": [
       "missing_salary",
       "missing_benefits",
