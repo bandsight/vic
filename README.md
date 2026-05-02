@@ -1,65 +1,86 @@
-# City of Ballarat Pulse Job Scraper
+# EBA Workbench
 
-This repository now intentionally focuses on a single source: the City of Ballarat
-job board that runs on Pulse. The goal is to prove out one reliable scraping
-approach for a JavaScript-heavy Pulse tenancy before attempting the wider
-Victorian councils directory again.
+Human-in-the-loop extraction and governance workbench for Victorian local government enterprise agreements.
 
-## Current capabilities
-- ✅ **Single council scope** – `scraper.py` only targets
-  `https://ballarat.pulsesoftware.com/Pulse/jobs` and exports the jobs to
-  `jobs_output.json` plus a basic RSS feed.
-- ✅ **Playwright-based rendering** – launches Chromium headlessly, waits for the
-  Vue component to populate at least 15 cards, scrolls to trigger lazy loading,
-  and then scrapes either the exposed Vue data or a DOM fallback.
-- ✅ **Structured job details** – captures metadata from the listing, opens each
-  job detail view for descriptions, requirements, application instructions,
-  contact info, and an inferred band level snippet.
-- ✅ **Static viewer** – `index.html` now loads `jobs_output.json` directly so
-  the GitHub Pages site always shows the latest scrape (or the placeholder JSON
-  committed in this repo until the first automated run).
+This app is an internal operator cockpit, not a client-facing portal. It is where the operator reviews source intake, governs extracted pay tables and uplift rules, explores chart ideas, and prepares report assets for later customer-facing consumption.
 
-## Setup
-1. Install the dependencies and browsers:
-   ```bash
-   pip install -r requirements.txt
-   playwright install
-   ```
-2. Run the scraper:
-   ```bash
-   python scraper.py
-   ```
-3. Review `jobs_output.json`, `rss.xml`, `scrape.log`, and the latest
-  `pulse_list.png` screenshot for troubleshooting. The JSON file is also what
-  powers the public viewer at `index.html`.
+## Collaboration
 
-## Why Playwright (research summary)
-Pulse renders its public job listings fully client-side via Vue and only exposes
-minimal markup until the Vue instance finishes hydrating. Static HTTP requests
-alone cannot reach the job data without reverse engineering the internal API
-endpoints and authentication headers for each tenancy. For now Playwright gives
-us:
+See [GITHUB_COLLABORATION.md](GITHUB_COLLABORATION.md) for the GitHub collaboration plan and [machine-notes](machine-notes/) for Windows/Linux handoffs.
 
-- A predictable execution context where we can trigger `load()` if it exists and
-  wait for `.row.card-row` nodes to appear.
-- Full DOM access (or direct access to `__vue__`) so we can extract the `jobs`
-  array without guessing undocumented REST endpoints.
-- The ability to drive job detail pages, which Pulse loads on separate routes
-  that lazy-load additional chunks.
+## Quick Run
 
-### Alternative paths (to revisit later)
-- **Network interception:** Inspecting the `fetch`/XHR traffic to Pulse can
-  reveal a JSON API for search results. Capturing the request payloads in the
-  Playwright session and replaying them manually would eliminate the need for
-  headless browsers, but each tenancy may use unique IDs and auth tokens.
-- **Server-side rendering or caching:** If latency becomes an issue, we can
-  scrape with Playwright in CI, persist the JSON, and serve it statically (as we
-  already do) while scheduling runs sparingly.
+Windows:
 
-## Next steps
-- Harden the DOM fallback so the scraper still works if the Vue structure
-  changes.
-- Capture the Pulse API calls and confirm whether authenticated requests are
-  required.
-- Once the Ballarat approach is stable, re-introduce multiple councils and the
-  MAV directory with accurate documentation.
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\setup-windows.ps1
+powershell -ExecutionPolicy Bypass -File scripts\run-windows.ps1
+```
+
+Ubuntu:
+
+```bash
+bash scripts/setup-ubuntu.sh
+bash scripts/run-ubuntu.sh
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8765
+```
+
+## Offline Setup
+
+When the target machine cannot reach or trust PyPI, build and package a wheelhouse first:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\build-offline-deps.ps1 -PipTrustedHost
+powershell -ExecutionPolicy Bypass -File scripts\package-workbench.ps1 -Profile runtime_code -IncludeDependencyBundle
+```
+
+Then on the target:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\setup-windows.ps1 -Offline
+```
+
+Ubuntu uses the same `vendor/python-wheels` layout:
+
+```bash
+OFFLINE=1 bash scripts/setup-ubuntu.sh
+```
+
+## Agent Discovery
+
+The app exposes a read-only discovery layer for Codex, OpenClaw, or another agent runner:
+
+- `/api/agent/status`
+- `/api/agent/catalog`
+- `/api/agent/actions`
+- `/api/agent/io`
+
+The matching manifest is [workbench-agent.json](workbench-agent.json).
+
+## Portable Packaging
+
+The portability manifest is [PORTABLE_MANIFEST.json](PORTABLE_MANIFEST.json).
+
+Default runtime packages include source, tests, scripts, docs, lightweight reference data, and report asset metadata. They exclude secrets, source PDFs, governed YAML, generated registers, bulky analysis JSON, virtual environments, dependency caches, exports, and logs.
+
+## Current Verification
+
+As of 2026-05-02:
+
+- Windows runtime package/unpack/setup/run has been smoke-tested.
+- Windows offline Python wheelhouse package/setup/run has been smoke-tested.
+- Full test suite passed locally: `428 passed`.
+- Frontend lint reports `0` errors and `1` existing unused-function warning.
+- Ubuntu setup scripts exist but still need to be proven on a Linux or WSL machine.
+
+## Key Docs
+
+- [PRODUCT_ARCHITECTURE.md](PRODUCT_ARCHITECTURE.md)
+- [CURRENT_STATE_AND_NEXT_ACTIONS.md](CURRENT_STATE_AND_NEXT_ACTIONS.md)
+- [REPORT_ASSET_CONTRACT.md](REPORT_ASSET_CONTRACT.md)
+- [GITHUB_COLLABORATION.md](GITHUB_COLLABORATION.md)
