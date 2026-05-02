@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "version": "0.1.0",
+  "project": {
+    "id": "municipal-benchmark-eba-workbench",
+    "label": "Municipal Benchmark EBA Workbench",
+    "intent": "Operator cockpit for human-in-the-loop EBA governance, machine improvement, chart exploration, and report asset production.",
+    "client_facing": false
+  },
+  "platforms": {
+    "supported": ["windows", "ubuntu"],
+    "current_primary": "windows"
+  },
+  "commands": {
+    "run_windows": "powershell -ExecutionPolicy Bypass -File scripts/run-windows.ps1",
+    "run_ubuntu": "bash scripts/run-ubuntu.sh",
+    "setup_windows": "powershell -ExecutionPolicy Bypass -File scripts/setup-windows.ps1",
+    "setup_ubuntu": "bash scripts/setup-ubuntu.sh",
+    "test_windows": ".\\.venv-win\\Scripts\\python.exe -m pytest",
+    "test_ubuntu": ".venv/bin/python -m pytest",
+    "lint_frontend": "npm run lint",
+    "package_windows": "powershell -ExecutionPolicy Bypass -File scripts/package-workbench.ps1",
+    "package_windows_with_deps": "powershell -ExecutionPolicy Bypass -File scripts/package-workbench.ps1 -IncludeDependencyBundle",
+    "package_ubuntu": "bash scripts/package-workbench.sh",
+    "package_ubuntu_with_deps": "INCLUDE_DEPENDENCY_BUNDLE=1 bash scripts/package-workbench.sh",
+    "build_offline_deps_windows": "powershell -ExecutionPolicy Bypass -File scripts/build-offline-deps.ps1",
+    "build_offline_deps_ubuntu": "bash scripts/build-offline-deps.sh",
+    "unpack_windows": "powershell -ExecutionPolicy Bypass -File scripts/unpack-workbench.ps1 -SourceZip <zip> -Destination <folder>",
+    "unpack_ubuntu": "bash scripts/unpack-workbench.sh <zip> <folder>"
+  },
+  "api": {
+    "status": "/api/agent/status",
+    "catalog": "/api/agent/catalog",
+    "actions": "/api/agent/actions",
+    "io": "/api/agent/io",
+    "llm_status": "/api/llm/status",
+    "intake_quality": "/api/intake/quality"
+  },
+  "data_sets": [
+    {
+      "id": "intake_candidates",
+      "kind": "source_stage",
+      "endpoint": "/api/intake/candidates"
+    },
+    {
+      "id": "canonical_agreements",
+      "kind": "workspace_state",
+      "directory": "canonical"
+    },
+    {
+      "id": "source_pdfs",
+      "kind": "source_evidence",
+      "directory": "documents/immutable"
+    },
+    {
+      "id": "uplift_rules",
+      "kind": "governed_entity_set",
+      "endpoint": "/api/analysis/uplift-rules"
+    },
+    {
+      "id": "pay_tables",
+      "kind": "governed_entity_set",
+      "endpoint": "/api/analysis/pay-tables"
+    },
+    {
+      "id": "distribution_point_analysis",
+      "kind": "report_asset_source",
+      "endpoint": "/api/analysis/distribution-point-analysis",
+      "file": "data/analysis/distribution-point-analysis.json"
+    },
+    {
+      "id": "distribution_point_analysis_asset",
+      "kind": "report_asset_manifest",
+      "file": "data/analysis/distribution-point-analysis.asset.json",
+      "contract": "REPORT_ASSET_CONTRACT.md"
+    }
+  ],
+  "safe_io": {
+    "root_boundary": ".",
+    "readable": [
+      "PRODUCT_ARCHITECTURE.md",
+      "CURRENT_STATE_AND_NEXT_ACTIONS.md",
+      "REPORT_ASSET_CONTRACT.md",
+      "GITHUB_COLLABORATION.md",
+      "README.md",
+      "src",
+      "static",
+      "tests",
+      "scripts",
+      ".github",
+      "machine-notes",
+      "data/reference",
+      "data/analysis",
+      "registers",
+      "canonical",
+      "scenario-overrides"
+    ],
+    "writable_with_governance": [
+      "canonical",
+      "registers",
+      "scenario-overrides",
+      "data/analysis",
+      "exports",
+      "var"
+    ],
+    "never_package_by_default": [
+      ".env",
+      ".git",
+      ".venv",
+      ".venv-win",
+      "node_modules",
+      "vendor",
+      "__pycache__",
+      ".pytest_cache",
+      "cache",
+      "*.log"
+    ]
+  },
+  "governance": {
+    "principle": "Agent work must use the same services and API actions as the UI where practical.",
+    "must_not_bypass": ["accept", "promote", "unwind", "source_freeze", "intake_decision"],
+    "write_boundary": "project_root"
+  }
+}
