@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "project_id": "municipal-benchmark-eba-workbench",
+  "label": "Municipal Benchmark EBA Workbench",
+  "created_for": "portable packaging and target-directory repair",
+  "default_profile": "runtime_code",
+  "profiles": {
+    "runtime_code": {
+      "description": "Portable app source, docs, tests, scripts, config templates, and lightweight reference data. Excludes secrets and bulky generated runtime material.",
+      "include": [
+        "README.md",
+        "PRODUCT_ARCHITECTURE.md",
+        "CURRENT_STATE_AND_NEXT_ACTIONS.md",
+        "REPORT_ASSET_CONTRACT.md",
+        "GITHUB_COLLABORATION.md",
+        "PORTABLE_MANIFEST.json",
+        "workbench-agent.json",
+        ".env.example",
+        "requirements.txt",
+        "requirements-dev.txt",
+        "requirements-browser.txt",
+        "package.json",
+        "package-lock.json",
+        "pytest.ini",
+        "conftest.py",
+        "smoke_test.py",
+        "main.py",
+        "src/**",
+        "static/**",
+        "scripts/**",
+        "tests/**",
+        ".github/**",
+        "machine-notes/**",
+        "briefs/**",
+        "data/analysis/*.asset.json",
+        "data/reference/**",
+        "phase1_rules/**"
+      ],
+      "exclude": [
+        ".env",
+        ".git/**",
+        ".venv/**",
+        ".venv-win/**",
+        "node_modules/**",
+        "vendor/**",
+        "__pycache__/**",
+        ".pytest_cache/**",
+        "cache/**",
+        "llm-bundle/**",
+        "llm-bundle.zip",
+        "*.log",
+        "uvicorn-*.log",
+        "artifacts/**",
+        "exports/**",
+        "var/**"
+      ]
+    },
+    "with_governed_data": {
+      "description": "Runtime code plus reviewed workspace data and analysis assets. Source PDFs remain excluded unless explicitly added.",
+      "extends": "runtime_code",
+      "include": [
+        "canonical/**",
+        "registers/**",
+        "scenario-overrides/**",
+        "data/analysis/**",
+        "data/bronze/phase1_source_build/candidate_agreements/**"
+      ]
+    },
+    "with_source_evidence": {
+      "description": "Runtime code, governed data, and immutable PDFs. Use only when the package is intended to carry source evidence.",
+      "extends": "with_governed_data",
+      "include": [
+        "documents/immutable/**"
+      ]
+    }
+  },
+  "path_policy": {
+    "preferred": "Derive paths from the unpacked project root.",
+    "source_rewrite_expected": false,
+    "local_config": ".env",
+    "unpack_script_windows": "scripts/unpack-workbench.ps1",
+    "unpack_script_ubuntu": "scripts/unpack-workbench.sh",
+    "repair_script_windows": "scripts/setup-windows.ps1",
+    "repair_script_ubuntu": "scripts/setup-ubuntu.sh"
+  },
+  "setup_policy": {
+    "network_required_by_default": ["pypi.org", "files.pythonhosted.org"],
+    "network_required_with_node_tools": ["registry.npmjs.org"],
+    "runtime_setup_installs_node_tools_by_default": false,
+    "windows_node_tools_switch": "-WithNodeTools",
+    "windows_offline_setup_switch": "-Offline",
+    "windows_wheelhouse_arg": "-Wheelhouse vendor\\python-wheels",
+    "windows_npm_cache_arg": "-NpmCache vendor\\npm-cache",
+    "windows_pip_trusted_host_switch": "-PipTrustedHost",
+    "windows_npm_system_ca_switch": "-NpmUseSystemCa",
+    "windows_npm_strict_ssl_false_switch": "-NpmStrictSslFalse",
+    "ubuntu_node_tools_env": "WITH_NODE_TOOLS=1",
+    "ubuntu_offline_setup_env": "OFFLINE=1",
+    "ubuntu_wheelhouse_env": "WHEELHOUSE=vendor/python-wheels",
+    "ubuntu_npm_cache_env": "NPM_CACHE=vendor/npm-cache",
+    "ubuntu_pip_trusted_host_env": "PIP_TRUSTED_HOST=1",
+    "ubuntu_npm_system_ca_env": "NPM_USE_SYSTEM_CA=1",
+    "ubuntu_npm_strict_ssl_false_env": "NPM_STRICT_SSL_FALSE=1",
+    "build_dependency_bundle_windows": "scripts/build-offline-deps.ps1",
+    "build_dependency_bundle_ubuntu": "scripts/build-offline-deps.sh",
+    "package_dependency_bundle_windows": "-IncludeDependencyBundle",
+    "package_dependency_bundle_ubuntu": "INCLUDE_DEPENDENCY_BUNDLE=1",
+    "offline_dependency_bundle": {
+      "default_included": false,
+      "python_wheels": "vendor/python-wheels",
+      "node_cache": "vendor/npm-cache",
+      "manifest": "vendor/dependency-bundle.json"
+    }
+  },
+  "secret_policy": {
+    "excluded_by_default": [".env", ".git"],
+    "operator_must_recreate": ["ANTHROPIC_API_KEY", "OPENAI_API_KEY"],
+    "template": ".env.example"
+  },
+  "integrity": {
+    "manifest_generated_by": "manual initial scaffold",
+    "future_work": "Package scripts should add file hashes and package timestamps."
+  }
+}
