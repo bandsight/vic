@@ -1,0 +1,129 @@
+{
+  "asset_id": "distribution_point_analysis_default",
+  "asset_type": "chart",
+  "export_targets": [
+    "csv",
+    "svg",
+    "png",
+    "xlsx",
+    "docx",
+    "pptx"
+  ],
+  "filters": {
+    "classification_basis": "chart_band and chart level range",
+    "cohort": "all governed agreements included in the distribution analysis build",
+    "period_basis": "quarter_start",
+    "status": "rows with calculation_status retained for downstream filtering"
+  },
+  "generated_at": "2026-05-05T01:27:36.793912+00:00",
+  "generated_by": "workbench-analysis-generator",
+  "metric_definition": "Service-horizon curve/envelope view derived from pay_distribution_point_mart. Dots and comparator curve must come from the same service_horizon_window metric universe.",
+  "operator_note": "Use this as the proving asset for turning exploratory chart ideas into governed report-ready evidence objects.",
+  "provenance": {
+    "asset_file": "data\\analysis\\distribution-point-analysis.json",
+    "contract": "REPORT_ASSET_CONTRACT.md",
+    "endpoint": "/api/analysis/distribution-point-analysis",
+    "materialized_at": "2026-05-05T01:27:36.875371+00:00",
+    "patterns": [
+      {
+        "count": 6374,
+        "pattern": "governed_table"
+      },
+      {
+        "count": 1478,
+        "pattern": "annual_rate/52"
+      },
+      {
+        "count": 536,
+        "pattern": "scenario_projection"
+      },
+      {
+        "count": 448,
+        "pattern": "scenario_override_use_computed"
+      },
+      {
+        "count": 208,
+        "pattern": "fortnightly_rate/2"
+      }
+    ],
+    "row_count": 9044
+  },
+  "quality_flags": [
+    "Source basis counts: annual_rate/52=1478, fortnightly_rate/2=208, governed_table=6374, scenario_override_use_computed=448, scenario_projection=536",
+    "Projection and scenario override rows must remain visible or explicitly filtered before report use.",
+    "Per-row fields retain duplicate level, partial band, missing level, known value, projected value, source page, and calculation status indicators.",
+    "Calculation status counts: duplicate_levels=446, ok=6876, partial=1722"
+  ],
+  "report_subtitle_candidate": "EBA pay table points by agreement, quarter, band, and level range",
+  "report_title_candidate": "Governed Weekly Pay Distribution Points",
+  "pay_metric_set": "pay_structure_semantics_v1",
+  "default_pay_metric": "range_midpoint_rate",
+  "service_horizon_window_id": "entry_to_y6",
+  "service_horizon_window_label": "Entry-to-Year-6 service-horizon distribution",
+  "included_metric_points": [
+    "entry_rate",
+    "service_year_1_rate",
+    "service_year_2_rate",
+    "service_year_3_rate",
+    "service_year_4_rate",
+    "service_year_5_rate",
+    "service_year_6_rate"
+  ],
+  "weighting_method": "observation_weighted",
+  "curve_source": "pay_service_horizon_curve_view",
+  "selected_council_points_source": "selected_council_points_json",
+  "available_pay_metrics": [
+    "entry_rate",
+    "capacity_rate",
+    "range_midpoint_rate",
+    "service_year_1_rate",
+    "service_year_2_rate",
+    "service_year_3_rate",
+    "service_year_4_rate",
+    "service_year_5_rate",
+    "service_year_6_rate"
+  ],
+  "blocked_pay_metrics": [],
+  "metric_caveats": [
+    "Midpoint is an explicit comparison metric, not the default analytical truth.",
+    "Y1-Y6 values are service-horizon comparison points and must be read with resolved_value_mode, calculation_status, and report_ready_status.",
+    "Estimated service-horizon values use ordered governed pay points with capacity carry-forward after the actual ladder is exhausted unless governed progression rules exist.",
+    "Interactive curve/envelope views must use pay_service_horizon_curve_view so dots and curve share the same service_horizon_window."
+  ],
+  "source_dataset": "pay_service_horizon_curve_view",
+  "source_dataset_version": "initial_datamart_suite.v2_2_service_horizon_curve_view",
+  "status": "draft",
+  "title": "Distribution Point Analysis",
+  "visual_encoding": {
+    "chart_type": "service_horizon_distribution_curve",
+    "colour_policy": "Use brand/report colour roles, not hard-coded one-off chart colours.",
+    "comparison_metric": "range_midpoint_rate",
+    "service_year_index": null,
+    "service_horizon_year": null,
+    "service_horizon_window_id": "entry_to_y6",
+    "service_horizon_window_label": "Entry-to-Year-6 service-horizon distribution",
+    "included_metric_points": [
+      "entry_rate",
+      "service_year_1_rate",
+      "service_year_2_rate",
+      "service_year_3_rate",
+      "service_year_4_rate",
+      "service_year_5_rate",
+      "service_year_6_rate"
+    ],
+    "weighting_method": "observation_weighted",
+    "curve_source": "pay_service_horizon_curve_view",
+    "selected_council_points_source": "selected_council_points_json",
+    "resolved_value_mode": null,
+    "input_mart_version": "initial_datamart_suite.v2_2_service_horizon_curve_view",
+    "point_roles": [
+      "cohort_point",
+      "statewide_context",
+      "selected_council",
+      "projected_value",
+      "quality_warning"
+    ],
+    "x_axis": "weekly_rate",
+    "y_axis": "classification band or selected cohort dimension"
+  }
+}

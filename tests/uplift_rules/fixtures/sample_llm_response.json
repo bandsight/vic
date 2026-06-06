@@ -1,0 +1,37 @@
+{
+  "council": "Example Shire Council",
+  "covered_councils": ["Example Shire Council"],
+  "multi_employer": false,
+  "timing_pattern": "annual_fixed_date",
+  "rules": [
+    {
+      "period_label": "Year 1",
+      "quantum": "3.5%",
+      "quantum_type": "percentage",
+      "timing_clause": "the first full pay period on or after 1 July 2025",
+      "effective_date": "2025-07-01",
+      "quantum_floor": null,
+      "quantum_ceiling": null,
+      "quantum_external_ref": null,
+      "quantum_external_definition": null,
+      "quantum_resolution": null,
+      "source_page": 12,
+      "confidence": 0.95
+    },
+    {
+      "period_label": "Year 2",
+      "quantum": "the greater of 3% or $40 per week",
+      "quantum_type": "pct_OR_floor",
+      "timing_clause": "the first full pay period on or after 1 July 2026",
+      "effective_date": "2026-07-01",
+      "quantum_floor": "$40",
+      "quantum_ceiling": null,
+      "quantum_external_ref": null,
+      "quantum_external_definition": null,
+      "quantum_resolution": null,
+      "source_page": 12,
+      "confidence": 0.9
+    }
+  ],
+  "notes": "Two-year term, fixed annual dates. No external references."
+}

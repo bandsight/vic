@@ -1,0 +1,1223 @@
+﻿{
+    "displayFieldName":  "LGA_NAME_2025",
+    "fieldAliases":  {
+                         "objectid":  "OBJECTID",
+                         "lga_code_2025":  "LGA_CODE_2025",
+                         "lga_name_2025":  "LGA_NAME_2025",
+                         "state_code_2021":  "STATE_CODE_2021",
+                         "state_name_2021":  "STATE_NAME_2021",
+                         "aus_code_2021":  "AUS_CODE_2021",
+                         "aus_name_2021":  "AUS_NAME_2021",
+                         "area_albers_sqkm":  "AREA_ALBERS_SQKM",
+                         "st_length(shape)":  "SHAPE_Length",
+                         "st_area(shape)":  "SHAPE_Area"
+                     },
+    "fields":  [
+                   {
+                       "name":  "objectid",
+                       "type":  "esriFieldTypeOID",
+                       "alias":  "OBJECTID"
+                   },
+                   {
+                       "name":  "lga_code_2025",
+                       "type":  "esriFieldTypeString",
+                       "alias":  "LGA_CODE_2025",
+                       "length":  5
+                   },
+                   {
+                       "name":  "lga_name_2025",
+                       "type":  "esriFieldTypeString",
+                       "alias":  "LGA_NAME_2025",
+                       "length":  50
+                   },
+                   {
+                       "name":  "state_code_2021",
+                       "type":  "esriFieldTypeString",
+                       "alias":  "STATE_CODE_2021",
+                       "length":  1
+                   },
+                   {
+                       "name":  "state_name_2021",
+                       "type":  "esriFieldTypeString",
+                       "alias":  "STATE_NAME_2021",
+                       "length":  50
+                   },
+                   {
+                       "name":  "aus_code_2021",
+                       "type":  "esriFieldTypeString",
+                       "alias":  "AUS_CODE_2021",
+                       "length":  3
+                   },
+                   {
+                       "name":  "aus_name_2021",
+                       "type":  "esriFieldTypeString",
+                       "alias":  "AUS_NAME_2021",
+                       "length":  50
+                   },
+                   {
+                       "name":  "area_albers_sqkm",
+                       "type":  "esriFieldTypeDouble",
+                       "alias":  "AREA_ALBERS_SQKM"
+                   },
+                   {
+                       "name":  "st_length(shape)",
+                       "type":  "esriFieldTypeDouble",
+                       "alias":  "SHAPE_Length"
+                   },
+                   {
+                       "name":  "st_area(shape)",
+                       "type":  "esriFieldTypeDouble",
+                       "alias":  "SHAPE_Area"
+                   }
+               ],
+    "features":  [
+                     {
+                         "attributes":  {
+                                            "objectid":  132,
+                                            "lga_code_2025":  "20110",
+                                            "lga_name_2025":  "Alpine",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  4788.157,
+                                            "st_length(shape)":  557328.13683259417,
+                                            "st_area(shape)":  7492619990.9778662
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  133,
+                                            "lga_code_2025":  "20260",
+                                            "lga_name_2025":  "Ararat",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  4211.1172,
+                                            "st_length(shape)":  490470.03611724207,
+                                            "st_area(shape)":  6697545388.6206923
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  134,
+                                            "lga_code_2025":  "20570",
+                                            "lga_name_2025":  "Ballarat",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  739.0321,
+                                            "st_length(shape)":  205526.91760020677,
+                                            "st_area(shape)":  1176005998.6301537
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  135,
+                                            "lga_code_2025":  "20660",
+                                            "lga_name_2025":  "Banyule",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  62.5402,
+                                            "st_length(shape)":  71990.054652356106,
+                                            "st_area(shape)":  100154415.46591131
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  136,
+                                            "lga_code_2025":  "20740",
+                                            "lga_name_2025":  "Bass Coast",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  865.8094,
+                                            "st_length(shape)":  360414.57843096397,
+                                            "st_area(shape)":  1416061796.8359847
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  137,
+                                            "lga_code_2025":  "20830",
+                                            "lga_name_2025":  "Baw Baw",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  4027.6287,
+                                            "st_length(shape)":  547341.21254724404,
+                                            "st_area(shape)":  6494034537.323616
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  138,
+                                            "lga_code_2025":  "20910",
+                                            "lga_name_2025":  "Bayside (Vic.)",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  37.2111,
+                                            "st_length(shape)":  42554.597379618586,
+                                            "st_area(shape)":  59928111.04214558
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  139,
+                                            "lga_code_2025":  "21010",
+                                            "lga_name_2025":  "Benalla",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  2352.6398,
+                                            "st_length(shape)":  356392.82859177812,
+                                            "st_area(shape)":  3656208934.125453
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  140,
+                                            "lga_code_2025":  "21110",
+                                            "lga_name_2025":  "Boroondara",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  60.1776,
+                                            "st_length(shape)":  60100.499834812035,
+                                            "st_area(shape)":  96597718.177880406
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  141,
+                                            "lga_code_2025":  "21180",
+                                            "lga_name_2025":  "Brimbank",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  123.3991,
+                                            "st_length(shape)":  86864.304611762636,
+                                            "st_area(shape)":  197698259.03393653
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  142,
+                                            "lga_code_2025":  "21270",
+                                            "lga_name_2025":  "Buloke",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  7998.247,
+                                            "st_length(shape)":  684796.14468167385,
+                                            "st_area(shape)":  12219496648.073372
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  143,
+                                            "lga_code_2025":  "21370",
+                                            "lga_name_2025":  "Campaspe",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  4519.073,
+                                            "st_length(shape)":  667158.0270052806,
+                                            "st_area(shape)":  6979766087.0592899
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  144,
+                                            "lga_code_2025":  "21450",
+                                            "lga_name_2025":  "Cardinia",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  1282.5671,
+                                            "st_length(shape)":  268234.00861111743,
+                                            "st_area(shape)":  2073503709.4249289
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  145,
+                                            "lga_code_2025":  "21610",
+                                            "lga_name_2025":  "Casey",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  409.4287,
+                                            "st_length(shape)":  152833.67701863669,
+                                            "st_area(shape)":  662300130.42384183
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  146,
+                                            "lga_code_2025":  "21670",
+                                            "lga_name_2025":  "Central Goldfields",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  1532.7843,
+                                            "st_length(shape)":  309548.73687444249,
+                                            "st_area(shape)":  2408115734.1551414
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  147,
+                                            "lga_code_2025":  "21750",
+                                            "lga_name_2025":  "Colac Otway",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  3437.47,
+                                            "st_length(shape)":  498263.61070875236,
+                                            "st_area(shape)":  5613662157.2168674
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  148,
+                                            "lga_code_2025":  "21830",
+                                            "lga_name_2025":  "Corangamite",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  4407.492,
+                                            "st_length(shape)":  716211.07619125722,
+                                            "st_area(shape)":  7149248470.5710545
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  149,
+                                            "lga_code_2025":  "21890",
+                                            "lga_name_2025":  "Darebin",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  53.4712,
+                                            "st_length(shape)":  56481.465203046915,
+                                            "st_area(shape)":  85634266.388135135
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  150,
+                                            "lga_code_2025":  "22110",
+                                            "lga_name_2025":  "East Gippsland",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  20939.5016,
+                                            "st_length(shape)":  1098795.6500125751,
+                                            "st_area(shape)":  33220913338.678112
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  151,
+                                            "lga_code_2025":  "22170",
+                                            "lga_name_2025":  "Frankston",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  129.5981,
+                                            "st_length(shape)":  64612.130746349096,
+                                            "st_area(shape)":  209812602.80858108
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  152,
+                                            "lga_code_2025":  "22250",
+                                            "lga_name_2025":  "Gannawarra",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  3737.5979,
+                                            "st_length(shape)":  514931.12909122219,
+                                            "st_area(shape)":  5687033092.5625982
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  153,
+                                            "lga_code_2025":  "22310",
+                                            "lga_name_2025":  "Glen Eira",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  38.6908,
+                                            "st_length(shape)":  36517.36690136735,
+                                            "st_area(shape)":  62244628.142565884
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  154,
+                                            "lga_code_2025":  "22410",
+                                            "lga_name_2025":  "Glenelg",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  6218.7884,
+                                            "st_length(shape)":  603424.09636004118,
+                                            "st_area(shape)":  9996500759.944006
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  155,
+                                            "lga_code_2025":  "22490",
+                                            "lga_name_2025":  "Golden Plains",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  2703.3899,
+                                            "st_length(shape)":  445095.58447837457,
+                                            "st_area(shape)":  4346865444.7859774
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  156,
+                                            "lga_code_2025":  "22620",
+                                            "lga_name_2025":  "Greater Bendigo",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  2999.9717,
+                                            "st_length(shape)":  453286.42290552234,
+                                            "st_area(shape)":  4679946261.0753899
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  157,
+                                            "lga_code_2025":  "22670",
+                                            "lga_name_2025":  "Greater Dandenong",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  129.5466,
+                                            "st_length(shape)":  66345.631308816941,
+                                            "st_area(shape)":  208997552.55611473
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  158,
+                                            "lga_code_2025":  "22750",
+                                            "lga_name_2025":  "Greater Geelong",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  1247.9872,
+                                            "st_length(shape)":  391230.37965554371,
+                                            "st_area(shape)":  2016838672.6669729
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  159,
+                                            "lga_code_2025":  "22830",
+                                            "lga_name_2025":  "Greater Shepparton",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  2421.9092,
+                                            "st_length(shape)":  379610.72725887119,
+                                            "st_area(shape)":  3745561478.2398911
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  160,
+                                            "lga_code_2025":  "22910",
+                                            "lga_name_2025":  "Hepburn",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  1472.9843,
+                                            "st_length(shape)":  343337.88609612628,
+                                            "st_area(shape)":  2333033896.9858866
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  161,
+                                            "lga_code_2025":  "22980",
+                                            "lga_name_2025":  "Hindmarsh",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  7524.1823,
+                                            "st_length(shape)":  536744.45829940832,
+                                            "st_area(shape)":  11535473541.959944
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  162,
+                                            "lga_code_2025":  "23110",
+                                            "lga_name_2025":  "Hobsons Bay",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  64.2405,
+                                            "st_length(shape)":  68515.463799504316,
+                                            "st_area(shape)":  103217913.557496
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  163,
+                                            "lga_code_2025":  "23190",
+                                            "lga_name_2025":  "Horsham",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  4266.769,
+                                            "st_length(shape)":  566232.87084386905,
+                                            "st_area(shape)":  6671920496.2025328
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  164,
+                                            "lga_code_2025":  "23270",
+                                            "lga_name_2025":  "Hume",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  503.8488,
+                                            "st_length(shape)":  161552.28673646587,
+                                            "st_area(shape)":  803820924.49522913
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  165,
+                                            "lga_code_2025":  "23350",
+                                            "lga_name_2025":  "Indigo",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  2040.471,
+                                            "st_length(shape)":  525008.9101820332,
+                                            "st_area(shape)":  3141929352.5400991
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  166,
+                                            "lga_code_2025":  "23430",
+                                            "lga_name_2025":  "Kingston (Vic.)",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  91.3676,
+                                            "st_length(shape)":  68896.938118825914,
+                                            "st_area(shape)":  147334671.58082521
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  167,
+                                            "lga_code_2025":  "23670",
+                                            "lga_name_2025":  "Knox",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  113.9114,
+                                            "st_length(shape)":  93284.949970037487,
+                                            "st_area(shape)":  183195197.93171439
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  168,
+                                            "lga_code_2025":  "23810",
+                                            "lga_name_2025":  "Latrobe (Vic.)",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  1425.613,
+                                            "st_length(shape)":  376899.27825672633,
+                                            "st_area(shape)":  2316816611.9786859
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  169,
+                                            "lga_code_2025":  "23940",
+                                            "lga_name_2025":  "Loddon",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  6696.4447,
+                                            "st_length(shape)":  591725.17540384631,
+                                            "st_area(shape)":  10347784800.127542
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  170,
+                                            "lga_code_2025":  "24130",
+                                            "lga_name_2025":  "Macedon Ranges",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  1748.284,
+                                            "st_length(shape)":  334244.01325657754,
+                                            "st_area(shape)":  2770451379.0373688
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  171,
+                                            "lga_code_2025":  "24210",
+                                            "lga_name_2025":  "Manningham",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  113.3479,
+                                            "st_length(shape)":  110999.6611004899,
+                                            "st_area(shape)":  181665824.85835725
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  172,
+                                            "lga_code_2025":  "24250",
+                                            "lga_name_2025":  "Mansfield",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  3843.8535,
+                                            "st_length(shape)":  549919.32952258375,
+                                            "st_area(shape)":  6069694310.8275776
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  173,
+                                            "lga_code_2025":  "24330",
+                                            "lga_name_2025":  "Maribyrnong",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  31.2258,
+                                            "st_length(shape)":  36523.837370913723,
+                                            "st_area(shape)":  50093104.207203187
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  174,
+                                            "lga_code_2025":  "24410",
+                                            "lga_name_2025":  "Maroondah",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  61.4097,
+                                            "st_length(shape)":  48771.965034146509,
+                                            "st_area(shape)":  98539396.220661923
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  175,
+                                            "lga_code_2025":  "24600",
+                                            "lga_name_2025":  "Melbourne",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  37.5452,
+                                            "st_length(shape)":  52280.757938920149,
+                                            "st_area(shape)":  60251370.524728
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  176,
+                                            "lga_code_2025":  "24650",
+                                            "lga_name_2025":  "Melton",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  527.5374,
+                                            "st_length(shape)":  134812.7345561019,
+                                            "st_area(shape)":  843945670.24152863
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  177,
+                                            "lga_code_2025":  "24700",
+                                            "lga_name_2025":  "Merri-bek",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  50.9522,
+                                            "st_length(shape)":  52610.085118580631,
+                                            "st_area(shape)":  81591243.957379043
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  178,
+                                            "lga_code_2025":  "24780",
+                                            "lga_name_2025":  "Mildura",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  22081.9206,
+                                            "st_length(shape)":  1119725.4223266148,
+                                            "st_area(shape)":  32882436828.299786
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  179,
+                                            "lga_code_2025":  "24850",
+                                            "lga_name_2025":  "Mitchell",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  2862.0837,
+                                            "st_length(shape)":  525469.37477802474,
+                                            "st_area(shape)":  4511909108.0744791
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  180,
+                                            "lga_code_2025":  "24900",
+                                            "lga_name_2025":  "Moira",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  4045.9201,
+                                            "st_length(shape)":  711445.58176124084,
+                                            "st_area(shape)":  6204216863.8983755
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  181,
+                                            "lga_code_2025":  "24970",
+                                            "lga_name_2025":  "Monash",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  81.4829,
+                                            "st_length(shape)":  63154.89700597732,
+                                            "st_area(shape)":  131069287.29762071
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  182,
+                                            "lga_code_2025":  "25060",
+                                            "lga_name_2025":  "Moonee Valley",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  43.1384,
+                                            "st_length(shape)":  49500.210949014079,
+                                            "st_area(shape)":  69119667.838507414
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  183,
+                                            "lga_code_2025":  "25150",
+                                            "lga_name_2025":  "Moorabool",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  2110.5504,
+                                            "st_length(shape)":  357829.63165552495,
+                                            "st_area(shape)":  3371010838.871614
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  184,
+                                            "lga_code_2025":  "25340",
+                                            "lga_name_2025":  "Mornington Peninsula",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  723.992,
+                                            "st_length(shape)":  270043.66603271477,
+                                            "st_area(shape)":  1178746386.4646883
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  185,
+                                            "lga_code_2025":  "25430",
+                                            "lga_name_2025":  "Mount Alexander",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  1529.6183,
+                                            "st_length(shape)":  325211.20877416385,
+                                            "st_area(shape)":  2405867266.4326286
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  186,
+                                            "lga_code_2025":  "25490",
+                                            "lga_name_2025":  "Moyne",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  5481.686,
+                                            "st_length(shape)":  654456.37613957596,
+                                            "st_area(shape)":  8871720204.3344917
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  187,
+                                            "lga_code_2025":  "25620",
+                                            "lga_name_2025":  "Murrindindi",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  3879.7505,
+                                            "st_length(shape)":  534739.18325764197,
+                                            "st_area(shape)":  6144108352.59237
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  188,
+                                            "lga_code_2025":  "25710",
+                                            "lga_name_2025":  "Nillumbik",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  432.3373,
+                                            "st_length(shape)":  190263.96411298809,
+                                            "st_area(shape)":  690352026.71015227
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  189,
+                                            "lga_code_2025":  "25810",
+                                            "lga_name_2025":  "Northern Grampians",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  5729.8765,
+                                            "st_length(shape)":  715663.5962521527,
+                                            "st_area(shape)":  8964188734.4306221
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  190,
+                                            "lga_code_2025":  "25900",
+                                            "lga_name_2025":  "Port Phillip",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  20.6141,
+                                            "st_length(shape)":  39165.149619727963,
+                                            "st_area(shape)":  33120265.097296409
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  191,
+                                            "lga_code_2025":  "25990",
+                                            "lga_name_2025":  "Pyrenees",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  3434.5687,
+                                            "st_length(shape)":  497973.52139095002,
+                                            "st_area(shape)":  5440018827.012701
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  192,
+                                            "lga_code_2025":  "26080",
+                                            "lga_name_2025":  "Queenscliffe",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  8.6166,
+                                            "st_length(shape)":  46835.579046907573,
+                                            "st_area(shape)":  13999501.436255636
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  193,
+                                            "lga_code_2025":  "26170",
+                                            "lga_name_2025":  "South Gippsland",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  3296.3307,
+                                            "st_length(shape)":  759955.97433373274,
+                                            "st_area(shape)":  5408373154.8336048
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  194,
+                                            "lga_code_2025":  "26260",
+                                            "lga_name_2025":  "Southern Grampians",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  6654.0186,
+                                            "st_length(shape)":  652354.90349137457,
+                                            "st_area(shape)":  10600877277.594501
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  195,
+                                            "lga_code_2025":  "26350",
+                                            "lga_name_2025":  "Stonnington",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  25.651,
+                                            "st_length(shape)":  37680.228887818361,
+                                            "st_area(shape)":  41219265.271804422
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  196,
+                                            "lga_code_2025":  "26430",
+                                            "lga_name_2025":  "Strathbogie",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  3303.2568,
+                                            "st_length(shape)":  482620.87537596771,
+                                            "st_area(shape)":  5156491895.2631044
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  197,
+                                            "lga_code_2025":  "26490",
+                                            "lga_name_2025":  "Surf Coast",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  1552.944,
+                                            "st_length(shape)":  290453.58316019207,
+                                            "st_area(shape)":  2526347117.3644438
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  198,
+                                            "lga_code_2025":  "26610",
+                                            "lga_name_2025":  "Swan Hill",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  6115.5373,
+                                            "st_length(shape)":  813238.35131606064,
+                                            "st_area(shape)":  9161967231.6155338
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  199,
+                                            "lga_code_2025":  "26670",
+                                            "lga_name_2025":  "Towong",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  6675.1725,
+                                            "st_length(shape)":  675289.13787115877,
+                                            "st_area(shape)":  10312291070.541178
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  200,
+                                            "lga_code_2025":  "26700",
+                                            "lga_name_2025":  "Wangaratta",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  3645.1096,
+                                            "st_length(shape)":  510318.45233930199,
+                                            "st_area(shape)":  5665060325.6135216
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  201,
+                                            "lga_code_2025":  "26730",
+                                            "lga_name_2025":  "Warrnambool",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  120.9487,
+                                            "st_length(shape)":  88508.609089653604,
+                                            "st_area(shape)":  197078874.99320081
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  202,
+                                            "lga_code_2025":  "26810",
+                                            "lga_name_2025":  "Wellington",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  10817.4231,
+                                            "st_length(shape)":  1494339.5662227548,
+                                            "st_area(shape)":  17400748399.025719
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  203,
+                                            "lga_code_2025":  "26890",
+                                            "lga_name_2025":  "West Wimmera",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  9108.6794,
+                                            "st_length(shape)":  771978.82811087871,
+                                            "st_area(shape)":  14189443518.963036
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  204,
+                                            "lga_code_2025":  "26980",
+                                            "lga_name_2025":  "Whitehorse",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  64.2801,
+                                            "st_length(shape)":  49435.654205296487,
+                                            "st_area(shape)":  103211183.01437244
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  205,
+                                            "lga_code_2025":  "27070",
+                                            "lga_name_2025":  "Whittlesea",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  489.6938,
+                                            "st_length(shape)":  175001.70761965116,
+                                            "st_area(shape)":  780363055.84431374
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  206,
+                                            "lga_code_2025":  "27170",
+                                            "lga_name_2025":  "Wodonga",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  433.0021,
+                                            "st_length(shape)":  191473.23633968525,
+                                            "st_area(shape)":  665469084.323511
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  207,
+                                            "lga_code_2025":  "27260",
+                                            "lga_name_2025":  "Wyndham",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  542.0943,
+                                            "st_length(shape)":  156758.76421886525,
+                                            "st_area(shape)":  871751839.22782874
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  208,
+                                            "lga_code_2025":  "27350",
+                                            "lga_name_2025":  "Yarra",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  19.5421,
+                                            "st_length(shape)":  51291.896236668697,
+                                            "st_area(shape)":  31354032.047846343
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  209,
+                                            "lga_code_2025":  "27450",
+                                            "lga_name_2025":  "Yarra Ranges",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  2468.2052,
+                                            "st_length(shape)":  453302.09982171946,
+                                            "st_area(shape)":  3950906143.0110946
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  210,
+                                            "lga_code_2025":  "27630",
+                                            "lga_name_2025":  "Yarriambiack",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  7325.797,
+                                            "st_length(shape)":  682430.60476937424,
+                                            "st_area(shape)":  11214221269.442915
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  211,
+                                            "lga_code_2025":  "29399",
+                                            "lga_name_2025":  "Unincorporated Vic",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  283.1903,
+                                            "st_length(shape)":  372568.11645839078,
+                                            "st_area(shape)":  455647254.15111154
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  212,
+                                            "lga_code_2025":  "29499",
+                                            "lga_name_2025":  "No usual address (Vic.)",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  null,
+                                            "st_length(shape)":  null,
+                                            "st_area(shape)":  null
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "objectid":  213,
+                                            "lga_code_2025":  "29799",
+                                            "lga_name_2025":  "Migratory - Offshore - Shipping (Vic.)",
+                                            "state_code_2021":  "2",
+                                            "state_name_2021":  "Victoria",
+                                            "aus_code_2021":  "AUS",
+                                            "aus_name_2021":  "Australia",
+                                            "area_albers_sqkm":  null,
+                                            "st_length(shape)":  null,
+                                            "st_area(shape)":  null
+                                        }
+                     }
+                 ]
+}

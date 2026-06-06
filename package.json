@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "lint": "node node_modules/eslint/bin/eslint.js static/app.js static/api-client.js static/report-export-state.js static/display-values.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.1"
+  }
+}

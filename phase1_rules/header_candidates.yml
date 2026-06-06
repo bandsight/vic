@@ -1,0 +1,36 @@
+title:
+  - Agreement Title
+  - AGREEMENT TITLE
+  - agreement_title
+  - AgreementTitle
+  - Title
+  - title
+agreement_id:
+  - Agreement ID
+  - Agmnt ID
+  - AgreementId
+  - AgmntId
+matter_number:
+  - Matter Number
+  - Matter No
+  - MatterNo
+operative_date:
+  - Operative Date
+  - OperativeDate
+expiry_date:
+  - Expiry Date
+  - ExpiryDate
+version:
+  - Version
+  - VERSION
+  - version
+print_id:
+  - Print ID
+  - PrintId
+  - PRINT ID
+  - print_id
+industry:
+  - Industry
+  - INDUSTRY
+  - Industry Name
+  - industry_name

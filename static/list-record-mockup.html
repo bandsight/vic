@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Compact List Record Mockup</title>
+  <link rel="stylesheet" href="shell/brand-tokens.css">
+  <style>
+    :root {
+      --ink: #17212d;
+      --ink-soft: #334155;
+      --muted: #6b7786;
+      --faint: #8a96a5;
+      --line: #d9dee5;
+      --line-soft: #e7ebf0;
+      --canvas: #f5f6f7;
+      --surface: #ffffff;
+      --surface-soft: #f9fafb;
+      --selected: #f0f2f4;
+      --selected-line: #7c8793;
+      --accent: #8b96a3;
+      --ok: #566372;
+      --warn: #6f6250;
+      --danger: #675a58;
+      --shadow: 0 1px 2px rgba(23, 33, 45, 0.06), 0 10px 24px rgba(23, 33, 45, 0.035);
+      --font-din: "DIN 2014", "DIN", "Bahnschrift", "Aptos Narrow", "Segoe UI", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: var(--font-din);
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+
+    button,
+    input {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    .mock-shell {
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .mock-page {
+      max-width: 1220px;
+      margin: 0 auto;
+    }
+
+    .mock-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 14px;
+    }
+
+    .mock-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #5b6672;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .mock-kicker img {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      filter: saturate(0.72);
+    }
+
+    .mock-header h1 {
+      margin: 8px 0 3px;
+      color: var(--ink);
+      font-size: 24px;
+      line-height: 1.08;
+      font-weight: 800;
+    }
+
+    .mock-header p {
+      margin: 0;
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .mock-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: #f8fafb;
+      color: #526272;
+      padding: 0 10px;
+      font-size: 11px;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .mock-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      box-shadow: 0 1px 2px rgba(23, 33, 45, 0.045);
+    }
+
+    .mock-tabs,
+    .mock-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mock-tab,
+    .mock-search,
+    .mini-btn,
+    .icon-btn {
+      border: 1px solid #cbd1d8;
+      border-radius: 4px;
+      background: #f9fafb;
+      color: var(--ink-soft);
+    }
+
+    .mock-tab {
+      min-height: 26px;
+      padding: 0 9px;
+      font-size: 11px;
+      font-weight: 720;
+    }
+
+    .mock-tab.is-active {
+      border-color: #9fa8b2;
+      background: #eef0f2;
+      color: #202a35;
+    }
+
+    .mock-search {
+      width: min(270px, 35vw);
+      min-height: 28px;
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .mock-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .mock-panel {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .mock-panel-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 11px 13px;
+      border-bottom: 1px solid var(--line-soft);
+      background: #fbfcfd;
+    }
+
+    .mock-panel-head h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.15;
+      font-weight: 800;
+    }
+
+    .mock-panel-head p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .record-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .record-row {
+      --row-accent: #9aa7b4;
+      position: relative;
+      display: grid;
+      grid-template-columns: 22px minmax(260px, 1.3fr) minmax(260px, 0.86fr) auto;
+      align-items: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 7px 10px 7px 12px;
+      border-bottom: 1px solid var(--line-soft);
+      background: var(--surface);
+    }
+
+    .record-row:last-child {
+      border-bottom: 0;
+    }
+
+    .record-row:hover {
+      background: #fbfcfd;
+    }
+
+    .record-row.is-selected {
+      --row-accent: var(--selected-line);
+      background: var(--selected);
+      box-shadow: inset 2px 0 0 var(--selected-line);
+    }
+
+    .record-row.is-attention {
+      --row-accent: #8c8174;
+    }
+
+    .record-row.is-muted {
+      color: #5f6b78;
+      background: #fbfbfc;
+    }
+
+    .record-mark {
+      width: 10px;
+      height: 10px;
+      margin-inline: auto;
+      border: 1px solid color-mix(in srgb, var(--row-accent) 54%, #fff);
+      border-radius: 999px;
+      background: var(--row-accent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--row-accent) 10%, transparent);
+    }
+
+    .record-mark.hollow {
+      background: #fff;
+    }
+
+    .record-main {
+      min-width: 0;
+    }
+
+    .record-title-line {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .ae-pill {
+      flex: 0 0 auto;
+      min-height: 18px;
+      border: 1px solid #d2d8de;
+      border-radius: 4px;
+      background: #f8f9fa;
+      color: #4c5966;
+      padding: 0 7px;
+      font-size: 10px;
+      line-height: 18px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .record-row.is-selected .ae-pill {
+      border-color: #c2c8cf;
+      background: #eceff1;
+      color: #3c4650;
+    }
+
+    .record-main h3 {
+      min-width: 0;
+      margin: 0;
+      overflow: hidden;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.15;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .record-meta,
+    .record-facts {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0;
+      min-width: 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .record-meta {
+      margin-top: 4px;
+    }
+
+    .record-meta span,
+    .record-facts span {
+      white-space: nowrap;
+    }
+
+    .record-meta span + span::before,
+    .record-facts span + span::before {
+      content: "|";
+      margin: 0 7px;
+      color: #c4cbd3;
+      font-weight: 500;
+    }
+
+    .tone-ok {
+      color: var(--ok);
+      font-weight: 760;
+    }
+
+    .tone-warn {
+      color: var(--warn);
+      font-weight: 760;
+    }
+
+    .tone-danger {
+      color: var(--danger);
+      font-weight: 760;
+    }
+
+    .record-facts {
+      justify-self: stretch;
+    }
+
+    .record-facts strong {
+      color: var(--ink-soft);
+      font-weight: 800;
+    }
+
+    .review-tick {
+      display: inline-grid;
+      grid-template-columns: repeat(5, 18px);
+      gap: 3px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .review-tick i {
+      display: block;
+      height: 4px;
+      border-radius: 999px;
+      background: #d8dee4;
+    }
+
+    .review-tick i.done {
+      background: #9aa4ae;
+    }
+
+    .row-actions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      justify-self: end;
+    }
+
+    .mini-btn {
+      min-height: 26px;
+      padding: 0 8px;
+      color: #28323d;
+      font-size: 11px;
+      font-weight: 720;
+      cursor: pointer;
+    }
+
+    .mini-btn.primary {
+      border-color: #8e98a3;
+      background: #eef0f2;
+      color: #18222d;
+      box-shadow: none;
+    }
+
+    .icon-btn {
+      width: 26px;
+      min-width: 26px;
+      min-height: 26px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0;
+      color: #4b5563;
+      cursor: pointer;
+    }
+
+    .icon-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2.2;
+    }
+
+    .side-panel .record-row {
+      grid-template-columns: 18px minmax(0, 1fr) auto;
+      gap: 8px;
+      min-height: 45px;
+      padding: 7px 9px;
+    }
+
+    .side-panel .record-facts {
+      display: none;
+    }
+
+    .side-panel .record-main h3 {
+      font-size: 12px;
+    }
+
+    .micro-list {
+      padding: 10px;
+      border-top: 1px solid var(--line-soft);
+      background: var(--surface-soft);
+    }
+
+    .micro-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 7px;
+      border-bottom: 1px solid var(--line-soft);
+      background: #fff;
+    }
+
+    .micro-row:first-child {
+      border-radius: 6px 6px 0 0;
+    }
+
+    .micro-row:last-child {
+      border-bottom: 0;
+      border-radius: 0 0 6px 6px;
+    }
+
+    .micro-row strong,
+    .micro-row span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .micro-row strong {
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .micro-row span {
+      margin-top: 1px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.15;
+    }
+
+    .micro-row b {
+      color: #4e5f6d;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 980px) {
+      .mock-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .record-row {
+        grid-template-columns: 22px minmax(0, 1fr) auto;
+      }
+
+      .record-facts {
+        grid-column: 2 / -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      html,
+      body {
+        overflow-x: hidden;
+      }
+
+      .mock-shell {
+        padding: 12px;
+      }
+
+      .mock-page,
+      .mock-toolbar,
+      .mock-panel,
+      .record-list {
+        width: 100%;
+        max-width: calc(100vw - 24px);
+      }
+
+      .mock-header,
+      .mock-toolbar,
+      .mock-panel-head {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .mock-header p,
+      .mock-panel-head p {
+        max-width: calc(100vw - 72px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .mock-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .mock-search {
+        width: 100%;
+      }
+
+      .record-row,
+      .side-panel .record-row {
+        grid-template-columns: 18px minmax(0, 1fr);
+        align-items: start;
+        max-width: calc(100vw - 24px);
+        overflow: hidden;
+      }
+
+      .record-facts,
+      .row-actions,
+      .side-panel .row-actions {
+        grid-column: 2 / -1;
+      }
+
+      .row-actions {
+        justify-self: start;
+      }
+
+      .record-title-line {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .record-main,
+      .record-meta,
+      .record-facts {
+        min-width: 0;
+        max-width: calc(100vw - 120px);
+      }
+
+      .record-main h3 {
+        width: 100%;
+        max-width: calc(100vw - 120px);
+        display: -webkit-box;
+        overflow: hidden;
+        white-space: normal;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+
+      .record-meta span,
+      .record-facts span {
+        white-space: normal;
+      }
+
+      .review-tick {
+        grid-template-columns: repeat(5, 13px);
+        margin-left: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute">
+    <symbol id="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14"></path>
+      <path d="m12 5 7 7-7 7"></path>
+    </symbol>
+    <symbol id="icon-more" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
+      <path d="M19 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
+      <path d="M5 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
+    </symbol>
+  </svg>
+
+  <main class="mock-shell">
+    <div class="mock-page">
+      <header class="mock-header">
+        <div>
+          <div class="mock-kicker">
+            <img src="brand-assets/municipal-benchmark-square-app-icon-clean.png" alt="">
+            Municipal Benchmark EBA Workbench
+          </div>
+          <h1>Compact Agreement Records</h1>
+          <p>DIN-like type, muted colour, pipe-separated context, and one highlighted record for the current focus.</p>
+        </div>
+        <span class="mock-tag">Item | item | item density</span>
+      </header>
+
+      <div class="mock-toolbar" aria-label="Agreement list controls">
+        <div class="mock-tabs" role="tablist" aria-label="Record density">
+          <button class="mock-tab is-active" type="button">Compact rows</button>
+          <button class="mock-tab" type="button">Needs review</button>
+          <button class="mock-tab" type="button">Lineage</button>
+        </div>
+        <div class="mock-actions">
+          <input class="mock-search" type="search" value="active | civic strong" aria-label="Filter agreement rows">
+          <button class="mock-tab" type="button">Sort: expiry</button>
+        </div>
+      </div>
+
+      <section class="mock-grid">
+        <article class="mock-panel">
+          <div class="mock-panel-head">
+            <div>
+              <h2>Processing Queue</h2>
+              <p>Compact enough for volume, with one selected item carrying the visual emphasis.</p>
+            </div>
+            <span class="mock-tag">8 visible</span>
+          </div>
+
+          <div class="record-list" aria-label="Processing queue rows">
+            <section class="record-row">
+              <span class="record-mark" aria-hidden="true"></span>
+              <div class="record-main">
+                <div class="record-title-line">
+                  <span class="ae-pill">AE521996</span>
+                  <h3>Kingston City Council Enterprise Agreement No.10, 2023-2027</h3>
+                </div>
+                <div class="record-meta">
+                  <span>Kingston</span>
+                  <span>2023-10-27 to 2027-06-30</span>
+                  <span class="tone-ok">source ready</span>
+                </div>
+              </div>
+              <div class="record-facts">
+                <span><strong>Review</strong> 4 of 5 <span class="review-tick" aria-hidden="true"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i></span></span>
+                <span><strong>Pages</strong> 98</span>
+                <span><strong>Match</strong> civic strong</span>
+              </div>
+              <div class="row-actions">
+                <button class="mini-btn" type="button">Open</button>
+                <button class="icon-btn" type="button" aria-label="More actions" title="More actions"><svg><use href="#icon-more"></use></svg></button>
+              </div>
+            </section>
+
+            <section class="record-row is-selected is-attention">
+              <span class="record-mark" aria-hidden="true"></span>
+              <div class="record-main">
+                <div class="record-title-line">
+                  <span class="ae-pill">AE518862</span>
+                  <h3>Colac Otway Shire Enterprise Agreement No. 9, 2022</h3>
+                </div>
+                <div class="record-meta">
+                  <span>Colac Otway</span>
+                  <span>2023-01-19 to 2025-08-31</span>
+                  <span class="tone-warn">needs attention</span>
+                  <span>pay tables done</span>
+                </div>
+              </div>
+              <div class="record-facts">
+                <span><strong>Review</strong> 4 of 5 <span class="review-tick" aria-hidden="true"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i></span></span>
+                <span><strong>Pages</strong> 175</span>
+                <span><strong>Note</strong> partial uplift rules</span>
+              </div>
+              <div class="row-actions">
+                <button class="mini-btn primary" type="button">Review</button>
+                <button class="icon-btn" type="button" aria-label="Open selected row" title="Open selected row"><svg><use href="#icon-arrow"></use></svg></button>
+              </div>
+            </section>
+
+            <section class="record-row">
+              <span class="record-mark hollow" aria-hidden="true"></span>
+              <div class="record-main">
+                <div class="record-title-line">
+                  <span class="ae-pill">AE518177</span>
+                  <h3>Murrindindi Shire Council - Enterprise Agreement No. 9, 2022</h3>
+                </div>
+                <div class="record-meta">
+                  <span>Murrindindi</span>
+                  <span>2022-11-22 to 2026-01-31</span>
+                  <span class="tone-ok">rule anchored</span>
+                </div>
+              </div>
+              <div class="record-facts">
+                <span><strong>Pages</strong> 127</span>
+                <span><strong>Match</strong> civic strong</span>
+                <span><strong>Status</strong> active</span>
+              </div>
+              <div class="row-actions">
+                <button class="mini-btn" type="button">Open</button>
+                <button class="icon-btn" type="button" aria-label="More actions" title="More actions"><svg><use href="#icon-more"></use></svg></button>
+              </div>
+            </section>
+
+            <section class="record-row is-attention">
+              <span class="record-mark hollow" aria-hidden="true"></span>
+              <div class="record-main">
+                <div class="record-title-line">
+                  <span class="ae-pill">AE516921</span>
+                  <h3>Bayside City Council Enterprise Agreement No. 9, 2022</h3>
+                </div>
+                <div class="record-meta">
+                  <span>Bayside</span>
+                  <span>2022-08-12 to 2025-12-31</span>
+                  <span class="tone-danger">thin source</span>
+                </div>
+              </div>
+              <div class="record-facts">
+                <span><strong>Review</strong> 2 of 5</span>
+                <span><strong>Pages</strong> 5</span>
+                <span><strong>Next</strong> source check</span>
+              </div>
+              <div class="row-actions">
+                <button class="mini-btn" type="button">Check</button>
+                <button class="icon-btn" type="button" aria-label="More actions" title="More actions"><svg><use href="#icon-more"></use></svg></button>
+              </div>
+            </section>
+
+            <section class="record-row">
+              <span class="record-mark hollow" aria-hidden="true"></span>
+              <div class="record-main">
+                <div class="record-title-line">
+                  <span class="ae-pill">AE517676</span>
+                  <h3>Borough of Queenscliffe Enterprise Bargaining Agreement No. 11, 2022</h3>
+                </div>
+                <div class="record-meta">
+                  <span>Queenscliffe</span>
+                  <span>2022-10-14 to 2026-06-30</span>
+                  <span class="tone-ok">active</span>
+                </div>
+              </div>
+              <div class="record-facts">
+                <span><strong>Scope</strong> clear</span>
+                <span><strong>Expiry</strong> Jun 2026</span>
+                <span><strong>Match</strong> civic strong</span>
+              </div>
+              <div class="row-actions">
+                <button class="mini-btn" type="button">Open</button>
+                <button class="icon-btn" type="button" aria-label="More actions" title="More actions"><svg><use href="#icon-more"></use></svg></button>
+              </div>
+            </section>
+
+            <section class="record-row">
+              <span class="record-mark hollow" aria-hidden="true"></span>
+              <div class="record-main">
+                <div class="record-title-line">
+                  <span class="ae-pill">AE520997</span>
+                  <h3>Maribyrnong City Council Enterprise Agreement 2022-2025</h3>
+                </div>
+                <div class="record-meta">
+                  <span>Maribyrnong</span>
+                  <span>2023-08-11 to 2025-06-30</span>
+                  <span class="tone-ok">active</span>
+                </div>
+              </div>
+              <div class="record-facts">
+                <span><strong>Lineage</strong> current</span>
+                <span><strong>Match</strong> civic strong</span>
+                <span><strong>Review</strong> queued</span>
+              </div>
+              <div class="row-actions">
+                <button class="mini-btn" type="button">Open</button>
+                <button class="icon-btn" type="button" aria-label="More actions" title="More actions"><svg><use href="#icon-more"></use></svg></button>
+              </div>
+            </section>
+
+            <section class="record-row">
+              <span class="record-mark hollow" aria-hidden="true"></span>
+              <div class="record-main">
+                <div class="record-title-line">
+                  <span class="ae-pill">AE520361</span>
+                  <h3>Knox City Council Enterprise Agreement #11 2023-2026</h3>
+                </div>
+                <div class="record-meta">
+                  <span>Knox</span>
+                  <span>2023-06-23 to 2026-06-30</span>
+                  <span class="tone-ok">active</span>
+                </div>
+              </div>
+              <div class="record-facts">
+                <span><strong>Scope</strong> clear</span>
+                <span><strong>Match</strong> civic strong</span>
+                <span><strong>Next</strong> overview</span>
+              </div>
+              <div class="row-actions">
+                <button class="mini-btn" type="button">Open</button>
+                <button class="icon-btn" type="button" aria-label="More actions" title="More actions"><svg><use href="#icon-more"></use></svg></button>
+              </div>
+            </section>
+
+            <section class="record-row is-muted">
+              <span class="record-mark hollow" aria-hidden="true"></span>
+              <div class="record-main">
+                <div class="record-title-line">
+                  <span class="ae-pill">AE507751</span>
+                  <h3>Ballarat City Council Enterprise Agreement No. 8, 2019</h3>
+                </div>
+                <div class="record-meta">
+                  <span>Ballarat</span>
+                  <span>2020-04-22 to 2023-10-31</span>
+                  <span class="tone-warn">superseded by AE526078</span>
+                </div>
+              </div>
+              <div class="record-facts">
+                <span><strong>Status</strong> hidden</span>
+                <span><strong>Use</strong> lineage</span>
+                <span><strong>Source</strong> frozen</span>
+              </div>
+              <div class="row-actions">
+                <button class="icon-btn" type="button" aria-label="Open lineage" title="Open lineage"><svg><use href="#icon-arrow"></use></svg></button>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <aside class="mock-panel side-panel">
+          <div class="mock-panel-head">
+            <div>
+              <h2>Sidebar Density</h2>
+              <p>Same record language for pickers, recent items, and quick switchers.</p>
+            </div>
+          </div>
+
+          <div class="record-list" aria-label="Sidebar list rows">
+            <section class="record-row is-selected">
+              <span class="record-mark" aria-hidden="true"></span>
+              <div class="record-main">
+                <div class="record-title-line">
+                  <span class="ae-pill">AE522532</span>
+                  <h3>Frankston City Council Enterprise Agreement No. 10 (2023)</h3>
+                </div>
+                <div class="record-meta">
+                  <span>Frankston</span>
+                  <span>active</span>
+                  <span>2026</span>
+                </div>
+              </div>
+              <button class="icon-btn" type="button" aria-label="Open Frankston" title="Open"><svg><use href="#icon-arrow"></use></svg></button>
+            </section>
+
+            <section class="record-row">
+              <span class="record-mark hollow" aria-hidden="true"></span>
+              <div class="record-main">
+                <div class="record-title-line">
+                  <span class="ae-pill">AE519906</span>
+                  <h3>Indigo Shire Council Enterprise Agreement 2021-2024</h3>
+                </div>
+                <div class="record-meta">
+                  <span>Indigo</span>
+                  <span class="tone-warn">short expiry</span>
+                  <span>2024</span>
+                </div>
+              </div>
+              <button class="icon-btn" type="button" aria-label="Open Indigo" title="Open"><svg><use href="#icon-arrow"></use></svg></button>
+            </section>
+
+            <section class="record-row">
+              <span class="record-mark hollow" aria-hidden="true"></span>
+              <div class="record-main">
+                <div class="record-title-line">
+                  <span class="ae-pill">AE520653</span>
+                  <h3>Melton City Council Enterprise Agreement No.10 2022-2026</h3>
+                </div>
+                <div class="record-meta">
+                  <span>Melton</span>
+                  <span>civic strong</span>
+                  <span>2026</span>
+                </div>
+              </div>
+              <button class="icon-btn" type="button" aria-label="Open Melton" title="Open"><svg><use href="#icon-arrow"></use></svg></button>
+            </section>
+          </div>
+
+          <div class="micro-list" aria-label="Micro row density">
+            <div class="micro-row">
+              <div>
+                <strong>City of Bayswater Enterprise Agreement 2019</strong>
+                <span>AE505081 | unmatched council scope</span>
+              </div>
+              <b>scope</b>
+            </div>
+            <div class="micro-row">
+              <div>
+                <strong>Greater Dandenong City Council Enterprise Agreement 2022</strong>
+                <span>AE520035 | active | civic strong</span>
+              </div>
+              <b>2025</b>
+            </div>
+            <div class="micro-row">
+              <div>
+                <strong>Melbourne City Council Enterprise Agreement 2021</strong>
+                <span>AE513710 | source frozen | current</span>
+              </div>
+              <b>open</b>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

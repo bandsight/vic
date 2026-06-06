@@ -1,0 +1,684 @@
+{
+  "metadata": {
+    "reportId": "small-council-state-scroll-report",
+    "title": "How do small councils compare to the state?",
+    "subtitle": "Small councils are often assumed to sit behind the broader sector. The real picture is more uneven - and more useful.",
+    "generatedAt": "2026-05-14T00:00:00+10:00",
+    "jurisdiction": "Victoria, Australia",
+    "dataStatus": "illustrative_placeholder",
+    "decisionUse": "not_for_decision_making",
+    "prototypeLabel": "Indicative prototype view - placeholder data",
+    "caveat": "All values in this standalone prototype are mock, illustrative placeholder values created for product demonstration only. They are not governed outputs and must not be used for decisions.",
+    "futureSourcePath": "Replace this file with report-ready JSON produced from governed datamarts and a report manifest."
+  },
+  "reportManifest": {
+    "asset_id": "prototype_small_council_state_scroll_report",
+    "asset_type": "report_asset",
+    "title": "Small Council vs State Scrollytelling Prototype",
+    "report_title_candidate": "How do small councils compare to the state?",
+    "source_dataset": "placeholder_sample_data",
+    "source_dataset_version": "2026-05-14.prototype",
+    "generated_by": "Codex prototype",
+    "status": "draft",
+    "brand_profile": "executive_digital_report",
+    "comparison_basis": "small_council_cohort_vs_all_victorian_councils",
+    "period_basis": "current_snapshot_plus_uplift_horizon",
+    "sourceDatasetsExpectedLater": [
+      "council_profile_mart",
+      "cohort_comparison_mart",
+      "pay_position_mart",
+      "pay_distribution_point_mart",
+      "uplift_timing_mart",
+      "temporal_pay_movement_mart",
+      "entitlement_summary_mart",
+      "evidence_trace_mart",
+      "report_product_input_mart"
+    ],
+    "quality_flags": [
+      "mock_values",
+      "not_governed",
+      "not_for_decision_making",
+      "entitlement_scores_placeholder"
+    ],
+    "metric_definition": "Weekly range midpoint rates by standard band, comparing an illustrative small-council cohort median with an illustrative statewide median.",
+    "visual_encoding": {
+      "pay_chart": "custom_svg_band_median_gap_chart",
+      "distribution_chart": "custom_svg_percentile_ribbons",
+      "uplift_chart": "custom_svg_cycle_horizon_view",
+      "entitlement_matrix": "semantic_dom_matrix"
+    }
+  },
+  "heroMetrics": [
+    {
+      "label": "Small council cohort",
+      "value": "6",
+      "detail": "illustrative councils",
+      "source": "mock cohort definition"
+    },
+    {
+      "label": "Statewide benchmark",
+      "value": "79",
+      "detail": "Victorian councils in universe",
+      "source": "placeholder statewide count"
+    },
+    {
+      "label": "Bands analysed",
+      "value": "1-8",
+      "detail": "standard band comparison",
+      "source": "mock standard band core"
+    },
+    {
+      "label": "Agreement timing matters",
+      "value": "2 yrs",
+      "detail": "snapshot plus horizon",
+      "source": "mock uplift timeline"
+    }
+  ],
+  "payPointGalaxy": {
+    "question": "What does the whole pay field look like over time?",
+    "title": "Pay point galaxy",
+    "summary": "Illustrative placeholder points showing how statewide and small-council average weekly values can be plotted across effective dates, bands, and level labels.",
+    "metric": "Illustrative average weekly rate",
+    "sourceDataset": "placeholder_sample_data",
+    "cohorts": [
+      {
+        "id": "statewide",
+        "label": "Statewide",
+        "description": "Placeholder statewide cohort."
+      },
+      {
+        "id": "small_shire",
+        "label": "Small council",
+        "description": "Placeholder small-council cohort."
+      }
+    ],
+    "summaryMetrics": [
+      {
+        "label": "Pay summary rows",
+        "value": "64",
+        "detail": "placeholder rows"
+      },
+      {
+        "label": "Small cohort rows",
+        "value": "32",
+        "detail": "placeholder rows"
+      },
+      {
+        "label": "Effective period",
+        "value": "2022-2025",
+        "detail": "illustrative timeframes"
+      },
+      {
+        "label": "Galaxy points",
+        "value": "16",
+        "detail": "cohort x date x band averages"
+      }
+    ],
+    "coverage": {
+      "statewideSourceRows": 64,
+      "smallShireSourceRows": 32,
+      "statewideCouncils": 79,
+      "smallShireCouncils": 6,
+      "dateStart": "2022-07-01",
+      "dateEnd": "2025-07-01",
+      "valueMin": 1140,
+      "valueMax": 2195,
+      "bandCount": 8
+    },
+    "observations": [
+      { "id": "placeholder-state-2022-b1", "cohort": "statewide", "cohortLabel": "Statewide", "date": "2022-07-01", "band": 1, "levelLabel": "Band 1 Level A", "averageWeekly": 1180, "minWeekly": 1140, "maxWeekly": 1220, "rowCount": 8, "councilCount": 8 },
+      { "id": "placeholder-small-2022-b1", "cohort": "small_shire", "cohortLabel": "Small council", "date": "2022-07-01", "band": 1, "levelLabel": "Band 1 Level A", "averageWeekly": 1160, "minWeekly": 1130, "maxWeekly": 1190, "rowCount": 4, "councilCount": 4 },
+      { "id": "placeholder-state-2022-b5", "cohort": "statewide", "cohortLabel": "Statewide", "date": "2022-07-01", "band": 5, "levelLabel": "Band 5 Level A", "averageWeekly": 1510, "minWeekly": 1450, "maxWeekly": 1590, "rowCount": 8, "councilCount": 8 },
+      { "id": "placeholder-small-2022-b5", "cohort": "small_shire", "cohortLabel": "Small council", "date": "2022-07-01", "band": 5, "levelLabel": "Band 5 Level A", "averageWeekly": 1470, "minWeekly": 1410, "maxWeekly": 1530, "rowCount": 4, "councilCount": 4 },
+      { "id": "placeholder-state-2023-b3", "cohort": "statewide", "cohortLabel": "Statewide", "date": "2023-07-01", "band": 3, "levelLabel": "Band 3 Level A", "averageWeekly": 1365, "minWeekly": 1300, "maxWeekly": 1430, "rowCount": 8, "councilCount": 8 },
+      { "id": "placeholder-small-2023-b3", "cohort": "small_shire", "cohortLabel": "Small council", "date": "2023-07-01", "band": 3, "levelLabel": "Band 3 Level A", "averageWeekly": 1330, "minWeekly": 1280, "maxWeekly": 1390, "rowCount": 4, "councilCount": 4 },
+      { "id": "placeholder-state-2023-b7", "cohort": "statewide", "cohortLabel": "Statewide", "date": "2023-07-01", "band": 7, "levelLabel": "Band 7 Level A", "averageWeekly": 1885, "minWeekly": 1780, "maxWeekly": 1990, "rowCount": 8, "councilCount": 8 },
+      { "id": "placeholder-small-2023-b7", "cohort": "small_shire", "cohortLabel": "Small council", "date": "2023-07-01", "band": 7, "levelLabel": "Band 7 Level A", "averageWeekly": 1825, "minWeekly": 1730, "maxWeekly": 1920, "rowCount": 4, "councilCount": 4 },
+      { "id": "placeholder-state-2024-b2", "cohort": "statewide", "cohortLabel": "Statewide", "date": "2024-07-01", "band": 2, "levelLabel": "Band 2 Level A", "averageWeekly": 1295, "minWeekly": 1240, "maxWeekly": 1350, "rowCount": 8, "councilCount": 8 },
+      { "id": "placeholder-small-2024-b2", "cohort": "small_shire", "cohortLabel": "Small council", "date": "2024-07-01", "band": 2, "levelLabel": "Band 2 Level A", "averageWeekly": 1260, "minWeekly": 1210, "maxWeekly": 1310, "rowCount": 4, "councilCount": 4 },
+      { "id": "placeholder-state-2024-b6", "cohort": "statewide", "cohortLabel": "Statewide", "date": "2024-07-01", "band": 6, "levelLabel": "Band 6 Level A", "averageWeekly": 1715, "minWeekly": 1630, "maxWeekly": 1810, "rowCount": 8, "councilCount": 8 },
+      { "id": "placeholder-small-2024-b6", "cohort": "small_shire", "cohortLabel": "Small council", "date": "2024-07-01", "band": 6, "levelLabel": "Band 6 Level A", "averageWeekly": 1660, "minWeekly": 1580, "maxWeekly": 1740, "rowCount": 4, "councilCount": 4 },
+      { "id": "placeholder-state-2025-b4", "cohort": "statewide", "cohortLabel": "Statewide", "date": "2025-07-01", "band": 4, "levelLabel": "Band 4 Level A", "averageWeekly": 1495, "minWeekly": 1420, "maxWeekly": 1570, "rowCount": 8, "councilCount": 8 },
+      { "id": "placeholder-small-2025-b4", "cohort": "small_shire", "cohortLabel": "Small council", "date": "2025-07-01", "band": 4, "levelLabel": "Band 4 Level A", "averageWeekly": 1450, "minWeekly": 1380, "maxWeekly": 1520, "rowCount": 4, "councilCount": 4 },
+      { "id": "placeholder-state-2025-b8", "cohort": "statewide", "cohortLabel": "Statewide", "date": "2025-07-01", "band": 8, "levelLabel": "Band 8 Level A", "averageWeekly": 2195, "minWeekly": 2080, "maxWeekly": 2310, "rowCount": 8, "councilCount": 8 },
+      { "id": "placeholder-small-2025-b8", "cohort": "small_shire", "cohortLabel": "Small council", "date": "2025-07-01", "band": 8, "levelLabel": "Band 8 Level A", "averageWeekly": 2110, "minWeekly": 1990, "maxWeekly": 2240, "rowCount": 4, "councilCount": 4 }
+    ],
+    "caveat": "Illustrative placeholder data only. Not for decision-making."
+  },
+  "cohort": {
+    "title": "Small councils as an analytical choice",
+    "definition": "For this prototype, small councils are represented by a rural/regional illustrative cohort used to test report structure and visual logic.",
+    "smallCouncilDefinition": "Councils with lower population scale and rural/regional service context, expressed here as a placeholder cohort.",
+    "statewideDefinition": "All Victorian councils in the report universe.",
+    "productionCaveat": "Production reporting should bind this section to governed council classification and cohort metadata, not handwritten membership.",
+    "smallCouncilExamples": [
+      {
+        "name": "Ararat Rural City",
+        "type": "Rural city",
+        "placeholderRole": "cohort member"
+      },
+      {
+        "name": "Central Goldfields",
+        "type": "Shire",
+        "placeholderRole": "cohort member"
+      },
+      {
+        "name": "Hepburn",
+        "type": "Shire",
+        "placeholderRole": "cohort member"
+      },
+      {
+        "name": "Hindmarsh",
+        "type": "Shire",
+        "placeholderRole": "cohort member"
+      },
+      {
+        "name": "Pyrenees",
+        "type": "Shire",
+        "placeholderRole": "cohort member"
+      },
+      {
+        "name": "West Wimmera",
+        "type": "Shire",
+        "placeholderRole": "cohort member"
+      }
+    ],
+    "comparisonUniverse": {
+      "smallCouncilCount": 6,
+      "statewideCouncilCount": 79,
+      "bandCount": 8
+    }
+  },
+  "evidenceChain": [
+    {
+      "stage": "Source agreement",
+      "description": "Enterprise agreement and source document records are registered with canonical council identity."
+    },
+    {
+      "stage": "Extracted candidate",
+      "description": "Pay, uplift, classification, and entitlement candidates are extracted with source references."
+    },
+    {
+      "stage": "Reviewed / governed data",
+      "description": "Human QA and governance status separate accepted facts from staged or blocked records."
+    },
+    {
+      "stage": "Datamart",
+      "description": "Metric-aware marts reshape governed records into comparable analytical grains."
+    },
+    {
+      "stage": "Report asset",
+      "description": "A manifest-backed report view carries caveats, sources, cohorts, metrics, and intended use."
+    }
+  ],
+  "payByBand": {
+    "question": "Do small councils pay less?",
+    "metric": "Weekly range midpoint rate",
+    "units": "AUD per week",
+    "currentPeriod": "Q2 2026 snapshot - placeholder",
+    "payMetricSet": "pay_structure_semantics_v1",
+    "bands": [
+      {
+        "band": 1,
+        "label": "Band 1",
+        "stateMedian": 913,
+        "smallMedian": 898,
+        "gap": -15,
+        "gapPct": -1.6,
+        "statewideRange": [866, 982],
+        "smallRange": [874, 934],
+        "timingSensitive": false,
+        "focus": "narrow_gap",
+        "note": "Entry bands show a narrow indicative difference."
+      },
+      {
+        "band": 2,
+        "label": "Band 2",
+        "stateMedian": 1038,
+        "smallMedian": 1018,
+        "gap": -20,
+        "gapPct": -1.9,
+        "statewideRange": [980, 1115],
+        "smallRange": [990, 1068],
+        "timingSensitive": false,
+        "focus": "narrow_gap",
+        "note": "Lower bands sit close enough that local classification mix could change the reading."
+      },
+      {
+        "band": 3,
+        "label": "Band 3",
+        "stateMedian": 1198,
+        "smallMedian": 1154,
+        "gap": -44,
+        "gapPct": -3.7,
+        "statewideRange": [1115, 1288],
+        "smallRange": [1102, 1212],
+        "timingSensitive": false,
+        "focus": "moderate_gap",
+        "note": "A visible difference appears in the middle of the structure."
+      },
+      {
+        "band": 4,
+        "label": "Band 4",
+        "stateMedian": 1386,
+        "smallMedian": 1318,
+        "gap": -68,
+        "gapPct": -4.9,
+        "statewideRange": [1284, 1490],
+        "smallRange": [1248, 1404],
+        "timingSensitive": false,
+        "focus": "moderate_gap",
+        "note": "Band 4 begins to show meaningful exposure in this mock set."
+      },
+      {
+        "band": 5,
+        "label": "Band 5",
+        "stateMedian": 1582,
+        "smallMedian": 1492,
+        "gap": -90,
+        "gapPct": -5.7,
+        "statewideRange": [1450, 1718],
+        "smallRange": [1392, 1614],
+        "timingSensitive": true,
+        "focus": "large_gap",
+        "note": "The largest current-period gap appears at Band 5, but scheduled uplifts affect the horizon."
+      },
+      {
+        "band": 6,
+        "label": "Band 6",
+        "stateMedian": 1796,
+        "smallMedian": 1718,
+        "gap": -78,
+        "gapPct": -4.3,
+        "statewideRange": [1645, 1962],
+        "smallRange": [1608, 1868],
+        "timingSensitive": true,
+        "focus": "large_gap",
+        "note": "Band 6 looks exposed today and is sensitive to agreement cycle timing."
+      },
+      {
+        "band": 7,
+        "label": "Band 7",
+        "stateMedian": 2045,
+        "smallMedian": 2008,
+        "gap": -37,
+        "gapPct": -1.8,
+        "statewideRange": [1875, 2242],
+        "smallRange": [1845, 2164],
+        "timingSensitive": false,
+        "focus": "narrow_gap",
+        "note": "Senior bands are not uniformly lower in the placeholder data."
+      },
+      {
+        "band": 8,
+        "label": "Band 8",
+        "stateMedian": 2380,
+        "smallMedian": 2355,
+        "gap": -25,
+        "gapPct": -1.1,
+        "statewideRange": [2190, 2635],
+        "smallRange": [2140, 2555],
+        "timingSensitive": false,
+        "focus": "narrow_gap",
+        "note": "The upper band gap is narrow enough that agreement age and role mix would matter."
+      }
+    ],
+    "states": {
+      "state_only": {
+        "label": "Statewide median",
+        "summary": "Start with the statewide median as the reference line."
+      },
+      "small_vs_state": {
+        "label": "Small vs state",
+        "summary": "Layer the small-council cohort median over the statewide pattern."
+      },
+      "gap_highlight": {
+        "label": "Largest gaps",
+        "summary": "Highlight the bands where the placeholder cohort trails by the largest weekly amount."
+      },
+      "band_focus": {
+        "label": "Narrow gaps",
+        "summary": "Some bands sit close to the statewide median, changing the executive story."
+      },
+      "timing_sensitive": {
+        "label": "Timing sensitive",
+        "summary": "Bands exposed today may move after scheduled uplifts."
+      },
+      "takeaway": {
+        "label": "Takeaway",
+        "summary": "The useful question is where exposure exists, not whether every band is lower."
+      }
+    },
+    "takeaway": "In the placeholder data, small councils trail most clearly in Bands 5 and 6. Lower and upper bands are closer, which makes workforce shape and timing essential context."
+  },
+  "distribution": {
+    "question": "Is the gap uniform, or does it depend where you look?",
+    "metric": "Weekly range midpoint rate",
+    "summary": "The statewide spread is wide enough that the small-council median can sit below the state median while still overlapping much of the sector range.",
+    "rangeRibbons": [
+      {
+        "band": 3,
+        "stateP10": 1088,
+        "stateP25": 1132,
+        "stateMedian": 1198,
+        "stateP75": 1256,
+        "stateP90": 1318,
+        "smallP25": 1120,
+        "smallMedian": 1154,
+        "smallP75": 1204
+      },
+      {
+        "band": 5,
+        "stateP10": 1395,
+        "stateP25": 1488,
+        "stateMedian": 1582,
+        "stateP75": 1678,
+        "stateP90": 1768,
+        "smallP25": 1448,
+        "smallMedian": 1492,
+        "smallP75": 1588
+      },
+      {
+        "band": 7,
+        "stateP10": 1818,
+        "stateP25": 1930,
+        "stateMedian": 2045,
+        "stateP75": 2168,
+        "stateP90": 2292,
+        "smallP25": 1912,
+        "smallMedian": 2008,
+        "smallP75": 2124
+      }
+    ],
+    "caveat": "Illustrative percentile ribbons only. Production views should use pay_distribution_point_mart and declare the comparison metric."
+  },
+  "classificationContext": {
+    "question": "Are we comparing the same workforce shape?",
+    "summary": "Band-level comparison controls one source of noise, but workforce mix still matters. A council concentrated in Bands 3-5 can experience a different labour-market story from a council concentrated in Bands 6-8.",
+    "bands": [
+      {
+        "band": 1,
+        "label": "Band 1",
+        "workforceSignal": "entry / operational support"
+      },
+      {
+        "band": 2,
+        "label": "Band 2",
+        "workforceSignal": "routine operational roles"
+      },
+      {
+        "band": 3,
+        "label": "Band 3",
+        "workforceSignal": "skilled operational and administrative roles"
+      },
+      {
+        "band": 4,
+        "label": "Band 4",
+        "workforceSignal": "experienced technical and service roles"
+      },
+      {
+        "band": 5,
+        "label": "Band 5",
+        "workforceSignal": "professional / supervisory pressure point"
+      },
+      {
+        "band": 6,
+        "label": "Band 6",
+        "workforceSignal": "senior professional and specialist roles"
+      },
+      {
+        "band": 7,
+        "label": "Band 7",
+        "workforceSignal": "advanced specialist / management roles"
+      },
+      {
+        "band": 8,
+        "label": "Band 8",
+        "workforceSignal": "senior management / principal roles"
+      }
+    ],
+    "productionNote": "Production reporting should distinguish band-level pay comparison from workforce composition and classification mapping quality."
+  },
+  "upliftTimeline": {
+    "question": "Is this a structural pay gap, or a timing artefact?",
+    "snapshotDate": "2026-05-14",
+    "horizonDate": "2027-07-01",
+    "metric": "Band 5 weekly range midpoint rate",
+    "summary": "Snapshot comparisons can mislead when councils sit at different points in their agreement cycle.",
+    "phases": [
+      {
+        "id": "current",
+        "label": "Current snapshot",
+        "description": "Compare current weekly rates before scheduled increases are applied."
+      },
+      {
+        "id": "uplifts",
+        "label": "Scheduled uplifts",
+        "description": "Reveal upcoming percentage increases and the agreement-cycle position."
+      },
+      {
+        "id": "horizon",
+        "label": "Horizon view",
+        "description": "Recalculate the comparison after scheduled uplifts land."
+      }
+    ],
+    "series": [
+      {
+        "name": "Small council cohort median",
+        "segment": "Small councils",
+        "currentWeekly": 1492,
+        "horizonWeekly": 1594,
+        "cycleStatus": "uplift due within 3 months",
+        "uplifts": [
+          {
+            "date": "2026-07-01",
+            "pct": 3.2,
+            "label": "Year 2 uplift"
+          },
+          {
+            "date": "2027-07-01",
+            "pct": 3.4,
+            "label": "Year 3 uplift"
+          }
+        ]
+      },
+      {
+        "name": "Statewide median",
+        "segment": "Statewide",
+        "currentWeekly": 1582,
+        "horizonWeekly": 1660,
+        "cycleStatus": "mixed agreement cycles",
+        "uplifts": [
+          {
+            "date": "2026-10-01",
+            "pct": 2.5,
+            "label": "median next uplift"
+          },
+          {
+            "date": "2027-07-01",
+            "pct": 2.4,
+            "label": "horizon adjustment"
+          }
+        ]
+      },
+      {
+        "name": "Recent-settled small council",
+        "segment": "Small council example",
+        "currentWeekly": 1538,
+        "horizonWeekly": 1616,
+        "cycleStatus": "recent agreement; smaller near-term uplift",
+        "uplifts": [
+          {
+            "date": "2026-11-01",
+            "pct": 2.4,
+            "label": "scheduled uplift"
+          },
+          {
+            "date": "2027-11-01",
+            "pct": 2.6,
+            "label": "outside horizon"
+          }
+        ]
+      },
+      {
+        "name": "Lagging-cycle small council",
+        "segment": "Small council example",
+        "currentWeekly": 1468,
+        "horizonWeekly": 1589,
+        "cycleStatus": "larger uplift pending",
+        "uplifts": [
+          {
+            "date": "2026-06-30",
+            "pct": 4.0,
+            "label": "catch-up uplift"
+          },
+          {
+            "date": "2027-06-30",
+            "pct": 4.1,
+            "label": "cycle uplift"
+          }
+        ]
+      }
+    ],
+    "caveat": "Mock uplift rules only. Production reporting should connect to uplift_timing_mart and temporal_pay_movement_mart."
+  },
+  "entitlements": {
+    "question": "Do small councils compete differently?",
+    "status": "placeholder_entitlement_scoring",
+    "summary": "Pay position is only one part of employment value. Small councils may compete through leave, flexibility, progression, or allowances where direct pay position is harder to move.",
+    "columns": [
+      "Pay",
+      "Leave",
+      "Allowances",
+      "Flexibility",
+      "Progression"
+    ],
+    "rows": [
+      {
+        "segment": "Small councils",
+        "scores": {
+          "Pay": {
+            "rating": "below",
+            "label": "Below median",
+            "note": "Band 5-6 exposure in placeholder pay data."
+          },
+          "Leave": {
+            "rating": "near",
+            "label": "Near state",
+            "note": "No governed leave conclusion in prototype."
+          },
+          "Allowances": {
+            "rating": "mixed",
+            "label": "Mixed",
+            "note": "Potential local work-pattern differences."
+          },
+          "Flexibility": {
+            "rating": "strength",
+            "label": "Relative strength",
+            "note": "Illustrative employment-value lever."
+          },
+          "Progression": {
+            "rating": "watch",
+            "label": "Watch",
+            "note": "Progression rules require governed comparison."
+          }
+        }
+      },
+      {
+        "segment": "Statewide position",
+        "scores": {
+          "Pay": {
+            "rating": "baseline",
+            "label": "Benchmark",
+            "note": "Statewide median is the reference."
+          },
+          "Leave": {
+            "rating": "baseline",
+            "label": "Benchmark",
+            "note": "Placeholder comparison baseline."
+          },
+          "Allowances": {
+            "rating": "baseline",
+            "label": "Benchmark",
+            "note": "Placeholder comparison baseline."
+          },
+          "Flexibility": {
+            "rating": "baseline",
+            "label": "Benchmark",
+            "note": "Placeholder comparison baseline."
+          },
+          "Progression": {
+            "rating": "baseline",
+            "label": "Benchmark",
+            "note": "Placeholder comparison baseline."
+          }
+        }
+      }
+    ],
+    "caveat": "Indicative prototype view. Placeholder entitlement scoring is designed to connect to governed entitlement summaries later."
+  },
+  "executiveTakeaways": [
+    {
+      "title": "Exposure",
+      "body": "The placeholder cohort is most exposed in mid-band professional and supervisory roles, not uniformly across the structure."
+    },
+    {
+      "title": "Resilience",
+      "body": "Narrow gaps at the lower and upper ends mean the narrative should avoid a blanket 'small councils pay less' conclusion."
+    },
+    {
+      "title": "Timing risk",
+      "body": "Agreement-cycle timing can change the apparent gap, so current snapshots need a horizon view before executive interpretation."
+    }
+  ],
+  "narrativeSteps": [
+    {
+      "id": "state-only",
+      "visualState": "state_only",
+      "eyebrow": "Reference",
+      "title": "Start with the state",
+      "body": "The statewide median gives the executive reader a reference line. It is the start of the argument, not the answer.",
+      "annotation": "Statewide median only"
+    },
+    {
+      "id": "small-vs-state",
+      "visualState": "small_vs_state",
+      "eyebrow": "Comparison",
+      "title": "Layer the small-council cohort",
+      "body": "The placeholder small-council median sits below the state in most bands, but the distance changes materially across the structure.",
+      "annotation": "Small-council median added"
+    },
+    {
+      "id": "gap-highlight",
+      "visualState": "gap_highlight",
+      "eyebrow": "Exposure",
+      "title": "The largest gaps are concentrated",
+      "body": "Bands 5 and 6 show the clearest indicative exposure. This is where workforce pressure, recruitment difficulty, and classification mapping deserve attention.",
+      "annotation": "Bands 5-6 highlighted"
+    },
+    {
+      "id": "band-focus",
+      "visualState": "band_focus",
+      "eyebrow": "Nuance",
+      "title": "Some bands are much closer",
+      "body": "Lower and upper bands are closer to the statewide benchmark. A useful report separates broad positioning from the precise bands that matter.",
+      "annotation": "Narrow-gap bands highlighted"
+    },
+    {
+      "id": "timing-sensitive",
+      "visualState": "timing_sensitive",
+      "eyebrow": "Timing",
+      "title": "The reading is sensitive to agreement age",
+      "body": "Where scheduled uplifts are near, today's gap may partly reflect timing rather than underlying pay strategy.",
+      "annotation": "Timing-sensitive bands marked"
+    },
+    {
+      "id": "takeaway",
+      "visualState": "takeaway",
+      "eyebrow": "Takeaway",
+      "title": "The useful answer is conditional",
+      "body": "Small councils do not simply sit below the state. Their position depends on band, spread, workforce shape, and the point in the agreement cycle.",
+      "annotation": "Executive reading"
+    }
+  ]
+}

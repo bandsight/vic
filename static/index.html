@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0B1D3A">
+  <title>Municipal Benchmark Workbench</title>
+  <link rel="stylesheet" href="/static/shell/brand-tokens.css?v={{ASSET_VERSION}}">
+  <link rel="stylesheet" href="/static/shell/stage-tokens.css?v={{ASSET_VERSION}}">
+  <link rel="stylesheet" href="/static/shell/components.css?v={{ASSET_VERSION}}">
+  <link rel="stylesheet" href="/static/style.css?v={{ASSET_VERSION}}&ui=eba-long-list-v1">
+</head>
+<body>
+  <div id="app-shell" class="app-shell">
+    <aside class="sidebar-nav" aria-label="Primary navigation">
+      <div class="brand-lockup">
+        <div class="brand-mark brand-mark-mb" aria-hidden="true">
+          <img class="brand-mark-img" src="/static/brand-assets/municipal-benchmark-square-app-icon-clean.png" alt="">
+          <span>MB</span>
+        </div>
+        <div>
+          <div class="brand-parent">Municipal Benchmark</div>
+          <div class="brand-product">EBA Workbench</div>
+        </div>
+      </div>
+      <div id="capability-tree" class="capability-tree" aria-label="Workbench capability tree"></div>
+      <div class="sidebar-brand-footer" aria-label="Municipal Benchmark">
+        <img src="/static/brand-assets/municipal-benchmark-horizontal-lockup-primary-clean.png" alt="Municipal Benchmark">
+      </div>
+    </aside>
+
+    <div class="app-shell-main">
+      <main class="workbench-canvas">
+        <section id="view-capability" class="view">
+          <div class="capability-dashboard-shell">
+            <header class="capability-dashboard-header app-page-header">
+              <div>
+                <h1 id="capability-dashboard-title">Workbench Capability Tree</h1>
+                <p id="capability-dashboard-description">Loading governed production system...</p>
+              </div>
+            </header>
+
+            <section class="capability-dashboard-metrics" aria-label="Capability branch summary">
+              <article class="intake-metric">
+                <span class="metric-label">Branch</span>
+                <strong id="capability-dashboard-branch-count">-</strong>
+                <span class="metric-note">top-level production lane</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Nodes</span>
+                <strong id="capability-dashboard-node-count">-</strong>
+                <span class="metric-note">routed work objects</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Governance</span>
+                <strong id="capability-dashboard-status">-</strong>
+                <span class="metric-note">branch maturity state</span>
+              </article>
+              <article class="intake-metric attention">
+                <span class="metric-label">Artifacts</span>
+                <strong id="capability-dashboard-artifact-count">-</strong>
+                <span class="metric-note">declared evidence links</span>
+              </article>
+            </section>
+
+            <section class="capability-dashboard-workbench">
+              <aside id="capability-dashboard-branch-list" class="capability-dashboard-branch-list" aria-label="Capability branches"></aside>
+              <section id="capability-dashboard-detail" class="capability-dashboard-detail" aria-label="Capability branch detail"></section>
+            </section>
+          </div>
+        </section>
+
+        <section id="view-incoming" class="view active">
+          <div class="incoming-shell">
+            <header class="incoming-hero app-page-header">
+              <h1>Fetch &gt; Incoming</h1>
+            </header>
+            <section class="incoming-main-panel">
+              <div class="incoming-toolbar">
+                <div>
+                  <h2>Incoming Queue</h2>
+                  <p>New to old, grouped by confidence rating.</p>
+                </div>
+                <button id="incoming-run-fetch" class="intake-wide-btn primary" type="button">Fetch registry</button>
+              </div>
+              <div id="incoming-list" class="incoming-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="view-intake" class="view">
+          <div class="intake-shell">
+            <header class="intake-hero app-page-header">
+              <h1>Fetch &gt; Intake Processing</h1>
+            </header>
+            <section class="intake-workbench">
+              <section class="intake-main-panel">
+                <div class="intake-toolbar">
+                  <h2>Queue</h2>
+                  <div class="intake-tools">
+                    <input type="search" id="intake-filter" placeholder="Filter agreement, AE ID, council">
+                    <select id="intake-sort" aria-label="Sort intake rows">
+                      <option value="effective_date">Sort: effective date</option>
+                      <option value="agreement_name">Sort: agreement name</option>
+                      <option value="lga_short_name">Sort: LGA short name</option>
+                      <option value="confidence">Sort: confidence</option>
+                      <option value="agreement_number">Sort: agreement number</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="intake-queue" class="intake-queue"></div>
+              </section>
+            </section>
+          </div>
+        </section>
+
+        <section id="view-job-intake" class="view">
+          <div class="job-intake-shell">
+            <header class="job-intake-hero app-page-header">
+              <h1>Fetch &gt; Job Intake</h1>
+            </header>
+
+            <section class="job-intake-metrics" aria-label="Job source registry summary">
+              <article class="intake-metric">
+                <span class="metric-label">Observed Jobs</span>
+                <strong id="job-intake-observed-count">-</strong>
+                <span class="metric-note">saved snapshot</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Councils</span>
+                <strong id="job-intake-council-count">-</strong>
+                <span class="metric-note">registry rows</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Ready</span>
+                <strong id="job-intake-ready-count">-</strong>
+                <span class="metric-note">verified endpoints</span>
+              </article>
+              <article class="intake-metric attention">
+                <span class="metric-label">Pattern Queue</span>
+                <strong id="job-intake-discovery-count">-</strong>
+                <span class="metric-note">unverified endpoints</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Restricted</span>
+                <strong id="job-intake-restricted-count">-</strong>
+                <span class="metric-note">broad boards</span>
+              </article>
+            </section>
+
+            <section class="job-intake-workbench">
+              <aside class="job-intake-side-panel">
+                <div class="intake-panel-card">
+                  <h2>Source Controls</h2>
+                  <label class="job-intake-control">
+                    <span>Source search</span>
+                    <input type="search" id="job-intake-filter" placeholder="Council, platform, endpoint">
+                  </label>
+                  <label class="job-intake-control">
+                    <span>Tier</span>
+                    <select id="job-intake-tier">
+                      <option value="all">All tiers</option>
+                      <option value="A">Tier A</option>
+                      <option value="B">Tier B</option>
+                      <option value="C">Tier C</option>
+                    </select>
+                  </label>
+                  <label class="job-intake-control">
+                    <span>Platform</span>
+                    <select id="job-intake-platform">
+                      <option value="all">All platforms</option>
+                    </select>
+                  </label>
+                  <label class="job-intake-control">
+                    <span>Status</span>
+                    <select id="job-intake-status">
+                      <option value="all">All statuses</option>
+                      <option value="ready">Ready</option>
+                      <option value="needs_endpoint_discovery">Pattern queue</option>
+                    </select>
+                  </label>
+                  <button id="job-intake-clear" class="intake-wide-btn" type="button">Clear</button>
+                  <button id="job-intake-refresh" class="intake-wide-btn" type="button">Reload registry</button>
+                </div>
+                <div class="intake-panel-card">
+                  <h2>Tier Meaning</h2>
+                  <div id="job-intake-tier-list" class="job-intake-tier-list"></div>
+                </div>
+                <div class="intake-panel-card">
+                  <h2>Platform Mix</h2>
+                  <div id="job-intake-platform-list" class="job-intake-platform-list"></div>
+                </div>
+                <div class="intake-panel-card">
+                  <h2>Secondary Sources</h2>
+                  <div id="job-intake-secondary-list" class="job-intake-source-list"></div>
+                </div>
+                <div class="intake-panel-card">
+                  <h2>Restricted Boards</h2>
+                  <div id="job-intake-restricted-list" class="job-intake-source-list"></div>
+                </div>
+              </aside>
+
+              <section class="job-intake-main-panel">
+                <div class="job-intake-toolbar">
+                  <div>
+                    <h2>Job Intake</h2>
+                    <p id="job-intake-status-note">Loading source registry...</p>
+                  </div>
+                  <nav class="job-intake-subnav" aria-label="Job intake views">
+                    <button type="button" data-job-intake-tab="jobs">Jobs</button>
+                    <button type="button" data-job-intake-tab="history">Checked Jobs</button>
+                    <button type="button" data-job-intake-tab="completion">Completion</button>
+                    <button type="button" data-job-intake-tab="sources">Sources</button>
+                    <button type="button" data-job-intake-tab="governance">Governance</button>
+                    <button type="button" data-job-intake-tab="secondary">Secondary</button>
+                  </nav>
+                </div>
+                <section id="job-intake-tab-jobs" class="job-intake-tab-panel job-observed-panel" aria-label="Observed scraped jobs">
+                  <div class="job-observed-head">
+                    <div>
+                      <h3>Parsed Jobs</h3>
+                      <p id="job-observed-status">Idle.</p>
+                    </div>
+                    <div class="job-observed-actions">
+                      <button id="job-observed-refresh" class="primary" type="button">Refresh intake snapshot</button>
+                      <button id="job-observed-enrich" type="button">Enrich linked documents</button>
+                    </div>
+                  </div>
+                  <div class="job-observed-controls" aria-label="Job filters">
+                    <input type="search" id="job-observed-filter" placeholder="Search title, council, band, salary">
+                    <select id="job-observed-governance">
+                      <option value="all">All governance</option>
+                      <option value="auto_included">Confirmed Band 1-8</option>
+                      <option value="needs_band_confirmation">Band inferred</option>
+                      <option value="needs_band_review">Needs band review</option>
+                    </select>
+                    <select id="job-observed-platform">
+                      <option value="all">All platforms</option>
+                    </select>
+                    <select id="job-observed-band">
+                      <option value="all">All bands</option>
+                    </select>
+                  </div>
+                  <div id="job-observed-list" class="job-observed-list"></div>
+                  <details class="job-source-results">
+                    <summary><span>Source scrape status</span><strong id="job-source-result-count">-</strong></summary>
+                    <div id="job-source-result-list" class="job-source-result-list"></div>
+                  </details>
+                </section>
+                <section id="job-intake-tab-history" class="job-intake-tab-panel job-history-panel" aria-label="Checked classified job history">
+                  <div class="job-observed-head">
+                    <div>
+                      <h3>Checked Classified Jobs</h3>
+                      <p id="job-history-status">Accumulated Band 1-8 jobs appear here.</p>
+                    </div>
+                    <div class="job-observed-actions">
+                      <button id="job-history-ingest" type="button">Accumulate saved snapshot</button>
+                      <button id="job-history-refresh" class="primary" type="button">Aggressive refresh</button>
+                    </div>
+                  </div>
+                  <div class="job-observed-controls job-history-controls" aria-label="Checked job filters">
+                    <input type="search" id="job-history-filter" placeholder="Search checked jobs, council, band, month">
+                  </div>
+                  <div id="job-history-metrics" class="job-history-metrics"></div>
+                  <div id="job-history-list" class="job-observed-list"></div>
+                  <details class="job-source-results">
+                    <summary><span>Council coverage gaps</span><strong id="job-history-missing-count">-</strong></summary>
+                    <div id="job-history-missing-list" class="job-source-result-list"></div>
+                  </details>
+                </section>
+                <section id="job-intake-tab-completion" class="job-intake-tab-panel job-completion-panel" aria-label="Job completion actions">
+                  <div class="job-observed-head">
+                    <div>
+                      <h3>Completion Actions</h3>
+                      <p id="job-completion-status">Run the preview scrape to see what will lift completion.</p>
+                    </div>
+                    <button id="job-completion-enrich" type="button">Run document pass</button>
+                  </div>
+                  <div id="job-completion-list" class="job-governance-list"></div>
+                </section>
+                <section id="job-intake-tab-governance" class="job-intake-tab-panel job-governance-panel" aria-label="Job governance summary">
+                  <div class="job-observed-head">
+                    <div>
+                      <h3>Governance Lens</h3>
+                      <p id="job-governance-status">Band and salary governance will appear after the preview scrape.</p>
+                    </div>
+                  </div>
+                  <div id="job-governance-list" class="job-governance-list"></div>
+                </section>
+                <section id="job-intake-tab-sources" class="job-intake-tab-panel job-source-registry-panel" aria-label="Council job source registry">
+                  <div class="job-intake-source-heading">
+                    <h3>Council Job Sources</h3>
+                    <span id="job-intake-source-note">Showing source registry rows</span>
+                  </div>
+                  <div id="job-intake-list" class="job-intake-list"></div>
+                  <details class="job-resolution-panel">
+                    <summary>
+                      <span>Endpoint Pattern Resolution</span>
+                      <strong id="job-resolution-status">Pattern probe idle.</strong>
+                    </summary>
+                    <button id="job-resolution-refresh" class="intake-wide-btn" type="button">Probe endpoint patterns</button>
+                    <div id="job-resolution-list" class="job-resolution-list"></div>
+                  </details>
+                </section>
+                <section id="job-intake-tab-secondary" class="job-intake-tab-panel job-secondary-panel" aria-label="Secondary job source signals">
+                  <div class="job-observed-head">
+                    <div>
+                      <h3>Secondary Signals</h3>
+                      <p id="job-secondary-status">Sector aggregator signals appear here.</p>
+                    </div>
+                    <button id="job-secondary-refresh" type="button">Refresh secondary sources</button>
+                  </div>
+                  <div id="job-secondary-list" class="job-observed-list"></div>
+                  <details class="job-source-results">
+                    <summary><span>Secondary source status</span><strong id="job-secondary-result-count">-</strong></summary>
+                    <div id="job-secondary-source-list" class="job-source-result-list"></div>
+                  </details>
+                </section>
+              </section>
+            </section>
+          </div>
+        </section>
+
+        <section id="view-job-pipeline" class="view">
+          <div class="job-pipeline-shell">
+            <header class="job-pipeline-hero app-page-header">
+              <h1>Process &gt; Job Pipeline</h1>
+            </header>
+
+            <section class="job-pipeline-metrics" aria-label="Job pipeline summary">
+              <article class="intake-metric">
+                <span class="metric-label">Stage 1 Jobs</span>
+                <strong id="job-pipeline-stage1-count">-</strong>
+                <span class="metric-note">Band governed</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Ready</span>
+                <strong id="job-pipeline-ready-count">-</strong>
+                <span class="metric-note">required fields filled</span>
+              </article>
+              <article class="intake-metric attention">
+                <span class="metric-label">Fill Required</span>
+                <strong id="job-pipeline-fill-count">-</strong>
+                <span class="metric-note">compulsory gaps</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Required</span>
+                <strong id="job-pipeline-required-rate">-</strong>
+                <span class="metric-note">field completion</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Optional</span>
+                <strong id="job-pipeline-optional-rate">-</strong>
+                <span class="metric-note">field completion</span>
+              </article>
+            </section>
+
+            <section class="job-pipeline-workbench">
+              <aside class="job-pipeline-side-panel">
+                <div class="intake-panel-card">
+                  <h2>Pipeline Controls</h2>
+                  <label class="job-intake-control">
+                    <span>Job search</span>
+                    <input type="search" id="job-pipeline-filter" placeholder="Title, council, band, missing field">
+                  </label>
+                  <label class="job-intake-control">
+                    <span>Stage status</span>
+                    <select id="job-pipeline-status">
+                      <option value="all">All Stage 1 jobs</option>
+                      <option value="stage1_ready">Ready</option>
+                      <option value="stage1_fill_required">Fill required</option>
+                    </select>
+                  </label>
+                  <button id="job-pipeline-refresh" class="intake-wide-btn primary" type="button">Load Stage 1</button>
+                  <button id="job-pipeline-open-intake" class="intake-wide-btn" type="button">Open intake snapshot</button>
+                </div>
+                <div class="intake-panel-card">
+                  <h2>Stage Rule</h2>
+                  <div id="job-pipeline-rule" class="job-pipeline-rule"></div>
+                </div>
+                <div class="intake-panel-card">
+                  <h2>Missing Required</h2>
+                  <div id="job-pipeline-missing-list" class="job-intake-source-list"></div>
+                </div>
+              </aside>
+
+              <section class="job-pipeline-main-panel">
+                <div class="job-intake-toolbar">
+                  <div>
+                    <h2>Stage 1 Field Completion</h2>
+                    <p id="job-pipeline-status-note">Load Stage 1 from the saved intake snapshot.</p>
+                  </div>
+                </div>
+                <div id="job-pipeline-list" class="job-pipeline-list"></div>
+              </section>
+            </section>
+          </div>
+        </section>
+
+        <section id="view-matrix" class="view">
+          <div class="matrix-shell">
+            <header class="matrix-hero app-page-header">
+              <h1>Process &gt; Review Board</h1>
+            </header>
+
+            <section class="matrix-metrics" aria-label="Review Board summary">
+              <article class="intake-metric">
+                <span class="metric-label">Agreements</span>
+                <strong id="matrix-agreements">-</strong>
+                <span class="metric-note">in governed review set</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Pay tables done</span>
+                <strong id="matrix-pay-done">-</strong>
+                <span class="metric-note">core extraction section</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">In progress</span>
+                <strong id="matrix-in-progress">-</strong>
+                <span class="metric-note">active analyst work</span>
+              </article>
+              <article class="intake-metric attention">
+                <span class="metric-label">Gated</span>
+                <strong id="matrix-gated">-</strong>
+                <span class="metric-note">source or scope blocked</span>
+              </article>
+            </section>
+
+            <section class="matrix-workbench">
+              <aside class="matrix-side-panel">
+                <div class="intake-panel-card">
+                  <h2>Review Controls</h2>
+                  <button id="matrix-focus-gated" class="intake-wide-btn">Gated</button>
+                  <button id="matrix-focus-pay" class="intake-wide-btn">Pay work</button>
+                  <button id="matrix-clear-filter" class="intake-wide-btn">Clear</button>
+                </div>
+                <div class="intake-panel-card">
+                  <h2>Review Lanes</h2>
+                  <div class="lane"><span>Source ready</span><strong id="matrix-lane-ready">-</strong></div>
+                  <div class="lane"><span>Source blocked</span><strong id="matrix-lane-source">-</strong></div>
+                  <div class="lane"><span>Scope decision</span><strong id="matrix-lane-gated">-</strong></div>
+                  <div class="lane"><span>Completed sections</span><strong id="matrix-lane-sections">-</strong></div>
+                </div>
+              </aside>
+
+              <section class="matrix-main-panel">
+                <div class="matrix-toolbar">
+                  <div>
+                    <h2>Agreement Review Status</h2>
+                    <p>Open a workspace section to review the source PDF, extraction draft and governed evidence.</p>
+                  </div>
+                  <div id="matrix-controls">
+                    <input type="search" id="matrix-filter" placeholder="Filter councils...">
+                    <select id="matrix-sort">
+                      <option value="default">Sort: default</option>
+                      <option value="lga">Sort: canonical LGA A-Z</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="matrix-stats" class="matrix-stats"></div>
+                <div id="matrix-card-list" class="matrix-card-list"></div>
+              </section>
+            </section>
+          </div>
+        </section>
+
+        <section id="view-workspace" class="view">
+          <div id="workspace-body">
+            <div id="workspace-module-header"></div>
+            <div id="workspace-main">
+              <div id="pdf-pane">
+                <div id="pdf-controls">
+                  <button id="pdf-pane-collapse" class="pdf-pane-layout-btn" type="button" aria-label="Collapse PDF pane to rail" aria-expanded="true">Collapse PDF</button>
+                  <button id="pdf-pane-expand" class="pdf-pane-layout-btn" type="button" aria-label="Expand PDF pane">Wide PDF</button>
+                  <span class="divider"></span>
+                  <button id="pdf-prev">◀</button>
+                  <span id="pdf-page-indicator">– / –</span>
+                  <button id="pdf-next">▶</button>
+                  <input type="number" id="pdf-page-jump" min="1" style="width: 4em">
+                  <button id="pdf-jump-btn">Go</button>
+                  <span class="divider"></span>
+                  <button id="pdf-zoom-out">−</button>
+                  <span id="pdf-zoom-level">100%</span>
+                  <button id="pdf-zoom-in">+</button>
+                </div>
+                <div id="pdf-canvas-wrap">
+                  <canvas id="pdf-canvas"></canvas>
+                </div>
+              </div>
+
+              <div id="section-pane" class="review-panel"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-analysis" class="view">
+          <div class="analysis-shell">
+            <div id="analysis-banner-header" hidden></div>
+            <header class="analysis-hero app-page-header">
+              <h1 id="analysis-title">Think &gt; Uplift Rules</h1>
+            </header>
+
+            <section class="analysis-metrics" aria-label="Data set summary">
+              <article class="intake-metric">
+                <span id="analysis-primary-label" class="metric-label">Promoted rules</span>
+                <strong id="analysis-rule-count">-</strong>
+                <span id="analysis-primary-note" class="metric-note">governed uplift records</span>
+              </article>
+              <article class="intake-metric">
+                <span id="analysis-agreement-label" class="metric-label">Agreements</span>
+                <strong id="analysis-agreement-count">-</strong>
+                <span id="analysis-agreement-note" class="metric-note">with governed uplift rules</span>
+              </article>
+              <article class="intake-metric">
+                <span id="analysis-secondary-label" class="metric-label">Rate-cap rules</span>
+                <strong id="analysis-rate-cap-count">-</strong>
+                <span id="analysis-secondary-note" class="metric-note">using cap-linked logic</span>
+              </article>
+              <article class="intake-metric">
+                <span id="analysis-date-label" class="metric-label">Effective range</span>
+                <strong id="analysis-date-range">-</strong>
+                <span id="analysis-date-note" class="metric-note">earliest to latest rule</span>
+              </article>
+            </section>
+
+            <section class="analysis-workbench">
+              <aside class="analysis-side-panel">
+                <div id="analysis-control-card" class="intake-panel-card">
+                  <h2>Data Set Controls</h2>
+                  <button id="analysis-focus-rate-cap" class="intake-wide-btn">Show rate-cap rules</button>
+                  <button id="analysis-focus-floor" class="intake-wide-btn">Show floor rules</button>
+                  <button id="analysis-clear-filter" class="intake-wide-btn">Clear</button>
+                </div>
+                <div class="intake-panel-card">
+                  <h2 id="analysis-pattern-heading">Pattern Mix</h2>
+                  <div id="analysis-pattern-list" class="analysis-pattern-list"></div>
+                </div>
+              </aside>
+
+              <section class="analysis-main-panel">
+                <div class="analysis-toolbar">
+                  <div>
+                    <h2 id="analysis-table-title">Uplift Rules Entity Set</h2>
+                    <p id="analysis-table-description">Rules only appear here after they have been promoted into the governed set for an agreement period.</p>
+                  </div>
+                  <div class="analysis-tools">
+                    <input type="search" id="analysis-filter" placeholder="Filter council, agreement, pattern">
+                    <select id="analysis-sort" aria-label="Sort uplift rules">
+                      <option value="effective_date">Sort: effective date</option>
+                      <option value="council">Sort: council</option>
+                      <option value="pattern">Sort: pattern</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="analysis-distribution-panel" class="analysis-distribution-panel" hidden></div>
+                <div id="report-export-panel" class="report-export-panel" hidden></div>
+                <div id="pay-candidate-quality-panel" class="pay-candidate-quality-panel" hidden></div>
+                <div id="analysis-status" class="analysis-status">Loading data set...</div>
+                <div id="analysis-rule-table" class="analysis-rule-table"></div>
+              </section>
+            </section>
+          </div>
+        </section>
+
+        <section id="view-audit" class="view">
+          <div class="audit-shell">
+            <header class="audit-hero app-page-header">
+              <h1>Think &gt; Council Audit</h1>
+            </header>
+            <section class="audit-run-card audit-picker-bar" aria-label="Council audit controls">
+              <label class="intake-run-label" for="audit-council-select">Council</label>
+              <select id="audit-council-select" aria-label="Audit council"></select>
+              <button id="audit-refresh" class="primary" type="button" disabled>Refresh</button>
+              <span id="audit-latest-note" class="intake-run-meta">Choose a council</span>
+            </section>
+
+            <section class="audit-metrics" aria-label="Council audit summary">
+              <article class="intake-metric">
+                <span class="metric-label">Lineage records</span>
+                <strong id="audit-lineage-count">-</strong>
+                <span class="metric-note">agreement records for council</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Fetched sources</span>
+                <strong id="audit-source-count">-</strong>
+                <span class="metric-note">PDF evidence records</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Review completion</span>
+                <strong id="audit-review-count">-</strong>
+                <span class="metric-note">workspace sections done</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Governed periods</span>
+                <strong id="audit-governed-count">-</strong>
+                <span id="audit-latest-period" class="metric-note">latest agreement period</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Quality standard</span>
+                <strong id="audit-quality-score">-</strong>
+                <span id="audit-quality-note" class="metric-note">score out of 1000</span>
+              </article>
+            </section>
+
+            <section id="audit-report-document" class="audit-report-document">
+              <div class="workbench-empty-state">
+                <span>Council audit</span>
+                <strong>Loading audit document</strong>
+                <p>Choose a council to view its lineage and process history.</p>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section id="view-wiki" class="view">
+          <div class="wiki-shell">
+            <header class="wiki-hero app-page-header">
+              <h1>Source Knowledge Library</h1>
+              <button id="wiki-refresh" type="button">Refresh</button>
+            </header>
+
+            <section class="wiki-metrics" aria-label="Wiki summary">
+              <article class="intake-metric">
+                <span class="metric-label">Sources</span>
+                <strong id="wiki-agreements-count">-</strong>
+                <span class="metric-note">mapped inputs</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Tags</span>
+                <strong id="wiki-pages-count">-</strong>
+                <span class="metric-note">controlled labels</span>
+              </article>
+              <article class="intake-metric">
+                <span class="metric-label">Evidence</span>
+                <strong id="wiki-questions-count">-</strong>
+                <span class="metric-note">tagged records</span>
+              </article>
+              <article class="intake-metric attention">
+                <span class="metric-label">Review Queue</span>
+                <strong id="wiki-backlog-count">-</strong>
+                <span class="metric-note">questions and learning items</span>
+              </article>
+            </section>
+
+            <section class="wiki-workbench">
+              <aside class="wiki-side-panel">
+                <div class="intake-panel-card">
+                  <h2>Knowledge Families</h2>
+                  <div id="wiki-clause-tree" class="wiki-clause-tree"></div>
+                </div>
+                <div class="intake-panel-card">
+                  <h2>Reference Inputs</h2>
+                  <div id="wiki-reference-list" class="wiki-reference-list"></div>
+                </div>
+                <div class="intake-panel-card">
+                  <h2>Language Map</h2>
+                  <div id="wiki-language-list" class="wiki-language-list"></div>
+                </div>
+              </aside>
+
+              <section class="wiki-main-panel">
+                <div class="wiki-toolbar">
+                  <div>
+                    <h2>Source Knowledge Library</h2>
+                    <p id="wiki-latest-run-note">Loading wiki layer...</p>
+                  </div>
+                </div>
+
+                <div id="wiki-status" class="analysis-status">Loading wiki layer...</div>
+                <section class="wiki-panel wiki-tag-explorer-panel">
+                  <div class="wiki-panel-head">
+                    <h3>Source Tag Explorer</h3>
+                    <span id="wiki-tag-evidence-note">-</span>
+                  </div>
+                  <div class="wiki-tag-toolbar">
+                    <label>
+                      <span>Tag</span>
+                      <select id="wiki-tag-filter"></select>
+                    </label>
+                    <label>
+                      <span>Source</span>
+                      <select id="wiki-tag-source-type"></select>
+                    </label>
+                    <label>
+                      <span>Record</span>
+                      <select id="wiki-tag-record-type"></select>
+                    </label>
+                    <label>
+                      <span>Relevance</span>
+                      <select id="wiki-tag-relevance"></select>
+                    </label>
+                    <label class="wiki-tag-search">
+                      <span>Search</span>
+                      <input id="wiki-tag-query" type="search" placeholder="heading or source">
+                    </label>
+                  </div>
+                  <div id="wiki-tag-summary" class="wiki-tag-summary"></div>
+                  <div id="wiki-tag-evidence-list" class="wiki-tag-evidence-list"></div>
+                </section>
+                <section class="wiki-panel wiki-entitlement-detail-panel">
+                  <div class="wiki-panel-head">
+                    <h3 id="wiki-entitlement-detail-title">Entitlement</h3>
+                    <span id="wiki-entitlement-detail-note">comparator seed</span>
+                  </div>
+                  <div id="wiki-entitlement-detail" class="wiki-entitlement-detail"></div>
+                </section>
+                <section class="wiki-panel wiki-clause-detail-panel">
+                  <div class="wiki-panel-head">
+                    <h3 id="wiki-clause-detail-title">Source Clause Context</h3>
+                    <span id="wiki-clause-detail-note">evidence library</span>
+                  </div>
+                  <div id="wiki-clause-detail" class="wiki-clause-detail"></div>
+                </section>
+                <div class="wiki-grid">
+                  <section class="wiki-panel">
+                    <div class="wiki-panel-head">
+                      <h3>Questions</h3>
+                      <span id="wiki-question-note">-</span>
+                    </div>
+                    <div id="wiki-question-list" class="wiki-question-list"></div>
+                  </section>
+                  <section class="wiki-panel">
+                    <div class="wiki-panel-head">
+                      <h3>Learning Backlog</h3>
+                      <span id="wiki-backlog-note">-</span>
+                    </div>
+                    <div id="wiki-backlog-list" class="wiki-backlog-list"></div>
+                  </section>
+                </div>
+                <section class="wiki-panel">
+                  <div class="wiki-panel-head">
+                    <h3>Agreement Evidence Maps</h3>
+                    <span>source support</span>
+                  </div>
+                  <div id="wiki-document-maps" class="wiki-document-maps"></div>
+                </section>
+                <section class="wiki-panel wiki-map-detail-panel">
+                  <div class="wiki-panel-head">
+                    <h3 id="wiki-map-detail-title">Document Map</h3>
+                    <span id="wiki-map-detail-note">Select an agreement</span>
+                  </div>
+                  <div id="wiki-map-detail" class="wiki-map-detail"></div>
+                </section>
+                <section class="wiki-panel">
+                  <div class="wiki-panel-head">
+                    <h3>Support Outputs</h3>
+                    <span id="wiki-artifact-note">-</span>
+                  </div>
+                  <div id="wiki-artifact-list" class="wiki-artifact-list"></div>
+                </section>
+              </section>
+            </section>
+          </div>
+        </section>
+
+        <section id="view-admin" class="view">
+          <div class="admin-shell">
+            <header class="admin-hero app-page-header">
+              <h1>Think &gt; Settings</h1>
+            </header>
+            <div id="admin-body">
+              <section id="llm-status-container"></section>
+              <section id="rate-cap-admin-container"></section>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script type="module" src="/static/pdf-viewer.js?v={{ASSET_VERSION}}"></script>
+  <script type="module" src="/static/app.js?v={{ASSET_VERSION}}&ui=eba-long-list-v1"></script>
+</body>
+</html>

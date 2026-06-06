@@ -1,0 +1,80 @@
+excluded_abs_lga_codes:
+  - '29799'
+  - '29499'
+  - '29399'
+canonical_alias_overrides:
+  - council: Merri-bek
+    canonical_lga_code: LGA24700
+    alias_type: rename_alias
+    binds_when_present:
+      - merri-bek
+      - merri bek
+      - moreland
+      - moreland city council
+      - city of moreland
+      - moreland city
+contradictions:
+  - lga_short_name: Wyndham
+    alias_value: wyndham
+    alias_type: weak
+    contradiction_phrase: east kimberley
+    rule_group: contradiction
+    active_flag: true
+  - lga_short_name: Latrobe
+    alias_value: latrobe
+    alias_type: weak
+    contradiction_phrase: kentish
+    rule_group: contradiction
+    active_flag: true
+  - lga_short_name: Yarra
+    alias_value: yarra
+    alias_type: weak
+    contradiction_phrase: yarra ranges
+    rule_group: disambiguation
+    active_flag: true
+specialist_keywords:
+  - leisure
+  - maternal and child health
+  - nurse
+  - nurses
+  - library
+  - aquatic
+  - aged care
+  - childcare
+shared_keywords:
+  - single interest
+  - multi enterprise
+  - multi-enterprise
+  - multi employer
+  - multi-employer
+  - joint
+excluded_phrases:
+  - ventia
+  - library corporation
+  - sports and aquatics
+  - jcdecaux
+  - merri creek management
+  - protech personnel
+  - yarra trams
+  - schneider electric
+  - labour hire
+  - site specific
+  - precinct
+  - management committee
+  - private
+civic_context_phrases:
+  - council
+  - city council
+  - shire council
+  - rural city council
+  - borough of
+  - city of
+
+disambiguation_overrides:
+  - council: Yarra Ranges
+    binds_only_when_present:
+      - yarra ranges
+      - shire of yarra ranges
+      - yarra ranges council
+    excludes_plain_place_binding_for:
+      - Yarra

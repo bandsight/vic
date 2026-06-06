@@ -1,0 +1,41 @@
+{
+  "asset_id": "prototype_small_council_state_scroll_report",
+  "asset_type": "report_asset",
+  "title": "Small Council vs State Scrollytelling Prototype",
+  "report_title_candidate": "How do small councils compare to the state?",
+  "report_subtitle_candidate": "Small councils are often assumed to sit behind the broader sector. The real picture is more uneven - and more useful.",
+  "source_dataset": "placeholder_sample_data",
+  "source_dataset_version": "2026-05-14.prototype",
+  "generated_at": "2026-05-14T00:00:00+10:00",
+  "generated_by": "Codex prototype",
+  "filters": {
+    "cohort": "illustrative_small_councils",
+    "comparison_basis": "all_victorian_councils",
+    "classification_scope": "standard_band_core",
+    "period_basis": "current_snapshot_plus_uplift_horizon"
+  },
+  "metric_definition": "Weekly range midpoint rates by standard band, comparing an illustrative small-council cohort median with an illustrative statewide median.",
+  "quality_flags": [
+    "mock_values",
+    "not_governed",
+    "not_for_decision_making",
+    "entitlement_scores_placeholder"
+  ],
+  "provenance": {
+    "prototype_data": "data/sample-small-council-state.json",
+    "expected_governed_inputs": [
+      "data/datamarts/council_profile_mart.json",
+      "data/datamarts/cohort_comparison_mart.json",
+      "data/datamarts/pay_position_mart.json",
+      "data/datamarts/pay_distribution_point_mart.json",
+      "data/datamarts/uplift_timing_mart.json",
+      "data/datamarts/temporal_pay_movement_mart.json",
+      "data/datamarts/entitlement_summary_mart.json",
+      "data/datamarts/evidence_trace_mart.json"
+    ]
+  },
+  "export_targets": [
+    "web"
+  ],
+  "status": "draft"
+}

@@ -1,0 +1,2259 @@
+{
+  "set_id": "council_geography",
+  "label": "Council Geography",
+  "description": "Council geography building blocks for cohort analysis and infographic map outputs.",
+  "generated_at": "2026-04-27T09:47:14Z",
+  "sources": {
+    "canonical_councils": {
+      "name": "victorian-councils.csv",
+      "exists": true,
+      "bytes": 4325,
+      "modified": "2026-04-27T09:46:13Z"
+    },
+    "office_addresses": {
+      "name": "Victorian_LGA_Office_Addresses_with_Geo.csv",
+      "exists": true,
+      "bytes": 10448,
+      "modified": "2025-07-25T09:14:22Z"
+    },
+    "polygon_attributes": {
+      "name": "AD_LGA_AREA_POLYGON.dbf",
+      "exists": true,
+      "bytes": 21811,
+      "modified": "2025-05-29T00:16:05Z"
+    },
+    "polygon_shapes": {
+      "name": "AD_LGA_AREA_POLYGON.shp",
+      "exists": true,
+      "bytes": 19896412,
+      "modified": "2025-05-29T00:16:05Z"
+    }
+  },
+  "summary": {
+    "councils": 79,
+    "councils_with_office_points": 75,
+    "councils_with_polygon_attributes": 79,
+    "office_rows": 75,
+    "polygon_attribute_records": 93,
+    "missing_office_points": [
+      "Boroondara",
+      "Glen Eira",
+      "Melbourne",
+      "Yarriambiack"
+    ],
+    "missing_polygon_attributes": [],
+    "extra_polygon_names": [
+      "FALLS CREEK ALPINE RESORT",
+      "FRENCH-ELIZABETH-SANDSTONE ISLANDS",
+      "GABO ISLAND",
+      "LAKE MOUNTAIN ALPINE RESORT",
+      "MOUNT BAW BAW ALPINE RESORT",
+      "MOUNT HOTHAM ALPINE RESORT"
+    ],
+    "categories": {
+      "Interface": 9,
+      "Large shire": 19,
+      "Metropolitan": 22,
+      "Regional": 10,
+      "Small shire": 19
+    },
+    "boundary_features": 89,
+    "boundary_bounds": [
+      140.961865804,
+      -39.13638675599998,
+      149.97650410900008,
+      -33.98117129199994
+    ],
+    "boundary_simplification_tolerance_degrees": 0.01
+  },
+  "councils": [
+    {
+      "short_name": "Alpine",
+      "long_name": "Alpine Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Alpine",
+      "spatial_key": "ALPINE",
+      "official_name": "ALPINE SHIRE",
+      "lga_code": "300",
+      "abs_lga_code": "20110",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Bright",
+        "address": "2 Churchill Ave, Bright VIC 3741",
+        "match_key": "2 Churchill Ave, Bright VIC 3741",
+        "lat": -36.7301603,
+        "lon": 146.9700165
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Ararat",
+      "long_name": "Ararat Rural City Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Ararat",
+      "spatial_key": "ARARAT",
+      "official_name": "ARARAT RURAL CITY",
+      "lga_code": "301",
+      "abs_lga_code": "20260",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "rural_city",
+      "office": {
+        "seat_township": "Ararat",
+        "address": "59 Vincent St, Ararat VIC 3377",
+        "match_key": "59 Vincent St, Ararat VIC 3377",
+        "lat": -37.2827999,
+        "lon": 142.9315566
+      },
+      "cohorts": {
+        "council_type": "rural_city",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Ballarat",
+      "long_name": "Ballarat City Council",
+      "status": "active",
+      "council_category": "Regional",
+      "spatial_name": "Ballarat",
+      "spatial_key": "BALLARAT",
+      "official_name": "BALLARAT CITY",
+      "lga_code": "302",
+      "abs_lga_code": "20570",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Ballarat",
+        "address": "25 Armstrong St S, Ballarat VIC 3350",
+        "match_key": "25 Armstrong St S, Ballarat VIC 3350",
+        "lat": -37.5631508,
+        "lon": 143.8562995
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Regional",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Banyule",
+      "long_name": "Banyule City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Banyule",
+      "spatial_key": "BANYULE",
+      "official_name": "BANYULE CITY",
+      "lga_code": "303",
+      "abs_lga_code": "20660",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Greensborough",
+        "address": "1 Flintoff St, Greensborough VIC 3088",
+        "match_key": "1 Flintoff St, Greensborough VIC 3088",
+        "lat": -37.704398,
+        "lon": 145.1046952220213
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Bass Coast",
+      "long_name": "Bass Coast Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Bass Coast",
+      "spatial_key": "BASS COAST",
+      "official_name": "BASS COAST SHIRE",
+      "lga_code": "304",
+      "abs_lga_code": "20740",
+      "state": "VIC",
+      "polygon_record_count": 3,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Wonthaggi",
+        "address": "76 McBride Ave, Wonthaggi VIC 3995",
+        "match_key": "76 McBride Ave, Wonthaggi VIC 3995",
+        "lat": -38.6079912,
+        "lon": 145.5909666
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Baw Baw",
+      "long_name": "Baw Baw Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Baw Baw",
+      "spatial_key": "BAW BAW",
+      "official_name": "BAW BAW SHIRE",
+      "lga_code": "305",
+      "abs_lga_code": "20830",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Drouin",
+        "address": "33 Young St, Drouin VIC 3818",
+        "match_key": "33 Young St, Drouin VIC 3818",
+        "lat": -38.1315637,
+        "lon": 145.8587819
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Bayside",
+      "long_name": "Bayside City Council",
+      "status": "missing",
+      "council_category": "Metropolitan",
+      "spatial_name": "Bayside",
+      "spatial_key": "BAYSIDE",
+      "official_name": "BAYSIDE CITY",
+      "lga_code": "306",
+      "abs_lga_code": "20910",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Sandringham",
+        "address": "76 Royal Ave, Sandringham VIC 3191",
+        "match_key": "76 Royal Ave, Sandringham VIC 3191",
+        "lat": -37.959498,
+        "lon": 145.0166229
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "missing",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Benalla",
+      "long_name": "Benalla Rural City Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Benalla",
+      "spatial_key": "BENALLA",
+      "official_name": "BENALLA RURAL CITY",
+      "lga_code": "381",
+      "abs_lga_code": "21010",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "rural_city",
+      "office": {
+        "seat_township": "Benalla",
+        "address": "1 Bridge St E, Benalla VIC 3672",
+        "match_key": "1 Bridge St E, Benalla VIC 3672",
+        "lat": -36.5518507,
+        "lon": 145.9821045
+      },
+      "cohorts": {
+        "council_type": "rural_city",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Boroondara",
+      "long_name": "Boroondara City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Boroondara",
+      "spatial_key": "BOROONDARA",
+      "official_name": "BOROONDARA CITY",
+      "lga_code": "307",
+      "abs_lga_code": "21110",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": null,
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "missing",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Brimbank",
+      "long_name": "Brimbank City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Brimbank",
+      "spatial_key": "BRIMBANK",
+      "official_name": "BRIMBANK CITY",
+      "lga_code": "308",
+      "abs_lga_code": "21180",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Sunshine",
+        "address": "301 Hampshire Rd, Sunshine VIC 3020",
+        "match_key": "301 Hampshire Rd, Sunshine VIC 3020",
+        "lat": -37.7831433,
+        "lon": 144.8320965712473
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Buloke",
+      "long_name": "Buloke Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Buloke",
+      "spatial_key": "BULOKE",
+      "official_name": "BULOKE SHIRE",
+      "lga_code": "309",
+      "abs_lga_code": "21270",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Wycheproof",
+        "address": "367 Broadway, Wycheproof VIC 3527",
+        "match_key": "367 Broadway, Wycheproof VIC 3527",
+        "lat": -36.0751804,
+        "lon": 143.2251227
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Campaspe",
+      "long_name": "Campaspe Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Campaspe",
+      "spatial_key": "CAMPASPE",
+      "official_name": "CAMPASPE SHIRE",
+      "lga_code": "310",
+      "abs_lga_code": "21370",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Echuca",
+        "address": "2 Heygarth St, Echuca VIC 3564",
+        "match_key": "2 Heygarth St, Echuca VIC 3564",
+        "lat": -36.1238758,
+        "lon": 144.7516322
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Cardinia",
+      "long_name": "Cardinia Shire Council",
+      "status": "active",
+      "council_category": "Interface",
+      "spatial_name": "Cardinia",
+      "spatial_key": "CARDINIA",
+      "official_name": "CARDINIA SHIRE",
+      "lga_code": "311",
+      "abs_lga_code": "21450",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Officer",
+        "address": "20\u201324 Siding Ave, Officer VIC 3809",
+        "match_key": "20\u201324 Siding Ave, Officer VIC 3809",
+        "lat": -38.0657621,
+        "lon": 145.414022
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Interface",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Casey",
+      "long_name": "Casey City Council",
+      "status": "active",
+      "council_category": "Interface",
+      "spatial_name": "Casey",
+      "spatial_key": "CASEY",
+      "official_name": "CASEY CITY",
+      "lga_code": "312",
+      "abs_lga_code": "21610",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Narre Warren",
+        "address": "Magid Dr, Narre Warren VIC 3805",
+        "match_key": "Magid Dr, Narre Warren VIC 3805",
+        "lat": -38.01916900248092,
+        "lon": 145.2990651610576
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Interface",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Central Goldfields",
+      "long_name": "Central Goldfields Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Central Goldfields",
+      "spatial_key": "CENTRAL GOLDFIELDS",
+      "official_name": "CENTRAL GOLDFIELDS SHIRE",
+      "lga_code": "313",
+      "abs_lga_code": "21670",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Maryborough",
+        "address": "22 Nolan St, Maryborough VIC 3465",
+        "match_key": "22 Nolan St, Maryborough VIC 3465",
+        "lat": -37.0510422,
+        "lon": 143.7404514
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Colac Otway",
+      "long_name": "Colac Otway Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Colac Otway",
+      "spatial_key": "COLAC OTWAY",
+      "official_name": "COLAC OTWAY SHIRE",
+      "lga_code": "314",
+      "abs_lga_code": "21750",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Colac",
+        "address": "2\u20136 Rae St, Colac VIC 3250",
+        "match_key": "2\u20136 Rae St, Colac VIC 3250",
+        "lat": -38.3423085,
+        "lon": 143.5855096
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Corangamite",
+      "long_name": "Corangamite Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Corangamite",
+      "spatial_key": "CORANGAMITE",
+      "official_name": "CORANGAMITE SHIRE",
+      "lga_code": "315",
+      "abs_lga_code": "21830",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Camperdown",
+        "address": "181 Manifold St, Camperdown VIC 3260",
+        "match_key": "181 Manifold St, Camperdown VIC 3260",
+        "lat": -38.2328448,
+        "lon": 143.1464174
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Darebin",
+      "long_name": "Darebin City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Darebin",
+      "spatial_key": "DAREBIN",
+      "official_name": "DAREBIN CITY",
+      "lga_code": "316",
+      "abs_lga_code": "21890",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Preston",
+        "address": "274 Gower St, Preston VIC 3072",
+        "match_key": "274 Gower St, Preston VIC 3072",
+        "lat": -37.74008705,
+        "lon": 145.00429285510103
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "East Gippsland",
+      "long_name": "East Gippsland Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "East Gippsland",
+      "spatial_key": "EAST GIPPSLAND",
+      "official_name": "EAST GIPPSLAND SHIRE",
+      "lga_code": "319",
+      "abs_lga_code": "22110",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Bairnsdale",
+        "address": "273 Main St, Bairnsdale VIC 3875",
+        "match_key": "273 Main St, Bairnsdale VIC 3875",
+        "lat": -37.8276507,
+        "lon": 147.625179
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Frankston",
+      "long_name": "Frankston City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Frankston",
+      "spatial_key": "FRANKSTON",
+      "official_name": "FRANKSTON CITY",
+      "lga_code": "320",
+      "abs_lga_code": "22170",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Frankston",
+        "address": "30 Davey St, Frankston VIC 3199",
+        "match_key": "30 Davey St, Frankston VIC 3199",
+        "lat": -38.1470289,
+        "lon": 145.12259484230884
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Gannawarra",
+      "long_name": "Gannawarra Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Gannawarra",
+      "spatial_key": "GANNAWARRA",
+      "official_name": "GANNAWARRA SHIRE",
+      "lga_code": "321",
+      "abs_lga_code": "22250",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Kerang",
+        "address": "47 Victoria St, Kerang VIC 3579",
+        "match_key": "47 Victoria St, Kerang VIC 3579",
+        "lat": -35.7336705,
+        "lon": 143.9200677
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Glen Eira",
+      "long_name": "Glen Eira City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Glen Eira",
+      "spatial_key": "GLEN EIRA",
+      "official_name": "GLEN EIRA CITY",
+      "lga_code": "322",
+      "abs_lga_code": "22310",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": null,
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "missing",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Glenelg",
+      "long_name": "Glenelg Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Glenelg",
+      "spatial_key": "GLENELG",
+      "official_name": "GLENELG SHIRE",
+      "lga_code": "323",
+      "abs_lga_code": "22410",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Portland",
+        "address": "71 Cliff St, Portland VIC 3305",
+        "match_key": "71 Cliff St, Portland VIC 3305",
+        "lat": -38.351722,
+        "lon": 141.6075552
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Golden Plains",
+      "long_name": "Golden Plains Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Golden Plains",
+      "spatial_key": "GOLDEN PLAINS",
+      "official_name": "GOLDEN PLAINS SHIRE",
+      "lga_code": "324",
+      "abs_lga_code": "22490",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Bannockburn",
+        "address": "2 Pope St, Bannockburn VIC 3331",
+        "match_key": "2 Pope St, Bannockburn VIC 3331",
+        "lat": -38.0500989,
+        "lon": 144.1724734
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Greater Bendigo",
+      "long_name": "Greater Bendigo City Council",
+      "status": "active",
+      "council_category": "Regional",
+      "spatial_name": "Greater Bendigo",
+      "spatial_key": "GREATER BENDIGO",
+      "official_name": "GREATER BENDIGO CITY",
+      "lga_code": "325",
+      "abs_lga_code": "22620",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Bendigo",
+        "address": "195\u2013229 Lyttleton Terrace, Bendigo VIC 3550",
+        "match_key": "195\u2013229 Lyttleton Terrace, Bendigo VIC 3550",
+        "lat": -36.75902495,
+        "lon": 144.2836307973192
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Regional",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Greater Dandenong",
+      "long_name": "Greater Dandenong City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Greater Dandenong",
+      "spatial_key": "GREATER DANDENONG",
+      "official_name": "GREATER DANDENONG CITY",
+      "lga_code": "326",
+      "abs_lga_code": "22670",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Dandenong",
+        "address": "225 Lonsdale St, Dandenong VIC 3175",
+        "match_key": "225 Lonsdale St, Dandenong VIC 3175",
+        "lat": -37.9888024,
+        "lon": 145.2135411031266
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Greater Geelong",
+      "long_name": "Greater Geelong City Council",
+      "status": "active",
+      "council_category": "Regional",
+      "spatial_name": "Greater Geelong",
+      "spatial_key": "GREATER GEELONG",
+      "official_name": "GREATER GEELONG CITY",
+      "lga_code": "327",
+      "abs_lga_code": "22750",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Geelong",
+        "address": "83 Ryrie St, Geelong VIC 3220",
+        "match_key": "83 Ryrie St, Geelong VIC 3220",
+        "lat": -38.1482209,
+        "lon": 144.35710844377047
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Regional",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Greater Shepparton",
+      "long_name": "Greater Shepparton City Council",
+      "status": "active",
+      "council_category": "Regional",
+      "spatial_name": "Greater Shepparton",
+      "spatial_key": "GREATER SHEPPARTON",
+      "official_name": "GREATER SHEPPARTON CITY",
+      "lga_code": "328",
+      "abs_lga_code": "22830",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Shepparton",
+        "address": "90 Welsford St, Shepparton VIC 3630",
+        "match_key": "90 Welsford St, Shepparton VIC 3630",
+        "lat": -36.3777413,
+        "lon": 145.3982511
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Regional",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Hepburn",
+      "long_name": "Hepburn Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Hepburn",
+      "spatial_key": "HEPBURN",
+      "official_name": "HEPBURN SHIRE",
+      "lga_code": "329",
+      "abs_lga_code": "22910",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Daylesford",
+        "address": "76 Vincent St, Daylesford VIC 3460",
+        "match_key": "76 Vincent St, Daylesford VIC 3460",
+        "lat": -37.3429539,
+        "lon": 144.1421862
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Hindmarsh",
+      "long_name": "Hindmarsh Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Hindmarsh",
+      "spatial_key": "HINDMARSH",
+      "official_name": "HINDMARSH SHIRE",
+      "lga_code": "330",
+      "abs_lga_code": "22980",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Nhill",
+        "address": "92 Nelson St, Nhill VIC 3418",
+        "match_key": "92 Nelson St, Nhill VIC 3418",
+        "lat": -36.3324845,
+        "lon": 141.6509023
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Hobsons Bay",
+      "long_name": "Hobsons Bay City Council",
+      "status": "missing",
+      "council_category": "Metropolitan",
+      "spatial_name": "Hobsons Bay",
+      "spatial_key": "HOBSONS BAY",
+      "official_name": "HOBSONS BAY CITY",
+      "lga_code": "331",
+      "abs_lga_code": "23110",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Altona",
+        "address": "115 Civic Pde, Altona VIC 3018",
+        "match_key": "115 Civic Pde, Altona VIC 3018",
+        "lat": -37.86372905,
+        "lon": 144.83102951464355
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "missing",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Horsham",
+      "long_name": "Horsham Rural City Council",
+      "status": "active",
+      "council_category": "Regional",
+      "spatial_name": "Horsham",
+      "spatial_key": "HORSHAM",
+      "official_name": "HORSHAM RURAL CITY",
+      "lga_code": "332",
+      "abs_lga_code": "23190",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "rural_city",
+      "office": {
+        "seat_township": "Horsham",
+        "address": "18 Roberts Ave, Horsham VIC 3400",
+        "match_key": "18 Roberts Ave, Horsham VIC 3400",
+        "lat": -36.7140492,
+        "lon": 142.2018018
+      },
+      "cohorts": {
+        "council_type": "rural_city",
+        "council_category": "Regional",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Hume",
+      "long_name": "Hume City Council",
+      "status": "active",
+      "council_category": "Interface",
+      "spatial_name": "Hume",
+      "spatial_key": "HUME",
+      "official_name": "HUME CITY",
+      "lga_code": "333",
+      "abs_lga_code": "23270",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Broadmeadows",
+        "address": "1079 Pascoe Vale Rd, Broadmeadows VIC 3047",
+        "match_key": "1079 Pascoe Vale Rd, Broadmeadows VIC 3047",
+        "lat": -37.6819237,
+        "lon": 144.9179606857977
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Interface",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Indigo",
+      "long_name": "Indigo Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Indigo",
+      "spatial_key": "INDIGO",
+      "official_name": "INDIGO SHIRE",
+      "lga_code": "334",
+      "abs_lga_code": "23350",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Beechworth",
+        "address": "101 Ford St, Beechworth VIC 3747",
+        "match_key": "101 Ford St, Beechworth VIC 3747",
+        "lat": -36.3586093,
+        "lon": 146.6877969
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Kingston",
+      "long_name": "Kingston City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Kingston",
+      "spatial_key": "KINGSTON",
+      "official_name": "KINGSTON CITY",
+      "lga_code": "335",
+      "abs_lga_code": "23430",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Cheltenham",
+        "address": "1230 Nepean Hwy, Cheltenham VIC 3192",
+        "match_key": "1230 Nepean Hwy, Cheltenham VIC 3192",
+        "lat": -37.9662318,
+        "lon": 145.05749081167
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Knox",
+      "long_name": "Knox City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Knox",
+      "spatial_key": "KNOX",
+      "official_name": "KNOX CITY",
+      "lga_code": "336",
+      "abs_lga_code": "23670",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Wantirna South",
+        "address": "511 Burwood Hwy, Wantirna South VIC 3152",
+        "match_key": "511 Burwood Hwy, Wantirna South VIC 3152",
+        "lat": -37.8711882,
+        "lon": 145.24534816617074
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Latrobe",
+      "long_name": "Latrobe City Council",
+      "status": "active",
+      "council_category": "Regional",
+      "spatial_name": "Latrobe",
+      "spatial_key": "LATROBE",
+      "official_name": "LATROBE CITY",
+      "lga_code": "337",
+      "abs_lga_code": "23810",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Morwell",
+        "address": "141 Commercial Rd, Morwell VIC 3840",
+        "match_key": "141 Commercial Rd, Morwell VIC 3840",
+        "lat": -38.2364103,
+        "lon": 146.3945118
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Regional",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Loddon",
+      "long_name": "Loddon Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Loddon",
+      "spatial_key": "LODDON",
+      "official_name": "LODDON SHIRE",
+      "lga_code": "338",
+      "abs_lga_code": "23940",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Wedderburn",
+        "address": "41 High St, Wedderburn VIC 3518",
+        "match_key": "41 High St, Wedderburn VIC 3518",
+        "lat": -36.420188,
+        "lon": 143.61443541974296
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Macedon Ranges",
+      "long_name": "Macedon Ranges Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Macedon Ranges",
+      "spatial_key": "MACEDON RANGES",
+      "official_name": "MACEDON RANGES SHIRE",
+      "lga_code": "339",
+      "abs_lga_code": "24130",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Kyneton",
+        "address": "40 Robertson St, Kyneton VIC 3444",
+        "match_key": "40 Robertson St, Kyneton VIC 3444",
+        "lat": -37.25133,
+        "lon": 144.46671
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Manningham",
+      "long_name": "Manningham City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Manningham",
+      "spatial_key": "MANNINGHAM",
+      "official_name": "MANNINGHAM CITY",
+      "lga_code": "340",
+      "abs_lga_code": "24210",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Doncaster",
+        "address": "699 Doncaster Rd, Doncaster VIC 3108",
+        "match_key": "699 Doncaster Rd, Doncaster VIC 3108",
+        "lat": -37.78651205,
+        "lon": 145.1326431801163
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Mansfield",
+      "long_name": "Mansfield Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Mansfield",
+      "spatial_key": "MANSFIELD",
+      "official_name": "MANSFIELD SHIRE",
+      "lga_code": "382",
+      "abs_lga_code": "24250",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Mansfield",
+        "address": "33 Highett St, Mansfield VIC 3722",
+        "match_key": "33 Highett St, Mansfield VIC 3722",
+        "lat": -37.0535975,
+        "lon": 146.0879934
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Maribyrnong",
+      "long_name": "Maribyrnong City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Maribyrnong",
+      "spatial_key": "MARIBYRNONG",
+      "official_name": "MARIBYRNONG CITY",
+      "lga_code": "341",
+      "abs_lga_code": "24330",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Footscray",
+        "address": "61 Napier St, Footscray VIC 3011",
+        "match_key": "61 Napier St, Footscray VIC 3011",
+        "lat": -37.8045906,
+        "lon": 144.90078084690958
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Maroondah",
+      "long_name": "Maroondah City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Maroondah",
+      "spatial_key": "MAROONDAH",
+      "official_name": "MAROONDAH CITY",
+      "lga_code": "342",
+      "abs_lga_code": "24410",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Ringwood",
+        "address": "Braeside Ave, Ringwood VIC 3134",
+        "match_key": "Braeside Ave, Ringwood VIC 3134",
+        "lat": -37.80969009431772,
+        "lon": 145.2421467927601
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Melbourne",
+      "long_name": "Melbourne City Council",
+      "status": "excluded",
+      "council_category": "Metropolitan",
+      "spatial_name": "Melbourne",
+      "spatial_key": "MELBOURNE",
+      "official_name": "MELBOURNE CITY",
+      "lga_code": "343",
+      "abs_lga_code": "24600",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": null,
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "excluded",
+        "office_geocoded": "missing",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Melton",
+      "long_name": "Melton City Council",
+      "status": "active",
+      "council_category": "Interface",
+      "spatial_name": "Melton",
+      "spatial_key": "MELTON",
+      "official_name": "MELTON CITY",
+      "lga_code": "344",
+      "abs_lga_code": "24650",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Melton",
+        "address": "232 High St, Melton VIC 3337",
+        "match_key": "232 High St, Melton VIC 3337",
+        "lat": -37.6721045,
+        "lon": 144.5796982
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Interface",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Merri-bek",
+      "long_name": "Merri-bek City Council",
+      "status": "missing",
+      "council_category": "Metropolitan",
+      "spatial_name": "Merri-bek",
+      "spatial_key": "MERRI BEK",
+      "official_name": "MERRI-BEK CITY",
+      "lga_code": "351",
+      "abs_lga_code": "25250",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Coburg",
+        "address": "90 Bell St, Coburg VIC 3058",
+        "match_key": "90 Bell St, Coburg VIC 3058",
+        "lat": -37.7412518,
+        "lon": 144.9701016
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "missing",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Mildura",
+      "long_name": "Mildura Rural City Council",
+      "status": "active",
+      "council_category": "Regional",
+      "spatial_name": "Mildura",
+      "spatial_key": "MILDURA",
+      "official_name": "MILDURA RURAL CITY",
+      "lga_code": "345",
+      "abs_lga_code": "24780",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "rural_city",
+      "office": {
+        "seat_township": "Mildura",
+        "address": "76 Deakin Ave, Mildura VIC 3500",
+        "match_key": "76 Deakin Ave, Mildura VIC 3500",
+        "lat": -34.1862986,
+        "lon": 142.1617713
+      },
+      "cohorts": {
+        "council_type": "rural_city",
+        "council_category": "Regional",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Mitchell",
+      "long_name": "Mitchell Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Mitchell",
+      "spatial_key": "MITCHELL",
+      "official_name": "MITCHELL SHIRE",
+      "lga_code": "346",
+      "abs_lga_code": "24850",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Broadford",
+        "address": "113 High St, Broadford VIC 3658",
+        "match_key": "113 High St, Broadford VIC 3658",
+        "lat": -37.2029077,
+        "lon": 145.0489343
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Moira",
+      "long_name": "Moira Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Moira",
+      "spatial_key": "MOIRA",
+      "official_name": "MOIRA SHIRE",
+      "lga_code": "347",
+      "abs_lga_code": "24900",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Cobram",
+        "address": "44 Station St, Cobram VIC 3644",
+        "match_key": "44 Station St, Cobram VIC 3644",
+        "lat": -35.9218589,
+        "lon": 145.6462411
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Monash",
+      "long_name": "Monash City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Monash",
+      "spatial_key": "MONASH",
+      "official_name": "MONASH CITY",
+      "lga_code": "348",
+      "abs_lga_code": "24970",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Glen Waverley",
+        "address": "293 Springvale Rd, Glen Waverley VIC 3150",
+        "match_key": "293 Springvale Rd, Glen Waverley VIC 3150",
+        "lat": -37.88213305,
+        "lon": 145.1645142367487
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Moonee Valley",
+      "long_name": "Moonee Valley City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Moonee Valley",
+      "spatial_key": "MOONEE VALLEY",
+      "official_name": "MOONEE VALLEY CITY",
+      "lga_code": "349",
+      "abs_lga_code": "25060",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Moonee Ponds",
+        "address": "9 Kellaway Ave, Moonee Ponds VIC 3039",
+        "match_key": "9 Kellaway Ave, Moonee Ponds VIC 3039",
+        "lat": -37.7641373,
+        "lon": 144.9250294
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Moorabool",
+      "long_name": "Moorabool Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Moorabool",
+      "spatial_key": "MOORABOOL",
+      "official_name": "MOORABOOL SHIRE",
+      "lga_code": "350",
+      "abs_lga_code": "25150",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Ballan",
+        "address": "15 Stead St, Ballan VIC 3342",
+        "match_key": "15 Stead St, Ballan VIC 3342",
+        "lat": -37.6018465,
+        "lon": 144.2278439
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Mornington Peninsula",
+      "long_name": "Mornington Peninsula Shire Council",
+      "status": "active",
+      "council_category": "Interface",
+      "spatial_name": "Mornington Peninsula",
+      "spatial_key": "MORNINGTON PENINSULA",
+      "official_name": "MORNINGTON PENINSULA SHIRE",
+      "lga_code": "352",
+      "abs_lga_code": "25340",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Rosebud",
+        "address": "90 Besgrove St, Rosebud VIC 3939",
+        "match_key": "90 Besgrove St, Rosebud VIC 3939",
+        "lat": -38.3713043,
+        "lon": 144.8916588
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Interface",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Mount Alexander",
+      "long_name": "Mount Alexander Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Mount Alexander",
+      "spatial_key": "MOUNT ALEXANDER",
+      "official_name": "MOUNT ALEXANDER SHIRE",
+      "lga_code": "353",
+      "abs_lga_code": "25430",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Castlemaine",
+        "address": "Lyttleton St, Castlemaine VIC 3450",
+        "match_key": "Lyttleton St, Castlemaine VIC 3450",
+        "lat": -37.06534628684295,
+        "lon": 144.22428642266289
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Moyne",
+      "long_name": "Moyne Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Moyne",
+      "spatial_key": "MOYNE",
+      "official_name": "MOYNE SHIRE",
+      "lga_code": "354",
+      "abs_lga_code": "25490",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Port Fairy",
+        "address": "1 Jamieson Ave, Port Fairy VIC 3284",
+        "match_key": "1 Jamieson Ave, Port Fairy VIC 3284",
+        "lat": -38.378074,
+        "lon": 142.233912
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Murrindindi",
+      "long_name": "Murrindindi Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Murrindindi",
+      "spatial_key": "MURRINDINDI",
+      "official_name": "MURRINDINDI SHIRE",
+      "lga_code": "355",
+      "abs_lga_code": "25620",
+      "state": "VIC",
+      "polygon_record_count": 2,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Alexandra",
+        "address": "Perkins St, Alexandra VIC 3714",
+        "match_key": "Perkins St, Alexandra VIC 3714",
+        "lat": -37.18913728410456,
+        "lon": 145.7128403941712
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Nillumbik",
+      "long_name": "Nillumbik Shire Council",
+      "status": "active",
+      "council_category": "Interface",
+      "spatial_name": "Nillumbik",
+      "spatial_key": "NILLUMBIK",
+      "official_name": "NILLUMBIK SHIRE",
+      "lga_code": "356",
+      "abs_lga_code": "25710",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Greensborough",
+        "address": "Civic Dr, Greensborough VIC 3088",
+        "match_key": "Civic Dr, Greensborough VIC 3088",
+        "lat": -37.68799195813326,
+        "lon": 145.10660428437586
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Interface",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Northern Grampians",
+      "long_name": "Northern Grampians Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Northern Grampians",
+      "spatial_key": "NORTHERN GRAMPIANS",
+      "official_name": "NORTHERN GRAMPIANS SHIRE",
+      "lga_code": "357",
+      "abs_lga_code": "25810",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Stawell",
+        "address": "59\u201369 Main St, Stawell VIC 3380",
+        "match_key": "59\u201369 Main St, Stawell VIC 3380",
+        "lat": -37.0568391,
+        "lon": 142.7790721
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Port Phillip",
+      "long_name": "Port Phillip City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Port Phillip",
+      "spatial_key": "PORT PHILLIP",
+      "official_name": "PORT PHILLIP CITY",
+      "lga_code": "358",
+      "abs_lga_code": "25900",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "St Kilda",
+        "address": "99a Carlisle St, St Kilda VIC 3182",
+        "match_key": "99a Carlisle St, St Kilda VIC 3182",
+        "lat": -37.8682842,
+        "lon": 144.9887179
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Pyrenees",
+      "long_name": "Pyrenees Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Pyrenees",
+      "spatial_key": "PYRENEES",
+      "official_name": "PYRENEES SHIRE",
+      "lga_code": "359",
+      "abs_lga_code": "25990",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Beaufort",
+        "address": "5 Lawrence St, Beaufort VIC 3373",
+        "match_key": "5 Lawrence St, Beaufort VIC 3373",
+        "lat": -37.42823675,
+        "lon": 143.38429237295185
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Queenscliffe",
+      "long_name": "Borough of Queenscliffe Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Queenscliffe",
+      "spatial_key": "QUEENSCLIFFE",
+      "official_name": "QUEENSCLIFFE BOROUGH",
+      "lga_code": "360",
+      "abs_lga_code": "26080",
+      "state": "VIC",
+      "polygon_record_count": 2,
+      "council_type": "borough",
+      "office": {
+        "seat_township": "Queenscliff",
+        "address": "50 Learmonth St, Queenscliff VIC 3225",
+        "match_key": "50 Learmonth St, Queenscliff VIC 3225",
+        "lat": -38.26767,
+        "lon": 144.659078
+      },
+      "cohorts": {
+        "council_type": "borough",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "South Gippsland",
+      "long_name": "South Gippsland Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "South Gippsland",
+      "spatial_key": "SOUTH GIPPSLAND",
+      "official_name": "SOUTH GIPPSLAND SHIRE",
+      "lga_code": "361",
+      "abs_lga_code": "26170",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Leongatha",
+        "address": "9 Smith St, Leongatha VIC 3953",
+        "match_key": "9 Smith St, Leongatha VIC 3953",
+        "lat": -38.4758404,
+        "lon": 145.9438974
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Southern Grampians",
+      "long_name": "Southern Grampians Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Southern Grampians",
+      "spatial_key": "SOUTHERN GRAMPIANS",
+      "official_name": "SOUTHERN GRAMPIANS SHIRE",
+      "lga_code": "362",
+      "abs_lga_code": "26260",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Hamilton",
+        "address": "111 Brown St, Hamilton VIC 3300",
+        "match_key": "111 Brown St, Hamilton VIC 3300",
+        "lat": -37.7420953,
+        "lon": 142.0244422
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Stonnington",
+      "long_name": "Stonnington City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Stonnington",
+      "spatial_key": "STONNINGTON",
+      "official_name": "STONNINGTON CITY",
+      "lga_code": "363",
+      "abs_lga_code": "26350",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Malvern",
+        "address": "311 Glenferrie Rd, Malvern VIC 3144",
+        "match_key": "311 Glenferrie Rd, Malvern VIC 3144",
+        "lat": -37.8559309,
+        "lon": 145.0291059551993
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Strathbogie",
+      "long_name": "Strathbogie Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Strathbogie",
+      "spatial_key": "STRATHBOGIE",
+      "official_name": "STRATHBOGIE SHIRE",
+      "lga_code": "364",
+      "abs_lga_code": "26430",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Euroa",
+        "address": "109 Binney St, Euroa VIC 3666",
+        "match_key": "109 Binney St, Euroa VIC 3666",
+        "lat": -36.7526968,
+        "lon": 145.5723126
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Surf Coast",
+      "long_name": "Surf Coast Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Surf Coast",
+      "spatial_key": "SURF COAST",
+      "official_name": "SURF COAST SHIRE",
+      "lga_code": "365",
+      "abs_lga_code": "26490",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Torquay",
+        "address": "1 Merrijig Dr, Torquay VIC 3228",
+        "match_key": "1 Merrijig Dr, Torquay VIC 3228",
+        "lat": -38.30712155,
+        "lon": 144.32504635631972
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Swan Hill",
+      "long_name": "Swan Hill Rural City Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Swan Hill",
+      "spatial_key": "SWAN HILL",
+      "official_name": "SWAN HILL RURAL CITY",
+      "lga_code": "366",
+      "abs_lga_code": "26610",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "rural_city",
+      "office": {
+        "seat_township": "Swan Hill",
+        "address": "45 Splatt St, Swan Hill VIC 3585",
+        "match_key": "45 Splatt St, Swan Hill VIC 3585",
+        "lat": -35.3400182,
+        "lon": 143.5572983052599
+      },
+      "cohorts": {
+        "council_type": "rural_city",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Towong",
+      "long_name": "Towong Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Towong",
+      "spatial_key": "TOWONG",
+      "official_name": "TOWONG SHIRE",
+      "lga_code": "367",
+      "abs_lga_code": "26670",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Tallangatta",
+        "address": "32 Towong St, Tallangatta VIC 3700",
+        "match_key": "32 Towong St, Tallangatta VIC 3700",
+        "lat": -36.2156173,
+        "lon": 147.1769576
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Wangaratta",
+      "long_name": "Wangaratta Rural City Council",
+      "status": "active",
+      "council_category": "Regional",
+      "spatial_name": "Wangaratta",
+      "spatial_key": "WANGARATTA",
+      "official_name": "WANGARATTA RURAL CITY",
+      "lga_code": "368",
+      "abs_lga_code": "26700",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "rural_city",
+      "office": {
+        "seat_township": "Wangaratta",
+        "address": "62 Ovens St, Wangaratta VIC 3677",
+        "match_key": "62 Ovens St, Wangaratta VIC 3677",
+        "lat": -36.3548233,
+        "lon": 146.32376
+      },
+      "cohorts": {
+        "council_type": "rural_city",
+        "council_category": "Regional",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Warrnambool",
+      "long_name": "Warrnambool City Council",
+      "status": "active",
+      "council_category": "Regional",
+      "spatial_name": "Warrnambool",
+      "spatial_key": "WARRNAMBOOL",
+      "official_name": "WARRNAMBOOL CITY",
+      "lga_code": "369",
+      "abs_lga_code": "26730",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Warrnambool",
+        "address": "25 Liebig St, Warrnambool VIC 3280",
+        "match_key": "25 Liebig St, Warrnambool VIC 3280",
+        "lat": -38.385867,
+        "lon": 142.4815074
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Regional",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Wellington",
+      "long_name": "Wellington Shire Council",
+      "status": "active",
+      "council_category": "Large shire",
+      "spatial_name": "Wellington",
+      "spatial_key": "WELLINGTON",
+      "official_name": "WELLINGTON SHIRE",
+      "lga_code": "370",
+      "abs_lga_code": "26810",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Sale",
+        "address": "18 Desailly St, Sale VIC 3850",
+        "match_key": "18 Desailly St, Sale VIC 3850",
+        "lat": -38.1112493,
+        "lon": 147.0645283
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Large shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "West Wimmera",
+      "long_name": "West Wimmera Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "West Wimmera",
+      "spatial_key": "WEST WIMMERA",
+      "official_name": "WEST WIMMERA SHIRE",
+      "lga_code": "371",
+      "abs_lga_code": "26890",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Edenhope",
+        "address": "49 Elizabeth St, Edenhope VIC 3318",
+        "match_key": "49 Elizabeth St, Edenhope VIC 3318",
+        "lat": -37.0353778,
+        "lon": 141.2971235
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Whitehorse",
+      "long_name": "Whitehorse City Council",
+      "status": "active",
+      "council_category": "Metropolitan",
+      "spatial_name": "Whitehorse",
+      "spatial_key": "WHITEHORSE",
+      "official_name": "WHITEHORSE CITY",
+      "lga_code": "372",
+      "abs_lga_code": "26980",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Nunawading",
+        "address": "379\u2013397 Whitehorse Rd, Nunawading VIC 3131",
+        "match_key": "379\u2013397 Whitehorse Rd, Nunawading VIC 3131",
+        "lat": -37.81739035,
+        "lon": 145.18135846445932
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Whittlesea",
+      "long_name": "Whittlesea City Council",
+      "status": "active",
+      "council_category": "Interface",
+      "spatial_name": "Whittlesea",
+      "spatial_key": "WHITTLESEA",
+      "official_name": "WHITTLESEA CITY",
+      "lga_code": "373",
+      "abs_lga_code": "27070",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "South Morang",
+        "address": "25 Ferres Blvd, South Morang VIC 3752",
+        "match_key": "25 Ferres Blvd, South Morang VIC 3752",
+        "lat": -37.6452683,
+        "lon": 145.06720371017627
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Interface",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Wodonga",
+      "long_name": "Wodonga City Council",
+      "status": "active",
+      "council_category": "Regional",
+      "spatial_name": "Wodonga",
+      "spatial_key": "WODONGA",
+      "official_name": "WODONGA CITY",
+      "lga_code": "374",
+      "abs_lga_code": "27170",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Wodonga",
+        "address": "104 Hovell St, Wodonga VIC 3690",
+        "match_key": "104 Hovell St, Wodonga VIC 3690",
+        "lat": -36.1228361,
+        "lon": 146.8895702
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Regional",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Wyndham",
+      "long_name": "Wyndham City Council",
+      "status": "active",
+      "council_category": "Interface",
+      "spatial_name": "Wyndham",
+      "spatial_key": "WYNDHAM",
+      "official_name": "WYNDHAM CITY",
+      "lga_code": "375",
+      "abs_lga_code": "27260",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Werribee",
+        "address": "45 Princes Hwy, Werribee VIC 3030",
+        "match_key": "45 Princes Hwy, Werribee VIC 3030",
+        "lat": -37.8965087,
+        "lon": 144.6711485
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Interface",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Yarra",
+      "long_name": "Yarra City Council",
+      "status": "missing",
+      "council_category": "Metropolitan",
+      "spatial_name": "Yarra",
+      "spatial_key": "YARRA",
+      "official_name": "YARRA CITY",
+      "lga_code": "376",
+      "abs_lga_code": "27350",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "city",
+      "office": {
+        "seat_township": "Richmond",
+        "address": "333 Bridge Rd, Richmond VIC 3121",
+        "match_key": "333 Bridge Rd, Richmond VIC 3121",
+        "lat": -37.8184163,
+        "lon": 145.0008425574423
+      },
+      "cohorts": {
+        "council_type": "city",
+        "council_category": "Metropolitan",
+        "register_status": "missing",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Yarra Ranges",
+      "long_name": "Yarra Ranges Shire Council",
+      "status": "active",
+      "council_category": "Interface",
+      "spatial_name": "Yarra Ranges",
+      "spatial_key": "YARRA RANGES",
+      "official_name": "YARRA RANGES SHIRE",
+      "lga_code": "377",
+      "abs_lga_code": "27450",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": {
+        "seat_township": "Lilydale",
+        "address": "15 Anderson St, Lilydale VIC 3140",
+        "match_key": "15 Anderson St, Lilydale VIC 3140",
+        "lat": -37.7596957,
+        "lon": 145.3535371
+      },
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Interface",
+        "register_status": "active",
+        "office_geocoded": "yes",
+        "polygon_attributed": "yes"
+      }
+    },
+    {
+      "short_name": "Yarriambiack",
+      "long_name": "Yarriambiack Shire Council",
+      "status": "active",
+      "council_category": "Small shire",
+      "spatial_name": "Yarriambiack",
+      "spatial_key": "YARRIAMBIACK",
+      "official_name": "YARRIAMBIACK SHIRE",
+      "lga_code": "378",
+      "abs_lga_code": "27630",
+      "state": "VIC",
+      "polygon_record_count": 1,
+      "council_type": "shire",
+      "office": null,
+      "cohorts": {
+        "council_type": "shire",
+        "council_category": "Small shire",
+        "register_status": "active",
+        "office_geocoded": "missing",
+        "polygon_attributed": "yes"
+      }
+    }
+  ]
+}

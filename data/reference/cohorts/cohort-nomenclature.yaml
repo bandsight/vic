@@ -1,0 +1,228 @@
+schema_version: "0.1"
+status: "draft_reference"
+last_reviewed: "2026-05-03"
+
+principle:
+  current_system: standard_band_core
+  anchor_cohort_id: standard_band_core
+  summary: >
+    The existing pay-table benchmark system is the standard band core. Other
+    employee language should be classified as an alias, modifier, service-area
+    tag, specialist schedule, or excluded/external cohort before it becomes a
+    new benchmark category.
+  decision_rule: >
+    If a row or entitlement resolves to the ordinary Band/Level matrix, keep it
+    in standard_band_core. If it requires its own progression, pay table, award
+    logic, hourly-only structure, professional schedule, or materially different
+    entitlement regime, classify it outside the core.
+
+research_basis:
+  - id: fair_work_local_government_industry_award_2020
+    label: "Local Government Industry Award 2020"
+    url: "https://awards.fairwork.gov.au/MA000112.html"
+    relevance: "Primary award context for ordinary local government classifications and work areas."
+  - id: fair_work_nurses_victorian_local_government_award_2015
+    label: "Nurses (ANMF - Victorian Local Government) Award 2015"
+    url: "https://awards.fairwork.gov.au/MA000131.html"
+    relevance: "Useful boundary source for nurse cohorts that should not be assumed to be standard band core."
+  - id: fair_work_schads_award_2010
+    label: "Social, Community, Home Care and Disability Services Industry Award 2010"
+    url: "https://awards.fairwork.gov.au/MA000100.html"
+    relevance: "Useful boundary source for home care, disability, and community service cohorts where separate treatment appears."
+  - id: fair_work_childrens_services_award_2010
+    label: "Children's Services Award 2010"
+    url: "https://awards.fairwork.gov.au/MA000120.html"
+    relevance: "Useful boundary source for child care and early years cohorts where separate treatment appears."
+  - id: fair_work_educational_services_teachers_award_2020
+    label: "Educational Services (Teachers) Award 2020"
+    url: "https://awards.fairwork.gov.au/MA000077.html"
+    relevance: "Useful boundary source for early childhood teachers and preschool teaching classifications."
+
+classification_layers:
+  - id: standard_band_core
+    role: anchor
+    category_pressure: "Keep broad. This is the current benchmark lane."
+  - id: standard_band_modifier
+    role: tag
+    category_pressure: "Do not split the base cohort unless the modifier creates a separate rate or entitlement regime."
+  - id: service_area_inside_standard_bands
+    role: tag
+    category_pressure: "Do not split by department name alone."
+  - id: specialist_schedule_inside_eba
+    role: non_core_candidate
+    category_pressure: "Split only when the EBA gives a separate schedule, progression, table, or entitlement treatment."
+  - id: external_award_or_excluded_occupation
+    role: non_core_boundary
+    category_pressure: "Keep outside the current benchmark lane unless a future workflow is deliberately added."
+
+cohorts:
+  standard_band_core:
+    label: "Standard band core"
+    current_system: true
+    default_treatment: "benchmark"
+    description: >
+      Ordinary employee pay matrix using numeric Band/Level cells. This is the
+      current governed pay-table and scenario-testing benchmark target.
+    includes_when:
+      - "Rows use a numeric band or equivalent grade that resolves to Band 1-10."
+      - "Rows use ordinary levels such as A-D or 1-4."
+      - "Rates are part of the general employee matrix rather than a role-only schedule."
+      - "The row can produce a stable classification key such as band_03_level_B."
+    excludes_when:
+      - "The table is profession-only or role-only."
+      - "The table is hourly-only and does not map back to the ordinary matrix."
+      - "The EBA creates a separate progression or schedule for the group."
+      - "The group is expressly excluded or covered by another award or instrument."
+    aliases:
+      band_terms:
+        - band
+        - grade
+        - classification
+        - level
+      level_terms:
+        - level
+        - step
+        - year
+        - increment
+      ordinary_stream_terms:
+        - indoor
+        - outdoor
+        - administrative
+        - operational
+        - professional
+        - technical
+        - municipal employee
+        - council employee
+    current_code_touchpoints:
+      - "src/benchmarking_data_factory/scenario_testing/normalise.py"
+      - "src/benchmarking_data_factory/workbench/review_advice.py"
+      - "src/benchmarking_data_factory/extraction/prompts.py"
+
+  standard_band_modifier:
+    label: "Standard band modifier"
+    current_system: false
+    default_treatment: "tag_on_standard_band_core"
+    description: >
+      Employment basis, work pattern, or entitlement state that can apply to a
+      standard band employee without creating a new pay cohort.
+    examples:
+      - full_time
+      - part_time
+      - casual
+      - fixed_term
+      - shiftworker
+      - weekend_worker
+      - seven_day_roster
+      - on_call
+      - higher_duties
+      - acting_role
+      - redeployment_affected
+      - parental_leave
+    split_trigger: >
+      Promote from modifier to separate cohort only if the agreement creates a
+      distinct rate table, progression, or materially different entitlement regime.
+
+  service_area_inside_standard_bands:
+    label: "Service area inside standard bands"
+    current_system: false
+    default_treatment: "tag_on_standard_band_core"
+    description: >
+      Local government work areas that often appear in EBAs but should remain
+      tags when their rates resolve to the ordinary Band/Level matrix.
+    examples:
+      - indoor_admin_corporate
+      - outdoor_operations
+      - professional_technical
+      - community_services_general
+      - library_services
+      - local_laws_parking_rangers
+      - recreation_aquatic_leisure
+      - waste_environment
+      - tourism_visitor_services
+      - child_care_services
+    split_trigger: >
+      Promote only when the agreement provides a distinct table, schedule,
+      progression, or entitlement logic for the service area.
+
+  specialist_schedule_inside_eba:
+    label: "Specialist schedule inside EBA"
+    current_system: false
+    default_treatment: "exclude_from_standard_band_core_and_queue_for_review"
+    description: >
+      Employee group covered somewhere in the agreement but not safely
+      benchmarked through the standard Band/Level matrix.
+    examples:
+      - maternal_and_child_health_nurses
+      - immunisation_nurses
+      - early_childhood_teachers
+      - preschool_field_officers
+      - swim_instructors
+      - aquatic_or_leisure_hourly_schedule
+      - library_specific_schedule
+      - home_care_aged_disability_schedule
+      - outdoor_infrastructure_specific_schedule
+      - apprentice_trainee_cadet_schedule
+      - senior_officers
+      - executive_contract_employees
+    review_policy: >
+      Capture the evidence and classify the schedule, but do not mix these rows
+      into standard pay-table benchmarking unless they explicitly map back to the
+      core matrix.
+
+  external_award_or_excluded_occupation:
+    label: "External award or excluded occupation"
+    current_system: false
+    default_treatment: "outside_current_workflow"
+    description: >
+      Group expressly excluded from the EBA scope, covered by a different award,
+      covered by an individual contract, or not intended for the current
+      benchmark lane.
+    examples:
+      - chief_executive_officer
+      - executive_leadership_contracts
+      - registered_nurses_when_external_award_applies
+      - medical_or_health_professionals_when_external_award_applies
+      - teachers_when_external_award_applies
+    review_policy: >
+      Record the exclusion or external instrument as scope evidence. Do not
+      create a pay-table benchmark cohort until a deliberate future workflow
+      exists for that class.
+
+promotion_ladder:
+  - stage: alias
+    meaning: "Alternative language for an existing cohort or tag."
+    action: "Add to aliases or source patterns."
+  - stage: tag
+    meaning: "Useful descriptor that does not split rates or entitlements."
+    action: "Store as metadata on the core cohort."
+  - stage: candidate_subcohort
+    meaning: "Repeated source evidence suggests possible distinct treatment."
+    action: "Queue for review and collect examples."
+  - stage: supported_subcohort
+    meaning: "Distinct treatment is proven across enough agreements."
+    action: "Add extraction and review rules."
+  - stage: primary_cohort
+    meaning: "Material workflow lane with separate benchmark/report value."
+    action: "Create a first-class domain model and governed output path."
+
+award_link_policy:
+  principle: >
+    Award links are metadata and evidence, not automatic cohort boundaries.
+  rules:
+    - "A single cohort may link to multiple awards or instruments."
+    - "A single award may contain multiple work areas that remain tags."
+    - "Create a new cohort only when treatment materially changes."
+    - "Keep the category count lower than the award/source count where work can be compared safely."
+
+entitlement_extraction_policy:
+  default_scope: standard_band_core
+  rules:
+    - "Every entitlement family should first ask which cohort layer the clause applies to."
+    - "General employee clauses default to standard_band_core unless the agreement narrows them."
+    - "Modifiers and service-area tags can qualify the entitlement without splitting the base cohort."
+    - "Specialist schedules and external/excluded cohorts should be captured as scope evidence before extracting comparable values."
+
+open_questions:
+  - "How many agreements must show the same distinct treatment before a candidate_subcohort becomes supported?"
+  - "Which specialist schedules deserve the first non-core workflow after standard_band_core entitlements?"
+  - "Should cohort review decisions become governed audit events or remain controlled reference maintenance at first?"

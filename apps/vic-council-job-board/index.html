@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Victorian Council Careers Signal Map</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./styles.css?v=20260522-min-pay-translucent">
+</head>
+<body>
+  <main class="job-board-shell">
+    <section class="map-stage" aria-label="Victorian local government job map">
+      <div class="map-grid" aria-hidden="true"></div>
+      <div class="map-frame" id="map-frame">
+        <svg id="victoria-map" class="victoria-map" viewBox="0 0 1200 860" role="img" aria-label="Victorian council areas highlighted by matching classified job count">
+          <defs>
+            <filter id="job-glow" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
+              <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.08 0 0 0 0 0.70 0 0 0 0 0.74 0 0 0 0.75 0"></feColorMatrix>
+              <feMerge>
+                <feMergeNode></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+              </feMerge>
+            </filter>
+            <filter id="selected-glow" x="-55%" y="-55%" width="210%" height="210%">
+              <feGaussianBlur stdDeviation="6.5" result="blur"></feGaussianBlur>
+              <feColorMatrix in="blur" type="matrix" values="0 0 0 0 1 0 0 0 0 0.78 0 0 0 0 0.30 0 0 0 1 0"></feColorMatrix>
+              <feMerge>
+                <feMergeNode></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+              </feMerge>
+            </filter>
+          </defs>
+          <g id="map-paths" aria-hidden="true"></g>
+          <g id="map-markers" aria-hidden="true"></g>
+        </svg>
+      </div>
+      <aside class="metro-inset" aria-label="Metropolitan Melbourne council inset map">
+        <div class="metro-inset-head">
+          <span>Metro inset</span>
+          <strong>Melbourne LGAs</strong>
+        </div>
+        <svg id="metro-map" class="metro-map" viewBox="0 0 420 300" role="img" aria-label="Metropolitan Melbourne council areas highlighted by matching classified job count">
+          <g id="metro-paths" aria-hidden="true"></g>
+          <g id="metro-markers" aria-hidden="true"></g>
+        </svg>
+      </aside>
+      <div id="map-tooltip" class="map-tooltip" role="tooltip" aria-hidden="true"></div>
+    </section>
+
+    <aside class="selection-panel" aria-label="Council job search and filters">
+      <header class="panel-header">
+        <p class="eyebrow">Victorian council careers</p>
+        <h1>Victorian council jobs</h1>
+        <p id="snapshot-note">Loading classified vacancy data.</p>
+      </header>
+
+      <label class="search-box" for="job-search">
+        <span>Search</span>
+        <input id="job-search" type="search" autocomplete="off" placeholder="Title, council, band, pay, location">
+      </label>
+
+      <div class="selected-council" id="selected-council" hidden>
+        <span id="selected-council-label"></span>
+        <button type="button" id="clear-council">Clear</button>
+      </div>
+
+      <section class="selection-viz" aria-label="Classified job data charts">
+        <div class="viz-card viz-card-band-pay">
+          <div class="viz-head">
+            <span>Band/pay map</span>
+            <strong id="band-chart-title">All roles</strong>
+          </div>
+          <div id="band-chart" class="band-pay-chart"></div>
+        </div>
+      </section>
+    </aside>
+
+    <section class="jobs-panel" aria-label="Matching council jobs">
+      <div class="result-head">
+        <strong id="result-count">Loading...</strong>
+        <span id="result-context">Preparing map</span>
+      </div>
+      <section id="job-list" class="job-list" aria-live="polite"></section>
+    </section>
+    <noscript>
+      <div class="empty-note">This report needs JavaScript enabled to draw the map and job list.</div>
+    </noscript>
+  </main>
+
+  <script src="./data/embedded-data.js?v=20260522-min-pay-translucent"></script>
+  <script type="module" src="./app.js?v=20260522-min-pay-translucent"></script>
+</body>
+</html>
