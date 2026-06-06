@@ -11,6 +11,10 @@ cache/
 artifacts/
 exports/
 var/
+tmp/
+outputs/
+prototype/
+wiki/
 llm-bundle/
 llm-bundle.zip
 llm-strategy-pack-*/
@@ -34,8 +38,11 @@ scenario-overrides/*.json
 !scenario-overrides/.gitkeep
 
 documents/immutable/
+documents/
 data/bronze/
 data/datamarts/
+data/governed_canonical/
+data/review/
 data/analysis/*.json
 !data/analysis/*.asset.json
 
